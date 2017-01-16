@@ -1,5 +1,4 @@
-console.log('js');
-
+//Declare app
 var myApp = angular.module('myApp', ['ngRoute']);
 
 //Config
@@ -22,18 +21,9 @@ myApp.config(['$routeProvider', function($routeProvider) {
     }); // end $routeProvider
 }]); // end config
 
-
-//Home Controller
-myApp.controller('HomeController', ['$scope', '$http', function($scope, $http) {
-  console.log('home controller');
-}]); // end HomeController
-
-//Dashboard Controller
-myApp.controller('DashboardController', ['$scope', '$http', function($scope, $http) {
-  console.log('dashboard controller');
-}]); // end DashboardController
-
-//Templates Controller
-myApp.controller('TemplatesController', ['$scope', '$http', function($scope, $http) {
-  console.log('NG');
-}]); // end TemplatesController
+//Factory
+myApp.factory('donorFactory', function() {
+  var factory = {};
+  factory.testNumber = 1;
+  return factory;
+}); // end donorFactory
