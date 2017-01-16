@@ -19,13 +19,14 @@ app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
-//ROUTERS
-app.get('/auth', function(req,res) {
-  res.sendStatus(200);
-}); // end auth get
-
 //base url
 var index = require('../routers/indexRouter');
 app.use('/', index);
+
+//ROUTERS
+var auth = require('../routers/authRouter');
+app.use('/auth', auth);
+
+
 
 module.exports = app;
