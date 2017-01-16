@@ -14,6 +14,7 @@
   <script src="scripts/services/authFactory.js" charset="utf-8"></script>
   <!-- Controllers -->
   <script src="scripts/controllers/authController.js" charset="utf-8"></script>
+  <script src="scripts/controllers/navController.js" charset="utf-8"></script>
   <script src="scripts/controllers/homeController.js" charset="utf-8"></script>
   <script src="scripts/controllers/DashboardController.js" charset="utf-8"></script>
   <script src="scripts/controllers/TemplatesController.js" charset="utf-8"></script>
@@ -25,7 +26,8 @@
   <link rel="stylesheet" href="../stylesheets/css/master.css">
 </head>
 <body ng-app="myApp">
-  <nav class="navbar">
+
+  <nav class="navbar" ng-controller="NavController as nav">
     <div class="container">
       <ul class="nav navbar-nav pull-right">
          <li><a href="#!/home">Home</a></li>
@@ -37,13 +39,18 @@
 
    <h1 class="text-center">SLS Donation Manager</h1>
 
+   <!-- Show a helpful message when needed -->
+   <section id="message" class="nav.message.type" ng-show="nav.message.text">
+      {{nav.message.text}}
+    </section>
+
   <div class="container wrapper">
     <main ng-view></main>
   </div>
 
   <div class="push"></div>
 
-  <footer class="footer">
+  <footer class="footer" ng-controller="NavController as nav">
     <div class="container">
       <ul class="footer-list">
         <li><a href="#!/home">Home</a></li>
