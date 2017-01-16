@@ -20,10 +20,3 @@ myApp.config(['$routeProvider', function($routeProvider) {
       redirectTo: 'home'
     }); // end $routeProvider
 }]); // end config
-
-//Factory
-myApp.factory('donorFactory', function() {
-  var factory = {};
-  factory.testNumber = 1;
-  return factory;
-}); // end donorFactory
