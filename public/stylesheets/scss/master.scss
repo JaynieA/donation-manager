@@ -1,3 +1,64 @@
+@import 'settings';
+@import 'tools';
+
+/* -- GLOBALS -- */
+
 html, body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: $mainFont;
+  height: 100%;
+}
+
+// -- LAYOUT -- //
+.clearfix:after {
+	visibility: hidden;
+	display: block;
+	font-size: 0;
+	content: " ";
+	clear: both;
+	height: 0;
+}
+.wrapper {
+  min-height: 78%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -60px; // the bottom margin is the negative value of the footer's height
+}
+
+// -- NAVBAR -- //
+.navbar  {
+  background-color: $white;
+  box-shadow: 0 3px 6px -6px $shadowColor;
+  a {
+    color: $slsRed;
+  }
+}
+
+// -- FOOTER -- //
+.footer, .push {
+  height: 60px; // '.push' must be the same height as 'footer'
+}
+.footer {
+  color: $white;
+  background-color: $lightGrey;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  a {
+    color: $darkGrey;
+  }
+}
+.footer-list {
+  list-style: none;
+  padding-left: 0;
+  padding: 20px 0 0 0;
+  text-align: center;
+  li {
+    //color: $mutedGrey;
+    display: inline;
+    &:not(:first-child):before {
+      content: ' | ';
+      padding: 20px;
+      color: $darkGrey;
+    }
+  }
 }

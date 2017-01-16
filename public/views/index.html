@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Donor Manager</title>
+  <title>Donation Manager</title>
   <!-- Angular and ngRouter -->
   <script src="vendors/angular.min.js" charset="utf-8"></script>
   <script src="vendors/angular-route.min.js" charset="utf-8"></script>
@@ -20,14 +20,33 @@
   <link rel="stylesheet" href="../stylesheets/css/master.css">
 </head>
 <body ng-app="myApp">
-  <h1>SLS Donation Manager</h1>
-  <ul class="nav">
-     <li><a href="#!/home">Home</a></li>
-     <li><a href="#!/dashboard">Dashboard</a></li>
-     <li><a href="#!/templates">Templates</a></li>
-   </ul>
+  <nav class="navbar">
+    <div class="container">
+      <ul class="nav navbar-nav pull-right">
+         <li><a href="#!/home">Home</a></li>
+         <li><a href="#!/dashboard">Dashboard</a></li>
+         <li><a href="#!/templates">Templates</a></li>
+       </ul>
+    </div>
+  </nav>
 
-  <main ng-view></main>
+   <h1 class="text-center">SLS Donation Manager</h1>
+
+  <div class="container wrapper">
+    <main ng-view></main>
+  </div>
+
+  <div class="push"></div>
+
+  <footer class="footer">
+    <div class="container">
+      <ul class="footer-list">
+        <li><a href="#!/home">Home</a></li>
+        <li><a href="#!/dashboard">Dashboard</a></li>
+        <li><a href="#!/templates">Templates</a></li>
+      </ul>
+    </div>
+  </footer>
 
 </body>
 </html>
