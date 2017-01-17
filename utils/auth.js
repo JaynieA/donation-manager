@@ -9,7 +9,7 @@ module.exports = function (req, res, next) {
   } else {
     // if user is not authenticated, send an error message
     console.log('user is not authenticated');
-    //TODO: add better error handling here
+    //TODO: add better error handling here. Redirect to a page explaining they they need admin status
     res.json({ err: 'You have not been authenticated as an admin for this site' });
   } // end else
 }; // end module.exports
