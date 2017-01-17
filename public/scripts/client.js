@@ -16,11 +16,13 @@ myApp.config(['$routeProvider', function($routeProvider) {
     })
     .when('/dashboard', {
       templateUrl: '../views/routes/dashboard.html',
-      controller: 'DashboardController'
+      controller: 'DashboardController',
+      controllerAs: 'dashboard'
     })
     .when('/templates', {
       templateUrl: '../views/routes/templates.html',
-      controller: 'TemplatesController'
+      controller: 'TemplatesController',
+      controllerAs: 'templates'
     })
     .otherwise({
       redirectTo: 'login'
