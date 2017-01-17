@@ -1,4 +1,3 @@
-
 // Handles all authentication requests including login and logout.
 
 var express = require('express');
@@ -18,9 +17,10 @@ router.get('/google/callback', passport.authenticate('google', {
 ); // end get
 
 router.get('/', function (req, res) {
-  if (req.isAuthenticated()) {
+  if (req.isAuthenticated() && req.user.admin === true) {
     res.json({ status: true, name: req.user.googleName });
   } else {
+    console.log('User not authed as admin. return false');
     res.json({ status: false });
   } // end else
 }); // end get

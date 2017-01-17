@@ -4,5 +4,5 @@ myApp.controller('AuthController', function (AuthFactory) {
   var _this = this;
   var authFactory = AuthFactory;
   _this.loggedIn = authFactory.checkLoggedIn(); // NOTE: only updated on page load
-  console.log('Auth Controller. logged in?', _this.loggedIn);
+  console.log('Auth Controller. logged in AND admin?', _this.loggedIn);
 });
