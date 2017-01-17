@@ -11,7 +11,8 @@ myApp.config(['$routeProvider', function($routeProvider) {
     })
     .when('/home', {
       templateUrl: '../views/routes/home.html',
-      controller: 'HomeController'
+      controller: 'HomeController',
+      controllerAs: 'home'
     })
     .when('/dashboard', {
       templateUrl: '../views/routes/dashboard.html',
