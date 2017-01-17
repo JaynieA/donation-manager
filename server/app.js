@@ -2,12 +2,33 @@ var PORT = process.env.PORT || 8080;
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
+var session = require('express-session');
+//Require custom app modules
+var configs = require('../config/auth');
+var passport = require('../auth/passport');
 
 //db connection
 //TODO: this can probably be used in routers only once those exist
 var mongoose = require('mongoose');
-var connection = require('../modules/connection.js');
+var connection = require('../config/connection.js');
 mongoose.connect(connection);
+
+// SESSION CREATION AND STORAGE
+ // * Creates session that will be stored in memory.
+ // TODO: Before deploying to production,
+ // configure session store to save to DB instead of memory (default).
+app.use(session({
+  secret: configs.sessionVars.secret,
+  key: 'user',
+  resave: 'true',
+  saveUninitialized: false,
+  cookie: { maxage: 60000, secure: false },
+}));
+
+// PASSPORT
+app.use(passport.initialize()); // kickstart passport
+// Alters request object to include user object.
+app.use(passport.session());
 
 //spin up server
 app.listen(PORT, function() {
@@ -26,7 +47,5 @@ app.use('/', index);
 //ROUTERS
 var auth = require('../routers/authRouter');
 app.use('/auth', auth);
-
-
 
 module.exports = app;

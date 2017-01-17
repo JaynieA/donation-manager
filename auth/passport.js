@@ -17,7 +17,7 @@ var GoogleStrategy = require('passport-google-oauth2').Strategy;
 var config = require('../config/auth');
 
 // all db queries moved to a service layer, necessary for proper unit testing
-var UserService = require('../strategies/adminStrategy');
+var AdminStrategy = require('../strategies/adminStrategy');
 /** ---------- PASSPORT SESSION SERIALIZATION ---------- **/
 
 // serialize the user onto the session
@@ -27,7 +27,7 @@ passport.serializeUser(function (user, done) {
 
 // deserialize the user from the session and provide user object
 passport.deserializeUser(function (id, done) {
-  UserService.findUserById(id, function (err, user) {
+  AdminStrategy.findAdminById(id, function (err, user) {
     if (err) {
       return done(err);
     }
@@ -45,7 +45,7 @@ passport.use('google', new GoogleStrategy({
   // Google has responded
 
   // does this user exist in our database already?
-  UserService.findUserByGoogleId(profile.id, function (err, user) {
+  AdminStrategy.findAdminByGoogleId(profile.id, function (err, user) {
       if (err) {
         return done(err);
       }
@@ -55,7 +55,9 @@ passport.use('google', new GoogleStrategy({
       }
 
       // user does not exist in our database, let's create one!
-      UserService.createGoogleUser(profile.id, token, profile.displayName,
+      console.log('user does not exist. create one -->', profile.id, token, profile.displayName);
+      console.log('profile display name -->', profile.displayName);
+      AdminStrategy.createGoogleAdmin(profile.id, token, profile.displayName,
         profile.emails[0].value, /* we take first email address */
         function (err, user) {
           if (err) {
