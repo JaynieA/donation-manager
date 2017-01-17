@@ -16,7 +16,7 @@ router.use('/home', home);
 router.get('/', function (req, res) {
   console.log('you made it!');
   //TODO: fix the following line... it's probably not correct
-  res.redirect('/#!/home'); // they made it!
+  res.redirect('/'); // they made it!
 });
 
 module.exports = router;

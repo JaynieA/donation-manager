@@ -1,4 +1,5 @@
 myApp.factory('AuthFactory', function ($http) {
+  console.log('in auth factory');
   var Status = {
     loggedIn: false,
   };

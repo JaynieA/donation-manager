@@ -6,7 +6,8 @@ myApp.config(['$routeProvider', function($routeProvider) {
   $routeProvider
     .when('/login', {
       templateUrl: '../views/routes/login.html',
-      controller: 'AuthController'
+      controller: 'AuthController',
+      controllerAs: 'auth'
     })
     .when('/home', {
       templateUrl: '../views/routes/home.html',

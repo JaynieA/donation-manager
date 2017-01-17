@@ -1,5 +1,5 @@
 myApp.controller('NavController', function (AuthFactory, $window) {
-  console.log('nav controller');
+  console.log('in nav controller');
   var _this = this;
   var authFactory = AuthFactory;
   _this.displayLogout = false; // should we display the logout option on the DOM?
