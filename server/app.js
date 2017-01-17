@@ -6,6 +6,8 @@ var session = require('express-session');
 //Require custom app modules
 var configs = require('../config/auth');
 var passport = require('../auth/passport');
+var isLoggedIn = require('../utils/auth');
+var private = require('../routers/private/index');
 
 //db connection
 //TODO: this can probably be used in routers only once those exist
@@ -47,5 +49,6 @@ app.use('/', index);
 //ROUTERS
 var auth = require('../routers/authRouter');
 app.use('/auth', auth);
+app.use('/private', isLoggedIn, private);
 
 module.exports = app;

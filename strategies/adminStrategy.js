@@ -1,6 +1,5 @@
-/**
- * A strategy layer that makes all of our Admin database queries.
- */
+
+ // A strategy layer that makes all of our Admin database queries.
 
 var Admin = require('../models/admin');
 

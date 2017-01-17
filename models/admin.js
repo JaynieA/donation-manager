@@ -1,5 +1,4 @@
 // Admin schema for mongoose
-
 var mongoose = require('mongoose');
 
 var adminSchema = mongoose.Schema({
