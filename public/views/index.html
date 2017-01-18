@@ -9,7 +9,9 @@
   <script src="vendors/angular.min.js" charset="utf-8"></script>
   <script src="vendors/angular-route.min.js" charset="utf-8"></script>
   <script src="vendors/angular-animate.min.js" charset="utf-8"></script>
+  <script src="vendors/angular-sanitize.min.js" charset="utf-8"></script>
   <script src="vendors/ui-bootstrap.js" charset="utf-8"></script>
+  <script src="vendors/ui-bootstrap-tpls.js" charset="utf-8"></script>
   <script src="scripts/client.js" charset="utf-8"></script>
   <!-- Services -->
   <script src="scripts/services/donorFactory.js" charset="utf-8"></script>
@@ -64,6 +66,29 @@
       </ul>
     </div>
   </footer>
+
+  <div ng-controller="ModalDemoCtrl as $ctrl" class="modal-demo">
+      <script type="text/ng-template" id="myModalContent.html">
+          <div class="modal-header">
+              <h3 class="modal-title" id="modal-title">I'm a modal!</h3>
+          </div>
+          <div class="modal-body" id="modal-body">
+              <ul>
+                  <li ng-repeat="item in $ctrl.items">
+                      <a href="#" ng-click="$event.preventDefault(); $ctrl.selected.item = item">{{ item }}</a>
+                  </li>
+              </ul>
+              Selected: <b>{{ $ctrl.selected.item }}</b>
+          </div>
+          <div class="modal-footer">
+              <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
+              <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+          </div>
+      </script>
+
+      <button type="button" class="btn btn-default" ng-click="$ctrl.open('lg')">Large modal</button>
+      <div ng-show="$ctrl.selected">Selection from a modal: {{ $ctrl.selected }}</div>
+  </div>
 
 </body>
 </html>
