@@ -24,7 +24,7 @@ var AdminService = {
     }); // end findOne
   }, // end findAdminByGoogleId
 
-  //create a Admin that will be authenticated by Google
+  //create a User that will be authenticated by Google
   createGoogleAdmin: function (id, token, name, email, callback) {
     var admin = new Admin();
 

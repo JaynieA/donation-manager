@@ -24,6 +24,11 @@ myApp.config(['$routeProvider', function($routeProvider) {
       controller: 'TemplatesController',
       controllerAs: 'templates'
     })
+    .when('/error', {
+      templateUrl: '../views/routes/error.html',
+      controller: 'ErrorController',
+      controllerAs: 'error'
+    })
     .otherwise({
       redirectTo: 'login'
     }); // end $routeProvider

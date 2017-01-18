@@ -1,8 +1,8 @@
 /**
- * We configure our instance of passport in this file.
+ * Configure the instance of passport
  * Serialize & Deserialize user info
- * In addition, we define our authentication strategy in this file.
- */
+ * In addition, define the authentication strategy in this file.
+*/
 
 // Require Node Modules
 var passport = require('passport');
