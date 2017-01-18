@@ -14,7 +14,8 @@ var router = express.Router();
  *
  */
 router.get('/', function (req, res) {
-  res.send({ message: 'hi. i\m the dashboard' });
+  //res.send({ message: 'hi. i\m the dashboard' });
+  res.send({ authStatus: true });
 });
 
 module.exports = router;

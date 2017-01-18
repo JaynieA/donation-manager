@@ -19,7 +19,7 @@ router.use('/templates', templates);
  */
 router.get('/', function (req, res) {
   console.log('you made it!');
-  res.redirect('/'); // they made it!
+  res.redirect('/#!/home'); // they made it!
 });
 
 module.exports = router;
