@@ -1,5 +1,5 @@
 //Declare app
-var myApp = angular.module('myApp', ['ngRoute']);
+var myApp = angular.module('myApp', ['ngRoute', 'ui.bootstrap']);
 
 //Config
 myApp.config(['$routeProvider', function($routeProvider) {

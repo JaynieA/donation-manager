@@ -1,18 +1,22 @@
 <!-- Home View -->
 <div class="text-center">
-  <p>Auth Status: {{home.data}}</p>
+  <p>Auth Status: {{data}}</p>
   <hr>
 
   <!-- Shown for users that are NOT logged in -->
-  <section ng-hide="home.data">
+  <section ng-hide="data">
     <!-- button image from Googles sign-in button brand guidelines page -->
     <a href= "/auth/google"><img src="/images/btn_google_signin_dark_normal_web.png" /></a>
   </section>
 
   <!-- Shown for users that are logged in -->
-  <section ng-if="home.data">
+  <section ng-if="data">
     <h2>Home</h2>
     <p>You are logged in!</p>
     <p>This is where the main page info will go</p>
+    <div>
+      <button type="button" class="btn btn-success">Get Started</button>
+    </div>
   </section>
+
 </div>
