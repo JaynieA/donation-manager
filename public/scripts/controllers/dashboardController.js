@@ -4,7 +4,6 @@ myApp.controller('DashboardController', function ($http) {
   console.log('loaded DashboardController');
   var _this = this;
   _this.data = '';
-
   //get authentication that user is logged in and has admin status
   $http.get('/private/dashboard')
     .then(function (response) {
