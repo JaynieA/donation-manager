@@ -26,12 +26,15 @@ html, body {
 .modal-dialog {
   margin-top: 12%; }
 
-.modal-header h3 {
-  display: inline-block; }
-.modal-header .glyphicon {
-  transform: scale(2, 2);
-  top: 12px;
-  right: 15px; }
+.modal-header {
+  padding: 20px; }
+  .modal-header .modal-title {
+    display: inline-block;
+    margin-left: 10px; }
+  .modal-header .glyphicon {
+    transform: scale(2, 2);
+    top: 12px;
+    right: 15px; }
 
 .modal-body {
   padding: 15px; }
@@ -41,11 +44,16 @@ html, body {
     display: inline-block; }
   .modal-body .glyphicon {
     right: 15px; }
+  .modal-body .progress, .modal-body .col-xs-2 {
+    margin-top: 7px; }
   .modal-body .animate-show {
     transition: all linear 1.5s;
     opacity: 1; }
   .modal-body .animate-show.ng-hide {
     opacity: 0; }
+
+.modal-footer {
+  padding: 20px; }
 
 .footer, .push {
   height: 60px; }

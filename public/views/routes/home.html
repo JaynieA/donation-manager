@@ -25,7 +25,7 @@
                 <div class="modal-body" id="modal-body">
                     <div ng-repeat="platform in platforms">
                         <div class="row">
-                            <div class="col-xs-4">
+                            <div class="col-xs-4 text-center">
                                 <label class="btn btn-primary btn-file" >
                                     {{ platform.name }}
                                     <input type="file" class="hidden" ng-model="upload.file" ngf-select="uploadFile($file, $invalidFiles, $index)" ngf-max-size="25MB" required>

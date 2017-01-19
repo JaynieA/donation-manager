@@ -38,8 +38,10 @@ html, body {
   margin-top: 12%;
 }
 .modal-header {
-  h3 {
+  padding: 20px;
+  .modal-title {
     display: inline-block;
+    margin-left: 10px;
   }
   .glyphicon {
     transform: scale(2.0, 2.0);
@@ -58,6 +60,9 @@ html, body {
   .glyphicon {
     right: 15px;
   }
+  .progress, .col-xs-2 {
+    margin-top: 7px;
+  }
   //delay success check show by 1.5s
   .animate-show {
     transition: all linear 1.5s;
@@ -66,6 +71,9 @@ html, body {
   .animate-show.ng-hide {
     opacity:0;
   }
+}
+.modal-footer {
+  padding: 20px;
 }
 
 
