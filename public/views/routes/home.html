@@ -1,85 +1,46 @@
 <!-- Home View -->
 <div class="text-center">
-  <p>Auth Status: {{data}}</p>
-  <hr>
+    <p>Auth Status: {{data}}</p>
+    <hr>
 
-  <!-- Shown for users that are NOT logged in -->
-  <section ng-hide="data">
-    <!-- button image from Googles sign-in button brand guidelines page -->
-    <a href= "/auth/google"><img src="/images/btn_google_signin_dark_normal_web.png" /></a>
-  </section>
+    <!-- Shown for users that are NOT logged in -->
+    <section ng-hide="data">
+        <!-- button image from Googles sign-in button brand guidelines page -->
+        <a href="/auth/google"><img src="/images/btn_google_signin_dark_normal_web.png" /></a>
+    </section>
 
-  <!-- Shown for users that are logged in -->
-  <section ng-if="data">
-    <h2>Home</h2>
-    <p>You are logged in!</p>
-    <p>This is where the main page info will go</p>
+    <!-- Shown for users that are logged in -->
+    <section ng-if="data">
+        <h2>Home</h2>
+        <p>You are logged in!</p>
+        <p>This is where the main page info will go</p>
 
-    <!-- UPLOAD MODAL -->
-    <div ng-controller="ModalDemoCtrl as $ctrl" class="modal-demo">
+        <!-- UPLOAD MODAL -->
+        <div ng-controller="ModalDemoCtrl as $ctrl" class="modal-demo">
+            <script type="text/ng-template" id="myModalContent.html">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modal-title">I'm a modal!</h3>
+                </div>
+                <div class="modal-body" id="modal-body">
 
-        <script type="text/ng-template" id="myModalContent.html">
-            <div class="modal-header">
-                <h3 class="modal-title" id="modal-title">Upload Reports</h3>
-                <span class="glyphicon glyphicon-open pull-right" aria-hidden="true"></span>
-            </div>
-            <div class="modal-body">
-              <!-- TODO: use an ng-repeat for these rows -->
-              <!-- Upload Paypal Button -->
-              <div class="row">
-                <div class="col-sm-4">
-                  <label class="btn btn-primary btn-file">
-                      Upload Paypal Report <input type="file" class="hidden" file-reader="fileContent" id="paypal-file-input">
-                  </label>
-                </div>
-                <div class="col-sm-4  text-center">
-                    progress bar here
-                </div>
-                <div class="col-sm-4">
-                    <span class="glyphicon glyphicon-ok pull-right" aria-hidden="true"></span>
-                </div>
-              </div>
+                    <div ng-repeat="platform in $ctrl.platforms">
+                        <button ng-click="$ctrl.selected.platform = platform">{{ platform }}</button>
+                    </div>
 
-              <!-- Upload Razoo Button -->
-              <div class="row">
-                <div class="col-sm-4">
-                  <label class="btn btn-primary btn-file">
-                      Upload Razoo Report <input type="file" class="hidden" file-reader="fileContent" id="razoo-file-input">
-                  </label>
-                </div>
-                <div class="col-sm-4  text-center">
-                    progress bar here
-                </div>
-                <div class="col-sm-4">
-                    <span class="glyphicon glyphicon-ok pull-right" aria-hidden="true"></span>
-                </div>
-              </div>
+                    Selected: <b>{{ $ctrl.selected.platform }}</b>
 
-              <!-- Upload YouCaring Button -->
-              <div class="row">
-                <div class="col-sm-4">
-                  <label class="btn btn-primary btn-file">
-                      Upload YouCaring Report <input type="file" class="hidden" file-reader="fileContent" id="youCaring-file-input">
-                  </label>
                 </div>
-                <div class="col-sm-4  text-center">
-                    progress bar here
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
+                    <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
                 </div>
-                <div class="col-sm-4">
-                    <span class="glyphicon glyphicon-ok pull-right" aria-hidden="true"></span>
-                </div>
-              </div>
+            </script>
 
-            </div>
+            <button type="button" class="btn btn-default" ng-click="$ctrl.open('lg')">Large modal</button>
 
-            <div class="modal-footer">
-                <button class="btn btn-success" type="button" ng-click="$ctrl.ok()">Save</button>
-                <button class="btn btn-danger" type="button" ng-click="$ctrl.cancel()">Cancel</button>
-            </div>
-        </script>
+            <div ng-show="$ctrl.selected">Selection from a modal: {{ $ctrl.selected }}</div>
 
-        <button type="button" class="btn btn-success" ng-click="$ctrl.open('lg')">Get Started</button>
-    </div>
-  </section>
+        </div>
+    </section>
 
 </div>

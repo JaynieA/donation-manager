@@ -1,14 +1,13 @@
 //Modal controllers
-myApp.controller('ModalDemoCtrl', ['$uibModal', '$log', '$document', function($uibModal, $log, $document) {
-  console.log('in ModalDemoCtrl');
+myApp.controller('ModalDemoCtrl', function ($uibModal, $log, $document) {
   var $ctrl = this;
+  $ctrl.platforms = ['Paypal', 'Razoo', 'WePay'];
 
+  //allow fade/slide-in
   $ctrl.animationsEnabled = true;
 
-  //handle modal open
+  //open the modal
   $ctrl.open = function (size, parentSelector) {
-    var parentElem = parentSelector ?
-      angular.element($document[0].querySelector('.modal-demo ' + parentSelector)) : undefined;
     var modalInstance = $uibModal.open({
       animation: $ctrl.animationsEnabled,
       ariaLabelledBy: 'modal-title',
@@ -17,57 +16,70 @@ myApp.controller('ModalDemoCtrl', ['$uibModal', '$log', '$document', function($u
       controller: 'ModalInstanceCtrl',
       controllerAs: '$ctrl',
       size: size,
-      appendTo: parentElem,
       resolve: {
-        items: function () {
-          return $ctrl.items;
-        } // end items
-      } // end resolve
-    }); // end modalInstance
-    //handles modal cancel - logs the time of cancellation
-    modalInstance.result.then(function (selectedItem) {
-      $ctrl.selected = selectedItem;
+        platforms: function () {
+          return $ctrl.platforms;
+        }
+      }
+    });
+
+    modalInstance.result.then(function (selectedPlatform) {
+      $ctrl.selected = selectedPlatform;
     }, function () {
       $log.info('Modal dismissed at: ' + new Date());
-    }); // end then
-  }; // end open
+    });
+  };
 
+  //enable animations
   $ctrl.toggleAnimation = function () {
     $ctrl.animationsEnabled = !$ctrl.animationsEnabled;
-  }; // end toggleAnimation
+  };
+});
 
-}]); // end ModalDemoCtrl
+// $uibModalInstance represents a modal window (instance) dependency.
+// It is not the same as the $uibModal service used above.
 
-myApp.controller('ModalInstanceCtrl', ['$uibModalInstance', 'items', function($uibModalInstance, items) {
-  console.log('in ModalInstanceCtrl');
+myApp.controller('ModalInstanceCtrl', function ($uibModalInstance, platforms) {
   var $ctrl = this;
+  $ctrl.platforms = platforms;
+  $ctrl.selected = {
+    platform: $ctrl.platforms[0]
+  };
 
   $ctrl.ok = function () {
-    $uibModalInstance.close($ctrl.selected.item);
-  }; // end ok
+    $uibModalInstance.close($ctrl.selected.platform);
+  };
 
   $ctrl.cancel = function () {
     $uibModalInstance.dismiss('cancel');
-  }; // end cancel
-}]); // end ModalInstanceCtrl
+  };
+});
 
-// The close and dismiss bindings are from $uibModalInstance.
-angular.module('myApp').component('modalComponent', {
+// Please note that the close and dismiss bindings are from $uibModalInstance.
+
+myApp.component('modalComponent', {
   templateUrl: 'myModalContent.html',
   bindings: {
     resolve: '<',
     close: '&',
     dismiss: '&'
-  }, // end bindings
+  },
   controller: function () {
     var $ctrl = this;
 
+    $ctrl.$onInit = function () {
+      $ctrl.platforms = $ctrl.resolve.platforms;
+      $ctrl.selected = {
+        platform: $ctrl.platforms[0]
+      };
+    };
+
     $ctrl.ok = function () {
-      $ctrl.close({$value: $ctrl.selected.item});
-    }; // end ok
+      $ctrl.close({$value: $ctrl.selected.platform});
+    };
 
     $ctrl.cancel = function () {
       $ctrl.dismiss({$value: 'cancel'});
-    }; // end cancel
-  } // end controller
-}); // end modalComponent
+    };
+  }
+});
