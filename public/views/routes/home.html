@@ -31,11 +31,11 @@
                                     <input type="file" class="hidden" ng-model="upload.file" ngf-select="uploadFile($file, $invalidFiles, $index)" ngf-max-size="25MB" required>
                                 </label>
                             </div>
-                            <div class="col-xs-4 text-center">
-                                <uib-progressbar max="max" value="platform.progress"  type="success"><span style="color:white; white-space:nowrap;">{{platform.progress}}%</span></uib-progressbar>
+                            <div class="col-xs-6 text-center">
+                                <uib-progressbar max="100" value="platform.progress"  type="success"><span style="color:white; white-space:nowrap;">{{platform.progress}}%</span></uib-progressbar>
                             </div>
-                            <div class="col-xs-4">
-                                <span ng-show="platform.progress === 100" class="glyphicon glyphicon-ok pull-right" aria-hidden="true"></span>
+                            <div class="col-xs-2">
+                                <span ng-hide="platform.progress!=100" class="glyphicon glyphicon-ok-circle pull-left animate-show" aria-hidden="true"></span>
                             </div>
                         </div>
                     </div>

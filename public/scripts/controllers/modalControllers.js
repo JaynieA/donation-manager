@@ -83,5 +83,7 @@ myApp.controller('ModalInstanceController', ['$scope','$uibModalInstance', 'Uplo
       $uibModalInstance.close();
     }; // end save
 
+    
+
   } // end controller callback
 ]); // end ModalInstanceController

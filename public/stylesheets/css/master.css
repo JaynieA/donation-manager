@@ -23,6 +23,9 @@ html, body {
   .navbar a {
     color: #DC0000; }
 
+.modal-dialog {
+  margin-top: 12%; }
+
 .modal-header h3 {
   display: inline-block; }
 .modal-header .glyphicon {
@@ -38,6 +41,11 @@ html, body {
     display: inline-block; }
   .modal-body .glyphicon {
     right: 15px; }
+  .modal-body .animate-show {
+    transition: all linear 1.5s;
+    opacity: 1; }
+  .modal-body .animate-show.ng-hide {
+    opacity: 0; }
 
 .footer, .push {
   height: 60px; }

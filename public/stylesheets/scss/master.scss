@@ -34,6 +34,9 @@ html, body {
 }
 
 // -- MODAL -- //
+.modal-dialog {
+  margin-top: 12%;
+}
 .modal-header {
   h3 {
     display: inline-block;
@@ -55,7 +58,16 @@ html, body {
   .glyphicon {
     right: 15px;
   }
+  //delay success check show by 1.5s
+  .animate-show {
+    transition: all linear 1.5s;
+    opacity: 1;
+  }
+  .animate-show.ng-hide {
+    opacity:0;
+  }
 }
+
 
 // -- FOOTER -- //
 .footer, .push {
