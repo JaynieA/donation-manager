@@ -27,13 +27,12 @@
                         <div class="row">
                             <div class="col-xs-4">
                                 <label class="btn btn-primary btn-file" >
-                                    Upload {{ platform.name }} Report
+                                    {{ platform.name }}
                                     <input type="file" class="hidden" ng-model="upload.file" ngf-select="uploadFile($file, $invalidFiles, $index)" ngf-max-size="25MB" required>
                                 </label>
                             </div>
                             <div class="col-xs-4 text-center">
-                                <uib-progressbar ng-hide="platform.progress > 0" value="0"></uib-progressbar>
-                                <uib-progressbar ng-show="platform.progress > 0" value="dynamic" type="success"><b>{{platform.progress}}%</b></uib-progressbar>
+                                <uib-progressbar max="max" value="platform.progress"  type="success"><span style="color:white; white-space:nowrap;">{{platform.progress}}%</span></uib-progressbar>
                             </div>
                             <div class="col-xs-4">
                                 <span ng-show="platform.progress === 100" class="glyphicon glyphicon-ok pull-right" aria-hidden="true"></span>

@@ -21,78 +21,67 @@ myApp.controller('ModalCtrl', ['$scope','$uibModal',function ($scope, $uibModal)
 //this instance object which is used to close the modal.
 
 //ModalInstanceController
-myApp.controller('ModalInstanceController', ['$scope','$uibModalInstance', 'Upload', '$timeout',function ($scope, $uibModalInstance, Upload, $timeout) {
-  console.log('in ModalInstanceController');
+myApp.controller('ModalInstanceController', ['$scope','$uibModalInstance', 'Upload', '$timeout',
+  function ($scope, $uibModalInstance, Upload, $timeout) {
+    console.log('in ModalInstanceController');
 
-  //set platforms for repeat
-  $scope.platforms = [
-    {
-      name: 'Paypal',
-      fileData: undefined,
-      progress: 0
-    },
-    {
-      name: 'Razoo',
-      fileData: undefined,
-      progress: 0
-    },
-    {
-      name: 'YouCaring',
-      fileData: undefined,
-      progress: 0
-    }
-  ];
+    //Define platforms for repeat
+    $scope.platforms = [
+      { name: 'Paypal', fileData: undefined, progress: 0 },
+      { name: 'Razoo', fileData: undefined, progress: 0 },
+      { name: 'YouCaring', fileData: undefined, progress: 0 }
+    ];
 
-  $scope.uploadFile = function(file, errFiles, index) {
-      console.log('index-->',index);
+    $scope.uploadFile = function(file, errFiles, index) {
+        console.log('index being uploaded -->',index);
+        $scope.f = file;
+        $scope.errFile = errFiles && errFiles[0];
+        //if a file was uploaded, continue
+        if (file) {
+            //upload the file
+            file.upload = Upload.upload({
+                url: 'https://angular-file-upload-cors-srv.appspot.com/upload',
+                data: {file: file}
+            }); // end upload
+            //return data if there are timeouts/errors
+            file.upload.then(function (response) {
+                $timeout(function () {
+                    file.result = response.data;
+                }); // end $timeout
+            }, function (response) {
+                if (response.status > 0)
+                    $scope.errorMsg = response.status + ': ' + response.data;
+            }, function (evt) {
+                //track upload progress
+                $scope.platforms[index].progress = Math.min(100, parseInt(100.0 *
+                                         evt.loaded / evt.total));
+            }); // end progress function
+        } // end if
+        // Parse the uploaded file's data using papa parse
+        Papa.parse(file, {
+          header: true,
+          //when parsing is complete:
+        	complete: function(results) {
+            //log the parsed results
+        		console.log("Parsed Result:", results);
+            //populate the fileData property value for the platform
+            $scope.platforms[index].fileData = results.data;
+            console.log('platform data-->', $scope.platforms);
+        	} // end complete
+        }); // end Papa.parse
 
-      $scope.f = file;
+    }; // end uploadFile
 
-      $scope.errFile = errFiles && errFiles[0];
-      //if a file was uploaded, continue
-      if (file) {
-          //upload the file
-          file.upload = Upload.upload({
-              url: 'https://angular-file-upload-cors-srv.appspot.com/upload',
-              data: {file: file}
-          }); // end upload
-          //return data if there are timeouts/errors
-          file.upload.then(function (response) {
-              $timeout(function () {
-                  file.result = response.data;
-              }); // end $timeout
-          }, function (response) {
-              if (response.status > 0)
-                  $scope.errorMsg = response.status + ': ' + response.data;
-          }, function (evt) {
-              //track upload progress
-              $scope.platforms[index].progress = Math.min(100, parseInt(100.0 *
-                                       evt.loaded / evt.total));
-          }); // end progress function
-      } // end if
-      // Parse the uploaded file's data using papa parse
-      Papa.parse(file, {
-        header: true,
-        //when parsing is complete:
-      	complete: function(results) {
-          //log the parsed results
-      		console.log("Parsed Result:", results);
-          //populate the fileData property value for the platform
-          $scope.platforms[index].fileData = results.data;
-          console.log($scope.platforms);
-      	} // end complete
-      }); // end Papa.parse
+    //close the  modal
+    $scope.close = function () {
+      $uibModalInstance.dismiss('cancel');
+    }; // end close
 
-  }; // end uploadFile
+    //save info received from uploads
+    $scope.save = function () {
+      console.log('save modal results-->', $scope.platforms);
+      $uibModalInstance.close();
+    }; // end save
 
-  //close the  modal
-  $scope.close = function () {
-    $uibModalInstance.dismiss('cancel');
-  }; // end close
-
-  //save info received from uploads
-  $scope.save = function () {
-    console.log('save modal results');
-    $uibModalInstance.close();
-  }; // end close
-}]); // end ModalInstanceController
+  } // end controller callback
+]); // end ModalInstanceController
