@@ -24,23 +24,29 @@ myApp.controller('ModalCtrl', ['$scope','$uibModal',function ($scope, $uibModal)
 myApp.controller('ModalInstanceController', ['$scope','$uibModalInstance', 'Upload', '$timeout',function ($scope, $uibModalInstance, Upload, $timeout) {
   console.log('in ModalInstanceController');
 
-  var fileData = {
-    paypal: undefined,
-    razoo: undefined,
-    youcaring: undefined
-  }; // end fileObjects
-
   //set platforms for repeat
-  $scope.platforms = ['Paypal', 'Razoo', 'YouCaring'];
+  $scope.platforms = [
+    {
+      name: 'Paypal',
+      fileData: undefined,
+      progress: 0
+    },
+    {
+      name: 'Razoo',
+      fileData: undefined,
+      progress: 0
+    },
+    {
+      name: 'YouCaring',
+      fileData: undefined,
+      progress: 0
+    }
+  ];
 
-  $scope.uploadFile = function(file, errFiles, platform) {
-      console.log('platform-->',platform);
-      
-      var f = platform + 'File';
-      console.log('f-->', f);
+  $scope.uploadFile = function(file, errFiles, index) {
+      console.log('index-->',index);
 
-      $scope[f] = file;
-
+      $scope.f = file;
 
       $scope.errFile = errFiles && errFiles[0];
       //if a file was uploaded, continue
@@ -60,9 +66,8 @@ myApp.controller('ModalInstanceController', ['$scope','$uibModalInstance', 'Uplo
                   $scope.errorMsg = response.status + ': ' + response.data;
           }, function (evt) {
               //track upload progress
-              file.progress = Math.min(100, parseInt(100.0 *
+              $scope.platforms[index].progress = Math.min(100, parseInt(100.0 *
                                        evt.loaded / evt.total));
-                                       console.log(file.progress);
           }); // end progress function
       } // end if
       // Parse the uploaded file's data using papa parse
@@ -72,19 +77,11 @@ myApp.controller('ModalInstanceController', ['$scope','$uibModalInstance', 'Uplo
       	complete: function(results) {
           //log the parsed results
       		console.log("Parsed Result:", results);
-          //update the fileData object (depending on the platform)
-          if (platform === 'Paypal') {
-            fileData.paypal = results.data;
-          } else if (platform === "Razoo") {
-            fileData.razoo = results.data;
-          }  else if (platform === 'YouCaring') {
-            fileData.youcaring = results.data;
-          } // end else/if
-          console.log('file data object-->', fileData);
+          //populate the fileData property value for the platform
+          $scope.platforms[index].fileData = results.data;
+          console.log($scope.platforms);
       	} // end complete
       }); // end Papa.parse
-
-
 
   }; // end uploadFile
 

@@ -27,16 +27,16 @@
                         <div class="row">
                             <div class="col-xs-4">
                                 <label class="btn btn-primary btn-file" >
-                                    Upload {{ platform }} Report
-                                    <input type="file" class="hidden" ng-model="upload.file" ngf-select="uploadFile($file, $invalidFiles, platform)" ngf-max-size="25MB" required>
+                                    Upload {{ platform.name }} Report
+                                    <input type="file" class="hidden" ng-model="upload.file" ngf-select="uploadFile($file, $invalidFiles, $index)" ngf-max-size="25MB" required>
                                 </label>
                             </div>
                             <div class="col-xs-4 text-center">
-                                <uib-progressbar ng-hide="f.progress >= 0" value="0"></uib-progressbar>
-                                <uib-progressbar ng-show="f.progress >= 0" value="dynamic" type="success"><b>{{f.progress}}%</b></uib-progressbar>
+                                <uib-progressbar ng-hide="platform.progress > 0" value="0"></uib-progressbar>
+                                <uib-progressbar ng-show="platform.progress > 0" value="dynamic" type="success"><b>{{platform.progress}}%</b></uib-progressbar>
                             </div>
                             <div class="col-xs-4">
-                                <span ng-show="f.progress === 100" class="glyphicon glyphicon-ok pull-right" aria-hidden="true"></span>
+                                <span ng-show="platform.progress === 100" class="glyphicon glyphicon-ok pull-right" aria-hidden="true"></span>
                             </div>
                         </div>
                     </div>
