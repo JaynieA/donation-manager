@@ -28,7 +28,7 @@
                             <div class="col-xs-4">
                                 <label class="btn btn-primary btn-file" >
                                     Upload {{ platform }} Report
-                                    <input ng-click="uploadFile(platform)" file-reader="fileContent" type="file" class="hidden">
+                                    <input type="file" class="hidden" ng-model="upload.file" ngf-select="uploadFile($file, $invalidFiles, platform)" ngf-max-size="25MB" required>
                                 </label>
                             </div>
                             <div class="col-xs-4 text-center">
@@ -40,6 +40,15 @@
                             </div>
                         </div>
                     </div>
+
+                    <form ng-submit="submit()">
+                        <legend>Upload a new file here:</legend>
+                        <br/>
+                        <label for="file">File:</label>
+                        <input type="file" name="file" id="file" ng-model="upload.file" ngf-select ngf-max-size="25MB" required/>
+                        <br/>
+                        <input type="submit" value="Submit"/>
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-success" type="button" ng-click="save()">Save</button>

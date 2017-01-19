@@ -1,5 +1,5 @@
 //Declare app
-var myApp = angular.module('myApp', ['ngAnimate','ngRoute', 'ui.bootstrap', ]);
+var myApp = angular.module('myApp', ['ngAnimate','ngRoute', 'ui.bootstrap', 'ngFileUpload']);
 
 //Config
 myApp.config(['$routeProvider', function($routeProvider) {
