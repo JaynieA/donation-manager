@@ -21,29 +21,55 @@
         <script type="text/ng-template" id="myModalContent.html">
             <div class="modal-header">
                 <h3 class="modal-title" id="modal-title">Upload Reports</h3>
+                <span class="glyphicon glyphicon-open pull-right" aria-hidden="true"></span>
             </div>
+            <div class="modal-body">
+              <!-- Upload Paypal Button -->
+              <div class="row">
+                <div class="col-sm-4">
+                  <label class="btn btn-primary btn-file">
+                      Upload Paypal Report <input type="file" class="hidden" file-reader="fileContent" id="paypal-file-input">
+                  </label>
+                </div>
+                <div class="col-sm-4  text-center">
+                    progress bar here
+                </div>
+                <div class="col-sm-4">
+                    <span class="glyphicon glyphicon-ok pull-right" aria-hidden="true"></span>
+                </div>
+              </div>
 
-            <!-- <input type="file" file-reader="fileContent" />
-            <div>{{fileContent}}</div> -->
+              <!-- Upload Razoo Button -->
+              <div class="row">
+                <div class="col-sm-4">
+                  <label class="btn btn-primary btn-file">
+                      Upload Razoo Report <input type="file" class="hidden" file-reader="fileContent" id="razoo-file-input">
+                  </label>
+                </div>
+                <div class="col-sm-4  text-center">
+                    progress bar here
+                </div>
+                <div class="col-sm-4">
+                    <span class="glyphicon glyphicon-ok pull-right" aria-hidden="true"></span>
+                </div>
+              </div>
 
-            <label class="btn btn-primary btn-file">
-                Upload Paypal Report <input type="file" class="hidden" file-reader="fileContent" id="paypal-file-input">
-            </label>
-            <p>{{fileContent}}</p>
+              <!-- Upload YouCaring Button -->
+              <div class="row">
+                <div class="col-sm-4">
+                  <label class="btn btn-primary btn-file">
+                      Upload YouCaring Report <input type="file" class="hidden" file-reader="fileContent" id="youCaring-file-input">
+                  </label>
+                </div>
+                <div class="col-sm-4  text-center">
+                    progress bar here
+                </div>
+                <div class="col-sm-4">
+                    <span class="glyphicon glyphicon-ok pull-right" aria-hidden="true"></span>
+                </div>
+              </div>
 
-            <br />
-            <label class="btn btn-primary btn-file">
-                Upload Razoo Report <input type="file" class="hidden" file-reader="fileContent" id="razoo-file-input">
-            </label>
-            <p>{{fileContent}}</p>
-
-            <br />
-            <label class="btn btn-primary btn-file">
-                Upload YouCaring Report <input type="file" class="hidden" file-reader="fileContent" id="youCaring-file-input">
-            </label>
-            <p>{{fileContent}}</p>
-
-
+            </div>
 
             <div class="modal-footer">
                 <button class="btn btn-success" type="button" ng-click="$ctrl.ok()">Save</button>

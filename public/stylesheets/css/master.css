@@ -23,6 +23,22 @@ html, body {
   .navbar a {
     color: #DC0000; }
 
+.modal-header h3 {
+  display: inline-block; }
+.modal-header .glyphicon {
+  transform: scale(2, 2);
+  top: 12px;
+  right: 15px; }
+
+.modal-body {
+  padding: 15px; }
+  .modal-body .row {
+    padding: 20px 0; }
+  .modal-body label {
+    display: inline-block; }
+  .modal-body .glyphicon {
+    right: 15px; }
+
 .footer, .push {
   height: 60px; }
 
