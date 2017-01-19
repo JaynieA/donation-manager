@@ -23,6 +23,7 @@ myApp.directive('fileReader', function() {
                 	header: true
                 });
                 //log the parsed results
+                //TODO: send these results to a factory!
                 console.log('results-->', results);
 
                 $scope.fileReader = 'success!';
