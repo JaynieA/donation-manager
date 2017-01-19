@@ -33,7 +33,13 @@
                             </div>
                             <div class="col-xs-4 text-center">
                                 Upload Status
-                                {{ fileContent }}
+                                File:
+                                <div>{{f.name}} {{errFile.name}} {{errFile.$error}} {{errFile.$errorParam}}
+                                    <span class="progress" ng-show="f.progress >= 0">
+                                        <div style="width:{{f.progress}}%" ng-bind="f.progress + '%'"></div>
+                                    </span>
+                                </div>
+                                {{errorMsg}}
                             </div>
                             <div class="col-xs-4">
                                 <span class="glyphicon glyphicon-ok pull-right" aria-hidden="true"></span>
@@ -41,14 +47,6 @@
                         </div>
                     </div>
 
-                    <form ng-submit="submit()">
-                        <legend>Upload a new file here:</legend>
-                        <br/>
-                        <label for="file">File:</label>
-                        <input type="file" name="file" id="file" ng-model="upload.file" ngf-select ngf-max-size="25MB" required/>
-                        <br/>
-                        <input type="submit" value="Submit"/>
-                    </form>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-success" type="button" ng-click="save()">Save</button>
