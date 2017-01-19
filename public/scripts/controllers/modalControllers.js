@@ -27,9 +27,9 @@ myApp.controller('ModalInstanceController', ['$scope','$uibModalInstance',functi
   $scope.platforms = ['Paypal', 'Razoo', 'YouCaring'];
 
   $scope.uploadFile = function(val) {
-    console.log(val);
-  }; // end uploadFile
+    console.log('upload file input clicked-->',val);
 
+  }; // end uploadFile
 
   $scope.close = function () {
     $uibModalInstance.dismiss('cancel');

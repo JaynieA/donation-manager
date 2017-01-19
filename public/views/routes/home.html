@@ -26,10 +26,14 @@
                     <div ng-repeat="platform in platforms">
                         <div class="row">
                             <div class="col-xs-4">
-                                <button ng-click="uploadFile(platform)" class="btn btn-primary">Upload {{ platform }} Report</button>
+                                <label class="btn btn-primary btn-file" >
+                                    Upload {{ platform }} Report
+                                    <input ng-click="uploadFile(platform)" file-reader="fileContent" type="file" class="hidden">
+                                </label>
                             </div>
                             <div class="col-xs-4 text-center">
-                                progress bar here
+                                Upload Status
+                                {{ fileContent }}
                             </div>
                             <div class="col-xs-4">
                                 <span class="glyphicon glyphicon-ok pull-right" aria-hidden="true"></span>
@@ -43,7 +47,7 @@
                 </div>
             </script>
 
-            <button type="button" class="btn btn-default" ng-click="open('lg')">Get Started</button>
+            <button type="button" class="btn btn-success" ng-click="open('lg')">Get Started</button>
 
 
         </div>

@@ -8,8 +8,7 @@ myApp.directive('fileReader', function() {
     link: function($scope, element) {
 
       element.bind('change', function(changeEvent) {
-        var id = changeEvent.target.id;
-        console.log('id-->',id);
+
         var files = changeEvent.target.files;
         if (files.length) {
           var r = new FileReader();
@@ -23,10 +22,13 @@ myApp.directive('fileReader', function() {
                 	header: true
                 });
                 //log the parsed results
-                //TODO: send these results to a factory!
+                
+                //TODO: send these results to a factory? Get them in to the modalController somehow...
+
                 console.log('results-->', results);
 
                 $scope.fileReader = 'success!';
+
               }); // end $apply
           }; // end onload
           r.readAsText(files[0]);
