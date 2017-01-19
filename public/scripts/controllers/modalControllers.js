@@ -1,7 +1,9 @@
 //ModalCtrl
 myApp.controller('ModalCtrl', ['$scope','$uibModal',function ($scope, $uibModal) {
+  console.log('in modalCtrl');
 
   //open the modal
+  //the open method returns a modal instance
   $scope.open = function (size) {
     console.log('opening pop up');
     var modalInstance = $uibModal.open({
@@ -20,6 +22,15 @@ myApp.controller('ModalCtrl', ['$scope','$uibModal',function ($scope, $uibModal)
 
 //ModalInstanceController
 myApp.controller('ModalInstanceController', ['$scope','$uibModalInstance',function ($scope, $uibModalInstance) {
+  console.log('in ModalInstanceController');
+  //set platforms for repeat
+  $scope.platforms = ['Paypal', 'Razoo', 'YouCaring'];
+
+  $scope.uploadFile = function(val) {
+    console.log(val);
+  }; // end uploadFile
+
+
   $scope.close = function () {
     $uibModalInstance.dismiss('cancel');
   }; // end close

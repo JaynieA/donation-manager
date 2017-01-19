@@ -20,9 +20,22 @@
             <script type="text/ng-template" id="uploadReportsModal.html">
                 <div class="modal-header">
                     <h3 class="modal-title" id="modal-title">Upload Reports</h3>
+                    <span class="glyphicon glyphicon-open pull-right" aria-hidden="true"></span>
                 </div>
                 <div class="modal-body" id="modal-body">
-                    hi
+                    <div ng-repeat="platform in platforms">
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <button ng-click="uploadFile(platform)" class="btn btn-primary">Upload {{ platform }} Report</button>
+                            </div>
+                            <div class="col-xs-4 text-center">
+                                progress bar here
+                            </div>
+                            <div class="col-xs-4">
+                                <span class="glyphicon glyphicon-ok pull-right" aria-hidden="true"></span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-success" type="button" ng-click="save()">Save</button>
