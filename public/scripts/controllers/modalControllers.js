@@ -23,12 +23,25 @@ myApp.controller('ModalCtrl', ['$scope','$uibModal',function ($scope, $uibModal)
 //ModalInstanceController
 myApp.controller('ModalInstanceController', ['$scope','$uibModalInstance', 'Upload', '$timeout',function ($scope, $uibModalInstance, Upload, $timeout) {
   console.log('in ModalInstanceController');
+
+  var fileData = {
+    paypal: undefined,
+    razoo: undefined,
+    youcaring: undefined
+  }; // end fileObjects
+
   //set platforms for repeat
   $scope.platforms = ['Paypal', 'Razoo', 'YouCaring'];
 
   $scope.uploadFile = function(file, errFiles, platform) {
-      $scope.f = file;
       console.log('platform-->',platform);
+      
+      var f = platform + 'File';
+      console.log('f-->', f);
+
+      $scope[f] = file;
+
+
       $scope.errFile = errFiles && errFiles[0];
       //if a file was uploaded, continue
       if (file) {
@@ -59,8 +72,20 @@ myApp.controller('ModalInstanceController', ['$scope','$uibModalInstance', 'Uplo
       	complete: function(results) {
           //log the parsed results
       		console.log("Parsed Result:", results);
+          //update the fileData object (depending on the platform)
+          if (platform === 'Paypal') {
+            fileData.paypal = results.data;
+          } else if (platform === "Razoo") {
+            fileData.razoo = results.data;
+          }  else if (platform === 'YouCaring') {
+            fileData.youcaring = results.data;
+          } // end else/if
+          console.log('file data object-->', fileData);
       	} // end complete
       }); // end Papa.parse
+
+
+
   }; // end uploadFile
 
   //close the  modal

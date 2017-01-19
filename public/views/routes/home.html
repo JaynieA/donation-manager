@@ -32,17 +32,11 @@
                                 </label>
                             </div>
                             <div class="col-xs-4 text-center">
-                                Upload Status
-                                File:
-                                <div>{{f.name}} {{errFile.name}} {{errFile.$error}} {{errFile.$errorParam}}
-                                    <span class="progress" ng-show="f.progress >= 0">
-                                        <div style="width:{{f.progress}}%" ng-bind="f.progress + '%'"></div>
-                                    </span>
-                                </div>
-                                {{errorMsg}}
+                                <uib-progressbar ng-hide="f.progress >= 0" value="0"></uib-progressbar>
+                                <uib-progressbar ng-show="f.progress >= 0" value="dynamic" type="success"><b>{{f.progress}}%</b></uib-progressbar>
                             </div>
                             <div class="col-xs-4">
-                                <span class="glyphicon glyphicon-ok pull-right" aria-hidden="true"></span>
+                                <span ng-show="f.progress === 100" class="glyphicon glyphicon-ok pull-right" aria-hidden="true"></span>
                             </div>
                         </div>
                     </div>
