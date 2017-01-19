@@ -16,29 +16,22 @@
         <p>This is where the main page info will go</p>
 
         <!-- UPLOAD MODAL -->
-        <div ng-controller="ModalDemoCtrl as $ctrl" class="modal-demo">
-            <script type="text/ng-template" id="myModalContent.html">
+        <div ng-controller="ModalCtrl" class="modal-demo">
+            <script type="text/ng-template" id="uploadReportsModal.html">
                 <div class="modal-header">
-                    <h3 class="modal-title" id="modal-title">I'm a modal!</h3>
+                    <h3 class="modal-title" id="modal-title">Upload Reports</h3>
                 </div>
                 <div class="modal-body" id="modal-body">
-
-                    <div ng-repeat="platform in $ctrl.platforms">
-                        <button ng-click="$ctrl.selected.platform = platform">{{ platform }}</button>
-                    </div>
-
-                    Selected: <b>{{ $ctrl.selected.platform }}</b>
-
+                    hi
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
-                    <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+                    <button class="btn btn-success" type="button" ng-click="save()">Save</button>
+                    <button class="btn btn-warning" type="button" ng-click="close()">Cancel</button>
                 </div>
             </script>
 
-            <button type="button" class="btn btn-default" ng-click="$ctrl.open('lg')">Large modal</button>
+            <button type="button" class="btn btn-default" ng-click="open('lg')">Get Started</button>
 
-            <div ng-show="$ctrl.selected">Selection from a modal: {{ $ctrl.selected }}</div>
 
         </div>
     </section>
