@@ -4,6 +4,7 @@
  */
 var express = require('express');
 var router = express.Router();
+var Donation = require('../../models/donation');
 /**
  * GET /private/home
  *
@@ -18,8 +19,20 @@ router.get('/', function (req, res) {
 });
 
 router.post('/', function(req,res) {
-  console.log(req.body);
-  res.send(req.body);
+  console.log(req.body.donations);
+  var donations = req.body.donations;
+  //create an entry in the database for each donation
+  for (var i = 0; i < donations.length; i++) {
+    var newDonation = new Donation(donations[i]);
+    newDonation.save(function(err){
+      if(err){
+        console.log(err);
+        res.sendStatus(500);
+      } else {
+        res.sendStatus(201);
+      }//end else
+    });//end save
+  } // end for
 }); // end pose
 
 module.exports = router;

@@ -46,9 +46,9 @@ myApp.controller('ModalInstanceController', ['$scope','$uibModalInstance', 'Uplo
         data: { donations: completeUploadResults }
       }).then(function(response) {
         console.log(response);
+        //close the modal
+        $uibModalInstance.close();
       }); // end then
-      //close the modal
-      $uibModalInstance.close();
     }; // end save
 
     //handle CSV uploads
