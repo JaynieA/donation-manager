@@ -28,6 +28,8 @@ myApp.controller('ModalInstanceController', ['$scope','$uibModalInstance', 'Uplo
       { name: 'Razoo', fileData: undefined, progress: 0 },
       { name: 'YouCaring', fileData: undefined, progress: 0 }
     ];
+    //define array for storage
+    var completeUploadResults = [];
 
     //close the  modal
     $scope.close = function () {
@@ -58,8 +60,9 @@ myApp.controller('ModalInstanceController', ['$scope','$uibModalInstance', 'Uplo
       $uibModalInstance.close();
     }; // end save
 
+    //handle CSV uploads
     $scope.uploadFile = function(file, errFiles, index) {
-        console.log('index being uploaded -->',index);
+        console.log('in uploadFile. uploading-->', index);
         $scope.f = file;
         $scope.errFile = errFiles && errFiles[0];
         //if a file was uploaded, continue
@@ -87,55 +90,81 @@ myApp.controller('ModalInstanceController', ['$scope','$uibModalInstance', 'Uplo
           header: true,
           //when parsing is complete:
         	complete: function(results) {
-            //log the parsed results
-        		//console.log("Parsed Result:", results);
+            //parse through platform data, format and and keep only the necessary information
+            var uploadedPlatformName = $scope.platforms[index].name;
+            var resultsArray = results.data;
+            var formattedResultsArray = formatFileData(uploadedPlatformName, resultsArray);
+            //add the results to the completeUploadResults array
+            completeUploadResults = completeUploadResults.concat( formattedResultsArray );
 
-          //TODO: parse through platform data and keep only the necessary information:
-          var uploadedPlatformName = $scope.platforms[index].name;
-          var resultsArray = results.data;
-          formatFileData(uploadedPlatformName, resultsArray);
-
-          //populate the fileData property value for the appropriate platform
-          // $scope.platforms[index].fileData = results.data;
-          // console.log('complete platform data-->', $scope.platforms);
-
+            console.log('complete upload results-->',completeUploadResults);
         	} // end complete
         }); // end Papa.parse
     }; // end uploadFile
 
     var formatFileData = function(nameString, resultsArray) {
       console.log('in formatFileData--> for', nameString);
-
+      var formattedResultsArray;
       if (nameString === 'Paypal') {
         //if the data is for Paypal, format it that way
-        var paypalData = formatPaypalObjects(resultsArray);
-        console.log('paypal data-->', paypalData);
+        formattedResultsArray = formatPaypalObjects(resultsArray);
       } else if (nameString === "Razoo") {
         //if the data is for Razoo, format it that way
-        var razooData = formatRazooObjects(resultsArray);
-        console.log('razoo data-->', razooData);
+        formattedResultsArray = formatRazooObjects(resultsArray);
       } else if (nameString === "YouCaring") {
-        var youCaringData = formatYouCaringObjects(resultsArray);
-        console.log('YouCaring data -->', youCaringData);
+        formattedResultsArray = formatYouCaringObjects(resultsArray);
       } // end else/if
+      //return an array of formatted results 
+      return formattedResultsArray;
     }; // end formatFileData
 
     var formatYouCaringObjects = function(resultsArray) {
-      console.log('in formatYouCaringObjects', resultsArray);
+      console.log('in formatYouCaringObjects');
       //create empty array to push data into
       var youCaringData = [];
       for (var i = 0; i < resultsArray.length; i++) {
-        console.log(resultsArray[i][' Amount']);
         //for every row that contains a donation, format a donationObject
-        if (resultsArray[i].Amount) {
+        if (resultsArray[i][' Amount']) {
+          //format the variables
+          var email = resultsArray[i][' Email'].replace(' ', '');
+          var name = resultsArray[i][' Display Name'].replace(' ', '');
+          var amount = resultsArray[i][' Amount'].replace(' ', '');
+          //format address variables
+          var address = resultsArray[i][' Address 1'].replace(' ', '');
+            if (address === '') {
+              address = undefined;
+            } // end if
+          var city = resultsArray[i][' City'].replace(' ', '');
+            if (city === '') {
+              city = undefined;
+            } // end if
+          var state = resultsArray[i][' State'].replace(' ', '');
+            if (state === '') {
+              state = undefined;
+            } // end if
+          var zip = resultsArray[i][' Zip'].replace(' ', '');
+            if (zip === '') {
+              zip = undefined;
+            } // end if
+          //assemble donationObject
           var donationObject = {
             platform_name: 'YouCaring',
-            date: new Date(resultsArray[i].Date),
-            donor_name: resultsArray[i]['Display Name']
+            date: new Date(resultsArray[i][' Date']),
+            donor_name: name,
+            donor_email: email,
+            donation_amt: amount,
+            donor_address: address,
+            donor_city: city,
+            donor_state: state,
+            donor_zip: zip,
+            reference_id: undefined,
+            origin: resultsArray[i].Title
           }; // end donationObject
-          console.log(donationObject);
+          //push objects into youCaringData array
+          youCaringData.push(donationObject);
         } // end if
       } // end for
+      return youCaringData;
     }; // end formatYouCaringObjects
 
     var formatRazooObjects = function(resultsArray) {
@@ -186,7 +215,9 @@ myApp.controller('ModalInstanceController', ['$scope','$uibModalInstance', 'Uplo
             //define and format address variables
             zip = addressArray[1].replace(' ', '');
             state = addressArray[2].replace(' ', '');
-            city = addressArray[3].replace(' ', '');
+            city = addressArray[3].replace(' ', '').toLowerCase();
+            //convert city to lowercase, capitilize first letter
+            city = city.charAt(0).toUpperCase() + city.slice(1);
             address = addressArray[4].replace(' ', '');
           } else {
             //else, the address does not exist
@@ -196,7 +227,6 @@ myApp.controller('ModalInstanceController', ['$scope','$uibModalInstance', 'Uplo
             city = undefined;
             address = undefined;
           } // end else
-
           //assemble donation object
           var donationObject = {
             platform_name: 'Paypal',
@@ -211,7 +241,6 @@ myApp.controller('ModalInstanceController', ['$scope','$uibModalInstance', 'Uplo
             donor_zip: zip,
             origin: resultsArray[i]['Item ID']
           }; // end donationObject
-          console.log('donation object', donationObject);
           //push the DonationObject into paypalData array
           paypalData.push(donationObject);
         } // end if
