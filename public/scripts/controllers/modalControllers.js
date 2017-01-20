@@ -38,16 +38,8 @@ myApp.controller('ModalInstanceController', ['$scope','$uibModalInstance', 'Uplo
 
     //save info received from uploads
     $scope.save = function () {
-      console.log('save modal results-->', $scope.platforms);
+      console.log('in save-->', completeUploadResults);
 
-
-      //construct object to send
-      var objectToSend = {
-        paypal: $scope.platforms[0].fileData,
-        razoo: $scope.platforms[1].fileData,
-        youCaring: $scope.platforms[2].fileData
-      };
-      console.log(objectToSend);
       // //send object to the server
       // $http({
       //   method: 'POST',
@@ -96,8 +88,6 @@ myApp.controller('ModalInstanceController', ['$scope','$uibModalInstance', 'Uplo
             var formattedResultsArray = formatFileData(uploadedPlatformName, resultsArray);
             //add the results to the completeUploadResults array
             completeUploadResults = completeUploadResults.concat( formattedResultsArray );
-
-            console.log('complete upload results-->',completeUploadResults);
         	} // end complete
         }); // end Papa.parse
     }; // end uploadFile
@@ -114,7 +104,7 @@ myApp.controller('ModalInstanceController', ['$scope','$uibModalInstance', 'Uplo
       } else if (nameString === "YouCaring") {
         formattedResultsArray = formatYouCaringObjects(resultsArray);
       } // end else/if
-      //return an array of formatted results 
+      //return an array of formatted results
       return formattedResultsArray;
     }; // end formatFileData
 
