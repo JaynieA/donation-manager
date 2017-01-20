@@ -108,16 +108,50 @@ myApp.controller('ModalInstanceController', ['$scope','$uibModalInstance', 'Uplo
 
       if (nameString === 'Paypal') {
         //if the data is for Paypal, format it that way
-        paypalData = formatPaypalObjects(resultsArray);
+        var paypalData = formatPaypalObjects(resultsArray);
         console.log('paypal data-->', paypalData);
       } else if (nameString === "Razoo") {
         //if the data is for Razoo, format it that way
-        //TODO: make formatRazooObjects function
+        var razooData = formatRazooObjects(resultsArray);
+        console.log('razoo data-->', razooData);
       } else if (nameString === "YouCaring") {
         //if the data is for YouCaring, format it that way
         //TODO: make formatYouCaringObjects function
       } // end else/if
     }; // end formatFileData
+
+    var formatRazooObjects = function(resultsArray) {
+      console.log('in formatRazooObjects');
+      //create empty array to push result data into
+      var razooData = [];
+      for (var i = 0; i < resultsArray.length; i++) {
+        //for every row that contains a donation, format a donationObject
+        if(resultsArray[i].Amount) {
+          //concatenate first and last names to make full name
+          var full_name = resultsArray[i]['Donor First Name'] + resultsArray[i]['Donor Last Name'];
+          //Format amount- remove the '$ ' at the beginning
+          var amount = resultsArray[i].Amount.replace('$', '');
+          amount = amount.replace(' ', '');
+          //assemble donation object
+          var donationObject = {
+            platform_name: "Razoo",
+            date: new Date(resultsArray[i].Date),
+            donor_name: full_name,
+            donor_email: resultsArray[i].Email,
+            donation_amt: amount,
+            reference_id: resultsArray[i]["Tracking #"],
+            donor_address: resultsArray[i].Address,
+            donor_city: resultsArray[i].City,
+            donor_state: resultsArray[i].State,
+            donor_zip: resultsArray[i].Zip,
+            origin: resultsArray[i].Origin
+          }; // end donationObject
+          //push the donationObject into razooData array
+          razooData.push(donationObject);
+        } // end if
+      } // end for
+      return razooData;
+    }; // end formatRazooObjects
 
     var formatPaypalObjects = function(resultsArray) {
       console.log('in formatPaypalObjects');
@@ -133,9 +167,9 @@ myApp.controller('ModalInstanceController', ['$scope','$uibModalInstance', 'Uplo
             donor_name: resultsArray[i].Name,
             donor_email: resultsArray[i]["From Email Address"],
             donation_amt: resultsArray[i].Gross,
-            transaction_id: resultsArray[i]["Transaction ID"],
+            reference_id: resultsArray[i]["Transaction ID"],
             address: resultsArray[i]["Shipping Address"],
-            cause: resultsArray[i]['Item ID']
+            origin: resultsArray[i]['Item ID']
           }; // end donationObject
           //push the DonationObject into paypalData array
           paypalData.push(donationObject);
