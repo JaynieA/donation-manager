@@ -2,6 +2,7 @@
 
 myApp.controller('DashboardController', ['$scope', '$http', function($scope, $http) {
   console.log('in DashboardController');
+
   //get authentication that user is logged in and has admin status
   $http.get('/private/dashboard')
     .then(function (response) {
@@ -11,7 +12,7 @@ myApp.controller('DashboardController', ['$scope', '$http', function($scope, $ht
     } else {
       $scope.data = response.data.authStatus;
       console.log('DC. You are logged in:', response.data.authStatus);
-      console.log(response.data.donations);
+      $scope.donations = response.data.donations;
     } // end else
   }); // end $http
 
