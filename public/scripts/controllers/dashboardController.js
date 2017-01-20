@@ -11,6 +11,7 @@ myApp.controller('DashboardController', ['$scope', '$http', function($scope, $ht
     } else {
       $scope.data = response.data.authStatus;
       console.log('DC. You are logged in:', response.data.authStatus);
+      console.log(response.data.donations);
     } // end else
   }); // end $http
 
