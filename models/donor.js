@@ -4,16 +4,15 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema();
 
 var donorSchema = new Schema({
+  platform_name: {type:String, required: true},
   date: Date,
-  first_name: String,
-  last_name: String,
-  email: String,
-  address: String,
-  city: String,
-  state: String,
-  zip: Number,
-  net_amount: { type: Number, required: true },
-  platform_name: { type: String, required: true },
+  donor_name: String,
+  donor_email: String,
+  dontion_amt: Number,
+  donor_address: String,
+  donor_city: String,
+  donor_state: String,
+  donor_zip: Number,
   thanked: {type: Boolean, default: false},
 }); // end donorSchema
 

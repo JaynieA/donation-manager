@@ -39,15 +39,14 @@ myApp.controller('ModalInstanceController', ['$scope','$uibModalInstance', 'Uplo
     //save info received from uploads
     $scope.save = function () {
       console.log('in save-->', completeUploadResults);
-
-      // //send object to the server
-      // $http({
-      //   method: 'POST',
-      //   url: '/home',
-      //   data: {stuff: $scope.platforms}
-      // }).then(function(response) {
-      //   console.log(response);
-      // }); // end then
+      //send completeUploadResults to the server
+      $http({
+        method: 'POST',
+        url: '/private/home',
+        data: { donations: completeUploadResults }
+      }).then(function(response) {
+        console.log(response);
+      }); // end then
       //close the modal
       $uibModalInstance.close();
     }; // end save
@@ -142,11 +141,11 @@ myApp.controller('ModalInstanceController', ['$scope','$uibModalInstance', 'Uplo
             date: new Date(resultsArray[i][' Date']),
             donor_name: name,
             donor_email: email,
-            donation_amt: amount,
+            donation_amt: Number(amount),
             donor_address: address,
             donor_city: city,
             donor_state: state,
-            donor_zip: zip,
+            donor_zip: Number(zip),
             reference_id: undefined,
             origin: resultsArray[i].Title
           }; // end donationObject
@@ -175,12 +174,12 @@ myApp.controller('ModalInstanceController', ['$scope','$uibModalInstance', 'Uplo
             date: new Date(resultsArray[i].Date),
             donor_name: full_name,
             donor_email: resultsArray[i].Email,
-            donation_amt: amount,
+            donation_amt: Number(amount),
             reference_id: resultsArray[i]["Tracking #"],
             donor_address: resultsArray[i].Address,
             donor_city: resultsArray[i].City,
             donor_state: resultsArray[i].State,
-            donor_zip: resultsArray[i].Zip,
+            donor_zip: Number(resultsArray[i].Zip),
             origin: resultsArray[i].Origin
           }; // end donationObject
           //push the donationObject into razooData array
@@ -223,12 +222,12 @@ myApp.controller('ModalInstanceController', ['$scope','$uibModalInstance', 'Uplo
             date: new Date(resultsArray[i].Date),
             donor_name: resultsArray[i].Name,
             donor_email: resultsArray[i]["From Email Address"],
-            donation_amt: resultsArray[i].Gross,
+            donation_amt: Number(resultsArray[i].Gross),
             reference_id: resultsArray[i]["Transaction ID"],
             donor_address: address,
             donor_city: city,
             donor_state: state,
-            donor_zip: zip,
+            donor_zip: Number(zip),
             origin: resultsArray[i]['Item ID']
           }; // end donationObject
           //push the DonationObject into paypalData array

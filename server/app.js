@@ -10,7 +10,6 @@ var isLoggedIn = require('../utils/auth');
 var private = require('../routers/private/index');
 
 //db connection
-//TODO: this can probably be used in routers only once those exist
 var mongoose = require('mongoose');
 var connection = require('../config/connection.js');
 mongoose.connect(connection);
