@@ -8,11 +8,13 @@ var donationSchema = new Schema({
   date: Date,
   donor_name: String,
   donor_email: String,
-  dontion_amt: Number,
+  donation_amt: Number,
+  reference_id: String,
   donor_address: String,
   donor_city: String,
   donor_state: String,
   donor_zip: Number,
+  origin: String,
   thanked: {type: Boolean, default: false}
 }); // end donorSchema
 
