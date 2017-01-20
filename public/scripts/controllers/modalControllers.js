@@ -176,8 +176,27 @@ myApp.controller('ModalInstanceController', ['$scope','$uibModalInstance', 'Uplo
       //create empty array to push result data to
       var paypalData = [];
       for (var i = 0; i < resultsArray.length; i++) {
+        var zip, state, city, address;
         //if the object is a donation payment, process it
         if (resultsArray[i].Type === "Donation Payment") {
+          //split the address string into array on ',', then reverse the array
+          var addressArray = resultsArray[i]["Shipping Address"].split(',').reverse();
+          // if the first item in the array is "US", the address exists
+          if (addressArray[0] === ' US') {
+            //define and format address variables
+            zip = addressArray[1].replace(' ', '');
+            state = addressArray[2].replace(' ', '');
+            city = addressArray[3].replace(' ', '');
+            address = addressArray[4].replace(' ', '');
+          } else {
+            //else, the address does not exist
+            //address variables should all be set to undefined
+            zip = undefined;
+            state = undefined;
+            city = undefined;
+            address = undefined;
+          } // end else
+
           //assemble donation object
           var donationObject = {
             platform_name: 'Paypal',
@@ -186,9 +205,13 @@ myApp.controller('ModalInstanceController', ['$scope','$uibModalInstance', 'Uplo
             donor_email: resultsArray[i]["From Email Address"],
             donation_amt: resultsArray[i].Gross,
             reference_id: resultsArray[i]["Transaction ID"],
-            address: resultsArray[i]["Shipping Address"],
+            donor_address: address,
+            donor_city: city,
+            donor_state: state,
+            donor_zip: zip,
             origin: resultsArray[i]['Item ID']
           }; // end donationObject
+          console.log('donation object', donationObject);
           //push the DonationObject into paypalData array
           paypalData.push(donationObject);
         } // end if
