@@ -115,10 +115,28 @@ myApp.controller('ModalInstanceController', ['$scope','$uibModalInstance', 'Uplo
         var razooData = formatRazooObjects(resultsArray);
         console.log('razoo data-->', razooData);
       } else if (nameString === "YouCaring") {
-        //if the data is for YouCaring, format it that way
-        //TODO: make formatYouCaringObjects function
+        var youCaringData = formatYouCaringObjects(resultsArray);
+        console.log('YouCaring data -->', youCaringData);
       } // end else/if
     }; // end formatFileData
+
+    var formatYouCaringObjects = function(resultsArray) {
+      console.log('in formatYouCaringObjects', resultsArray);
+      //create empty array to push data into
+      var youCaringData = [];
+      for (var i = 0; i < resultsArray.length; i++) {
+        console.log(resultsArray[i][' Amount']);
+        //for every row that contains a donation, format a donationObject
+        if (resultsArray[i].Amount) {
+          var donationObject = {
+            platform_name: 'YouCaring',
+            date: new Date(resultsArray[i].Date),
+            donor_name: resultsArray[i]['Display Name']
+          }; // end donationObject
+          console.log(donationObject);
+        } // end if
+      } // end for
+    }; // end formatYouCaringObjects
 
     var formatRazooObjects = function(resultsArray) {
       console.log('in formatRazooObjects');
