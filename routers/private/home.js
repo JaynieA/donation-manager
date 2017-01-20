@@ -17,4 +17,9 @@ router.get('/', function (req, res) {
   res.send({ authStatus: true });
 });
 
+router.post('/', function(req,res) {
+  console.log(req.body);
+  res.send(req.body);
+}); // end pose
+
 module.exports = router;
