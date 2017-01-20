@@ -109,6 +109,7 @@ myApp.controller('ModalInstanceController', ['$scope','$uibModalInstance', 'Uplo
       if (nameString === 'Paypal') {
         //if the data is for Paypal, format it that way
         paypalData = formatPaypalObjects(resultsArray);
+        console.log('paypal data-->', paypalData);
       } else if (nameString === "Razoo") {
         //if the data is for Razoo, format it that way
         //TODO: make formatRazooObjects function
@@ -120,8 +121,8 @@ myApp.controller('ModalInstanceController', ['$scope','$uibModalInstance', 'Uplo
 
     var formatPaypalObjects = function(resultsArray) {
       console.log('in formatPaypalObjects');
-      //create empty object to push result data to
-      var paypalData = {};
+      //create empty array to push result data to
+      var paypalData = [];
       for (var i = 0; i < resultsArray.length; i++) {
         //if the object is a donation payment, process it
         if (resultsArray[i].Type === "Donation Payment") {
@@ -132,12 +133,17 @@ myApp.controller('ModalInstanceController', ['$scope','$uibModalInstance', 'Uplo
             donor_name: resultsArray[i].Name,
             donor_email: resultsArray[i]["From Email Address"],
             donation_amt: resultsArray[i].Gross,
-            transaction_id: resultsArray[i]["Transaction ID"]
+            transaction_id: resultsArray[i]["Transaction ID"],
+            address: resultsArray[i]["Shipping Address"],
+            cause: resultsArray[i]['Item ID']
           }; // end donationObject
-          console.log('paypal donation object-->',donationObject);
+          //push the DonationObject into paypalData array
+          paypalData.push(donationObject);
         } // end if
       } // end for loop
+      return paypalData;
     }; // end formatPaypalObjects
+
 
   } // end controller callback
 ]); // end ModalInstanceController
