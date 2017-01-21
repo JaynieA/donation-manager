@@ -55,6 +55,9 @@ html, body {
 .modal-footer {
   padding: 20px; }
 
+.filters-form {
+  margin-top: 30px; }
+
 .table {
   margin: 20px auto 60px; }
   .table th {
