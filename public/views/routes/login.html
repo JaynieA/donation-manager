@@ -1,23 +1,22 @@
 <!-- Consider this the main view -->
 <div class="text-center">
 
-
 <h2 class="shadowed-sm-hdr">Login</h2>
   <!-- Shown for users that are NOT logged in -->
   <div ng-hide="auth.loggedIn" class="shadowed-sm">
-
     <div class="inner">
-
-      <!-- I got this button image from Googles sign-in button brand guidelines page -->
+      <!-- button image is from Googles sign-in button brand guidelines page -->
       <a href= "/auth/google"><img src="/images/btn_google_signin_dark_normal_web.png" /></a>
+    </div>
+  </div>
+  <!-- Shown for users that are logged in -->
+  <div ng-show="auth.loggedIn">
+    <div class="shadowed-sm">
+      <div class="inner">
+        <p>You are logged in!</p>
+        <img class="img-responsive error-img" src="../images/sls_badge_plain.png" alt="logo">
+      </div>
     </div>
 
   </div>
-
-  <!-- Shown for users that are logged in -->
-  <section ng-show="auth.loggedIn">
-    <p>
-      You are logged in!
-    </p>
-  </section>
 </div>
