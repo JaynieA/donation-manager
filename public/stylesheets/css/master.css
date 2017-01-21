@@ -1,7 +1,11 @@
+/* Responsive Styles */
+/* Extra small devices (phones, less than 768px) */
+/* No media query since this is the default in Bootstrap */
 /* -- GLOBALS -- */
 html, body {
   font-family: "Open Sans", sans-serif;
-  height: 100%; }
+  height: 100%;
+  color: #515150; }
 
 .clearfix:after {
   visibility: hidden;
@@ -31,6 +35,35 @@ html, body {
 
 .navbar-toggle .icon-bar {
   background-color: #DC0000; }
+
+.shadowed-sm-hdr {
+  text-transform: uppercase;
+  margin: 10vh auto 15px; }
+  .shadowed-sm-hdr.error {
+    color: #DC0000;
+    text-shadow: 1px 1px #cccccc;
+    text-transform: none; }
+
+.shadowed-sm {
+  min-height: 30vh;
+  width: 80%;
+  margin: 0 auto;
+  box-shadow: 0px 1px 5px 2px #cccccc;
+  display: flex;
+  justify-content: center; }
+  .shadowed-sm .inner {
+    align-self: center;
+    padding: 20px; }
+  .shadowed-sm a {
+    cursor: pointer; }
+  .shadowed-sm img, .shadowed-sm p {
+    margin-bottom: 20px; }
+  .shadowed-sm .error-img {
+    max-height: 100px;
+    margin: 0 auto; }
+  .shadowed-sm p {
+    padding: 0 60px;
+    font-size: 18px; }
 
 .modal-dialog {
   margin-top: 12%; }
@@ -97,5 +130,13 @@ html, body {
       content: ' | ';
       padding: 20px;
       color: #333; }
+
+/* Small devices (tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .shadowed-sm {
+    width: 50%; } }
+/* Medium devices (desktops, 992px and up) */
+/* Large devices (large desktops, 1200px and up) */
+/* Xtra Large devices (Xlarge desktops, 1500px and up) */
 
 /*# sourceMappingURL=master.css.map */

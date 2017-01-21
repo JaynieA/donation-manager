@@ -1,11 +1,15 @@
 @import 'settings';
 @import 'tools';
 
-/* -- GLOBALS -- */
+/* Responsive Styles */
+/* Extra small devices (phones, less than 768px) */
+/* No media query since this is the default in Bootstrap */
 
+/* -- GLOBALS -- */
 html, body {
   font-family: $mainFont;
   height: 100%;
+  color: $mainTextColor;
 }
 
 // -- LAYOUT -- //
@@ -41,6 +45,42 @@ html, body {
 .navbar-toggle  {
   .icon-bar {
     background-color: #DC0000;
+  }
+}
+// -- LOGIN & ERROR -- //
+.shadowed-sm-hdr {
+  text-transform: uppercase;
+  margin: 10vh auto 15px;
+  &.error {
+    color: $slsRed;
+    text-shadow: 1px 1px $boxShadowColor;
+    text-transform: none;
+  }
+}
+.shadowed-sm {
+  min-height: 30vh;
+  width: 80%;
+  margin: 0 auto;
+  box-shadow: 0px 1px 5px 2px $boxShadowColor;
+  display: flex;
+  justify-content: center;
+  .inner {
+    align-self: center;
+    padding: 20px;
+  }
+  a {
+    cursor: pointer;
+  }
+  img, p {
+    margin-bottom: 20px;
+  }
+  .error-img {
+    max-height: 100px;
+    margin: 0 auto;
+  }
+  p {
+    padding: 0 60px;
+    font-size: 18px;
   }
 }
 
@@ -129,3 +169,22 @@ html, body {
     }
   }
 }
+
+
+
+/* Small devices (tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  // -- LOGIN & ERROR -- //
+  .shadowed-sm {
+    width: 50%;
+  }
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media only screen and (min-width: 992px) {}
+
+/* Large devices (large desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {}
+
+/* Xtra Large devices (Xlarge desktops, 1500px and up) */
+@media only screen and (min-width: 1500px) {}
