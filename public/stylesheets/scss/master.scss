@@ -75,7 +75,16 @@ html, body {
 .modal-footer {
   padding: 20px;
 }
-
+// -- DASHBOARD -- //
+.table {
+  margin: 20px auto 60px;
+  th {
+    text-align: center;
+  }
+  td {
+    vertical-align: middle !important;
+  }
+}
 
 // -- FOOTER -- //
 .footer, .push {

@@ -11,31 +11,37 @@
   <div ng-if="data">
     <h2>Donation Dashboard</h2>
 
-    <table class="table table-responsive table-bordered table-striped table-hover">
-      <thead>
-        <tr>
-          <th>Date</th>
-          <th>Donor Name</th>
-          <th>Platform</th>
-          <th>Origin</th>
-          <th>Donation Amount</th>
-          <th>Thanked</th>
-          <th>Send Email</th>
-          <th>Generate Letter</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat="donation in donations">
-          <td>{{ donation.date }}</td>
-          <td>{{ donation.donor_name }}</td>
-          <td>{{ donation.platform_name }}</td>
-          <td>{{ donation.origin }}</td>
-          <td>{{ donation.donation_amt }}</td>
-          <td>{{ donation.thanked }}</td>
-          <td>**send email button**</td>
-          <td>**generate letter button**</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped table-hover">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Donor Name</th>
+            <th>Platform</th>
+            <th>Origin</th>
+            <th>Amount</th>
+            <th>Thanked</th>
+            <th>Send Email</th>
+            <th>Generate Letter</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="donation in donations">
+            <td>{{ donation.date | date:'MM/dd/yyyy' }}</td>
+            <td>{{ donation.donor_name }}</td>
+            <td>{{ donation.platform_name }}</td>
+            <td>{{ donation.origin }}</td>
+            <td>{{ donation.donation_amt | currency }}</td>
+            <td>
+              <span ng-show="donation.thanked" class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+              <span ng-hide="donation.thanked" class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+            </td>
+            <td><button class="btn btn-success">Send Email</button></td>
+            <td><button class="btn btn-success">Generate Letter</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
   </div>
 </div>

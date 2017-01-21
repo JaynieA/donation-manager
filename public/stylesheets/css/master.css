@@ -55,6 +55,13 @@ html, body {
 .modal-footer {
   padding: 20px; }
 
+.table {
+  margin: 20px auto 60px; }
+  .table th {
+    text-align: center; }
+  .table td {
+    vertical-align: middle !important; }
+
 .footer, .push {
   height: 60px; }
 
