@@ -26,30 +26,9 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', function
       //condense the dates returned, attach month string, and scope for select
       var condensedDates = condenseDateResponse(response.data);
       $scope.selectDates = makeDateObjects(condensedDates);
-      console.log($scope.selectDates);
   }); // end $http
 
-  var makeDateObjects = function(array) {
-    console.log('in makeDateObjects');
-    var dates = [];
-    for (var i = 0; i < array.length; i++) {
-      //split date strings on ','
-      array[i].split(',');
-      //marshall variables
-      var year = array[i].split(',')[1];
-      var monthNum =  array[i].split(',')[0];
-      var monthString = convertMonth(Number(monthNum));
-      //construct object containing date info
-      var newDate = {
-        month_num: monthNum,
-        month_str: monthString,
-        year: year
-      }; // end newDate
-      dates.push(newDate);
-    } // end for
-    return dates;
-  }; // end makeDateObjects
-
+  //condese results of .../dates get
   var condenseDateResponse = function(responseArray) {
     console.log('in condenseDateResponse');
     var dates = [];
@@ -96,5 +75,43 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', function
     } // end switch
   }; // end convertMonth
 
+  //convert array of date strings into date-like objects
+  var makeDateObjects = function(array) {
+    console.log('in makeDateObjects');
+    var dates = [];
+    for (var i = 0; i < array.length; i++) {
+      //split date strings on ','
+      array[i].split(',');
+      //marshall variables
+      var year = array[i].split(',')[1];
+      var monthNum =  array[i].split(',')[0];
+      var monthString = convertMonth(Number(monthNum));
+      //construct object containing date info
+      var newDate = {
+        month_num: monthNum,
+        month_str: monthString,
+        year: year
+      }; // end newDate
+      dates.push(newDate);
+    } // end for
+    return dates;
+  }; // end makeDateObjects
+
+  $scope.setDateFilter = function(value) {
+    console.log('in setDateFilter');
+    var year = new Date(value).getFullYear();
+    var month = new Date(value).getMonth();
+    //TODO: figure out how to correct this running on load without this hard-coded value
+    if (year !== 1969) {
+      console.log(month, year);
+    }
+  }; // end setDateFilter
+
+  $scope.setStatusFilter = function(value) {
+    //TODO: prevent this running on controller load
+    if (value) {
+      console.log('in setStatusFilter', value);
+    } // end if
+  }; // end setStatusFilter
 
 }]); // end DashboardController

@@ -8,15 +8,16 @@
       <div class="form-group">
         <label>Filter Results:</label>
 
-        <select class="form-control">
+        <select ng-model="dateSelect" ng-change="setDateFilter(dateSelect)" class="form-control">
           <option value="" selected disabled>Month:</option>
-          <option ng-repeat="date in selectDates | orderBy: ['-year', 'month_num']" value="month_str/year">
+          <option ng-repeat="date in selectDates | orderBy: ['-year', 'month_num']">
             {{date.month_str}} {{date.year}}
           </option>
         </select>
+
         <button class="btn btn-danger btn-sm">&times;</button>
 
-        <select class="form-control">
+        <select ng-model="statusSelect" ng-change="setStatusFilter(statusSelect)" class="form-control">
           <option value="" selected disabled>Status:</option>
           <option value="thanked">Thanked</option>
           <option value="not-thanked">Not Thanked</option>
