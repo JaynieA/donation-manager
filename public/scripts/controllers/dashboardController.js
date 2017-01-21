@@ -20,10 +20,60 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', function
     } // end else
   }); // end $http
 
-  //get dates to populate selects
+  //get aggregate dates of all donations
   $http.get('/private/dashboard/dates')
     .then(function(response) {
-      console.log(response);
+      condenseDateResponse(response.data);
   }); // end $http
-  
+
+  var condenseDateResponse = function(responseArray) {
+    console.log('in condenseDateResponse');
+    var dates = [];
+    //push the responses into dates array (if not already in)
+    for (var i = 0; i < responseArray.length; i++) {
+      //convert month number to month string
+      responseArray[i].monthString = convertMonth(responseArray[i].month);
+      var dateString = responseArray[i].month + ', ' + responseArray[i].year;
+      //if the date is not in dates array, push it in
+      if (dates.indexOf(dateString) === -1) {
+        console.log('not in array-->',dateString);
+        dates.push(dateString);
+      } // end if
+    } // end for
+    console.log('condensed dates-->',dates);
+  }; // end condenseDateResponse
+
+  //convert month from number to string
+  var convertMonth = function(monthNumber) {
+    switch (monthNumber) {
+      case 1:
+        return 'January';
+      case 2:
+        return 'February';
+      case 3:
+        return 'March';
+      case 4:
+        return 'April';
+      case 5:
+        return 'May';
+      case 6:
+        return 'June';
+      case 7:
+        return 'July';
+      case 8:
+        return 'August';
+      case 8:
+        return 'September';
+      case 9:
+        return 'October';
+      case 10:
+        return 'November';
+      case 12:
+        return 'December';
+      default:
+        return 'Error';
+    } // end switch
+  }; // end convertMonth
+
+
 }]); // end DashboardController
