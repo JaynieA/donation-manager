@@ -23,24 +23,45 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', function
   //get aggregate dates of all donations
   $http.get('/private/dashboard/dates')
     .then(function(response) {
-      condenseDateResponse(response.data);
+      //condense the dates returned, attach month string, and scope for select
+      var condensedDates = condenseDateResponse(response.data);
+      $scope.selectDates = makeDateObjects(condensedDates);
+      console.log($scope.selectDates);
   }); // end $http
+
+  var makeDateObjects = function(array) {
+    console.log('in makeDateObjects');
+    var dates = [];
+    for (var i = 0; i < array.length; i++) {
+      //split date strings on ','
+      array[i].split(',');
+      //marshall variables
+      var year = array[i].split(',')[1];
+      var monthNum =  array[i].split(',')[0];
+      var monthString = convertMonth(Number(monthNum));
+      //construct object containing date info
+      var newDate = {
+        month_num: monthNum,
+        month_str: monthString,
+        year: year
+      }; // end newDate
+      dates.push(newDate);
+    } // end for
+    return dates;
+  }; // end makeDateObjects
 
   var condenseDateResponse = function(responseArray) {
     console.log('in condenseDateResponse');
     var dates = [];
     //push the responses into dates array (if not already in)
     for (var i = 0; i < responseArray.length; i++) {
-      //convert month number to month string
-      responseArray[i].monthString = convertMonth(responseArray[i].month);
-      var dateString = responseArray[i].month + ', ' + responseArray[i].year;
+      var dateString = responseArray[i].month + ',' + responseArray[i].year;
       //if the date is not in dates array, push it in
       if (dates.indexOf(dateString) === -1) {
-        console.log('not in array-->',dateString);
         dates.push(dateString);
       } // end if
     } // end for
-    console.log('condensed dates-->',dates);
+    return dates;
   }; // end condenseDateResponse
 
   //convert month from number to string

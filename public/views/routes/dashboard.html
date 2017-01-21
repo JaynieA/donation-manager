@@ -10,8 +10,9 @@
 
         <select class="form-control">
           <option value="" selected disabled>Month:</option>
-          <option value="">jan</option>
-          <option value="">feb</option>
+          <option ng-repeat="date in selectDates | orderBy: ['-year', 'month_num']" value="month_str/year">
+            {{date.month_str}} {{date.year}}
+          </option>
         </select>
         <button class="btn btn-danger btn-sm">&times;</button>
 
