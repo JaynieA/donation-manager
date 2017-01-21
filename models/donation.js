@@ -18,6 +18,10 @@ var donationSchema = new Schema({
   thanked: {type: Boolean, default: false}
 }); // end donorSchema
 
+// donationSchema.index({ platform_name: 1, date: 1, donor_name:1, donor_email:1,
+//                        donation_amt:1, reference_id:1, donor_address:1, donor_city:1, donor_state:1,
+//                        donor_zip:1, origin:1}, { unique: true });
+
 var Donation = mongoose.model('donations', donationSchema);
 
 module.exports = Donation;

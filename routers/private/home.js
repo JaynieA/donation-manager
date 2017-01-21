@@ -30,9 +30,10 @@ router.post('/', function(req,res) {
     }); // end save
   }, function (error) {
     if (error) {
+      //TODO: add error handling to gracefully fail if duplicates exist
       console.log('Error:', error);
       //res.sendStatus(500);
-    }  // end if
+    }  // end if  
     console.log('Donations saved');
     return res.sendStatus(201);
   }); // end callback
