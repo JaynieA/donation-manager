@@ -19,4 +19,11 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', function
       $scope.donations = response.data.donations;
     } // end else
   }); // end $http
+
+  //get dates to populate selects
+  $http.get('/private/dashboard/dates')
+    .then(function(response) {
+      console.log(response);
+  }); // end $http
+  
 }]); // end DashboardController

@@ -22,7 +22,18 @@ router.get('/', function (req, res) {
       });
     } // end else
   }); // end find
-
 });
+
+//get months/year of donatios
+router.get('/dates', function(req,res) {
+  console.log('/private/dashboard/dates get route hit');
+  Donation.aggregate([{$project:{year: { $year: "$date" },month: { $month: "$date" }}}], function(err, results) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(results);
+    } // end else
+  }); // end aggregate
+}); // end get
 
 module.exports = router;
