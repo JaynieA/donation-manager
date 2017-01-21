@@ -3,7 +3,15 @@
 
     <!-- Shown for users that are logged in -->
     <section ng-if="data">
-        <h2>Home</h2>
+        <h2>Total Donations in {{ currentYear }}</h2>
+        <h3>$yearly total goes here</h3>
+        <div>
+            <p>Start: {{ slideChangeData.start }}</p>
+            <p>Change: {{ slideChangeData.change }}</p>
+            <p>End: {{ slideChangeData.end }}</p>
+            <rzslider rz-slider-model="month_slider.value" rz-slider-options="month_slider.options"></rzslider>
+        </div>
+
         <!-- UPLOAD MODAL -->
         <div ng-controller="ModalCtrl" class="modal-demo">
             <script type="text/ng-template" id="uploadReportsModal.html">
@@ -36,7 +44,12 @@
                 </div>
             </script>
 
-            <button type="button" class="btn btn-success" ng-click="open('lg')">Get Started</button>
+            <div class="shadowed-sm">
+                <div class="inner">
+                    <button type="button" class="btn btn-success" ng-click="open('lg')">Get Started</button>
+                </div>
+            </div>
+
 
 
         </div>
