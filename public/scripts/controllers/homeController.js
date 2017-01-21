@@ -43,19 +43,34 @@ myApp.controller('HomeController', ['$scope', '$http', '$location', function ($s
       floor: 0,
       ceil: 12,
       showSelectionBar: true,
-      stepsArray: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+      stepsArray: [
+          {value: 1, legend: 'Jan'},
+          {value: 2, legend: 'Feb'},
+          {value: 3, legend: 'Mar'},
+          {value: 4, legend: 'Apr'},
+          {value: 5, legend: 'May'},
+          {value: 6, legend: 'Jun'},
+          {value: 7, legend: 'Jul'},
+          {value: 8, legend: 'Aug'},
+          {value: 9, legend: 'Sep'},
+          {value: 10, legend: 'Oct'},
+          {value: 11, legend: 'Nov'},
+          {value: 12, legend: 'Dec'}
+        ],
       showTicks: true,
       onStart: function () {
-                $scope.otherData.start = $scope.month_slider.value;
+                $scope.slideChangeData.start = $scope.month_slider.value;
       },
       onChange: function () {
-          $scope.otherData.change = $scope.month_slider.value;
+          $scope.slideChangeData.change = $scope.month_slider.value;
       },
       onEnd: function () {
-          $scope.otherData.end = $scope.month_slider.value;
+          $scope.slideChangeData.end = $scope.month_slider.value;
       }
     } // end options
   }; // end month_slider
+
+
 
 
 
