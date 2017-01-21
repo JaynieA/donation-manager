@@ -18,8 +18,8 @@ myApp.controller('ModalCtrl', ['$scope','$uibModal',function ($scope, $uibModal)
 //this instance object which is used to close the modal.
 
 //ModalInstanceController
-myApp.controller('ModalInstanceController', ['$scope','$uibModalInstance', 'Upload', '$timeout', '$http',
-  function ($scope, $uibModalInstance, Upload, $timeout, $http) {
+myApp.controller('ModalInstanceController', ['$scope','$uibModalInstance', 'Upload', '$timeout', '$http', '$location',
+  function ($scope, $uibModalInstance, Upload, $timeout, $http, $location) {
     console.log('in ModalInstanceController');
 
     //Define platforms for repeat
@@ -48,6 +48,9 @@ myApp.controller('ModalInstanceController', ['$scope','$uibModalInstance', 'Uplo
         console.log(response);
         //close the modal
         $uibModalInstance.close();
+        //TODO: reroute the user to dahsboard view
+        //currently--> this redirects to dashboard and then gets redirected to login??
+        //$location.path( "/#!/dashboard" );
       }); // end then
     }; // end save
 

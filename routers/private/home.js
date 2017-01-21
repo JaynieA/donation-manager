@@ -19,21 +19,35 @@ router.post('/', function(req,res) {
   async.each(donations, function (donation, callback) {
     // Create new donation object
     var newDonation = new Donation(donation);
-    //save the donation
-    newDonation.save(function (err) {
-      if (err) {
-        console.log('save err:',err);
+    //Check if the newDonation matches an existing donation (on date, name, amount, origin)
+    Donation.findOne({date: donation.date, donor_name: donation.donor_name, donation_amt: donation.donation_amt,
+                      origin: donation.origin}, function(err, results) {
+      if (err) { console.log(err); }
+      if (!results) {
+        //if no pre-existing matches
+        console.log('no pre-existing matches');
+        //save the donation
+        newDonation.save(function (err) {
+          if (err) {
+            console.log('save err:',err);
+          } else {
+            console.log('saving Donation: '+ newDonation.donor_name);
+            callback();
+          } // end else
+        }); // end save
       } else {
-        console.log('saving Donation: '+ newDonation.donor_name);
+        //if no match exists, don't save but continue
+        console.log('already exists -->',results);
         callback();
       } // end else
-    }); // end save
+    }); // end find
   }, function (error) {
     if (error) {
       //TODO: add error handling to gracefully fail if duplicates exist
       console.log('Error:', error);
+      //if (err) return next(err);
       //res.sendStatus(500);
-    }  // end if  
+    }  // end if
     console.log('Donations saved');
     return res.sendStatus(201);
   }); // end callback
