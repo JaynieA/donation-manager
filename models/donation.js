@@ -15,7 +15,9 @@ var donationSchema = new Schema({
   donor_state: String,
   donor_zip: Number,
   origin: String,
-  thanked: {type: Boolean, default: false}
+  thanked: {type: Boolean, default: false},
+  donation_month: {type: Number, required: true},
+  donation_year: {type: Number, required: true}
 }); // end donorSchema
 
 // donationSchema.index({ platform_name: 1, date: 1, donor_name:1, donor_email:1,

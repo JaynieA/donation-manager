@@ -150,7 +150,9 @@ myApp.controller('ModalInstanceController', ['$scope','$uibModalInstance', 'Uplo
             donor_state: state,
             donor_zip: Number(zip),
             reference_id: undefined,
-            origin: resultsArray[i].Title
+            origin: resultsArray[i].Title,
+            donation_month: new Date(resultsArray[i][' Date']).getMonth(),
+            donation_year: new Date(resultsArray[i][' Date']).getFullYear()
           }; // end donationObject
           //push objects into youCaringData array
           youCaringData.push(donationObject);
@@ -183,7 +185,9 @@ myApp.controller('ModalInstanceController', ['$scope','$uibModalInstance', 'Uplo
             donor_city: resultsArray[i].City,
             donor_state: resultsArray[i].State,
             donor_zip: Number(resultsArray[i].Zip),
-            origin: resultsArray[i].Origin
+            origin: resultsArray[i].Origin,
+            donation_month: new Date(resultsArray[i].Date).getMonth(),
+            donation_year: new Date(resultsArray[i].Date).getFullYear()
           }; // end donationObject
           //push the donationObject into razooData array
           razooData.push(donationObject);
@@ -231,7 +235,9 @@ myApp.controller('ModalInstanceController', ['$scope','$uibModalInstance', 'Uplo
             donor_city: city,
             donor_state: state,
             donor_zip: Number(zip),
-            origin: resultsArray[i]['Item ID']
+            origin: resultsArray[i]['Item ID'],
+            donation_month: new Date(resultsArray[i].Date).getMonth(),
+            donation_year: new Date(resultsArray[i].Date).getFullYear()
           }; // end donationObject
           //push the DonationObject into paypalData array
           paypalData.push(donationObject);
