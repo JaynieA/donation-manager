@@ -12,16 +12,25 @@ html, body {
   height: 0; }
 
 .wrapper {
-  min-height: 78%;
+  min-height: 84%;
   height: auto !important;
   height: 100%;
   margin: 0 auto -60px; }
+
+.logo_img {
+  max-height: 50px;
+  border: 1px solid #fff;
+  margin-top: -14px;
+  padding-top: 2px; }
 
 .navbar {
   background-color: #fff;
   box-shadow: 0 3px 6px -6px #222; }
   .navbar a {
     color: #DC0000; }
+
+.navbar-toggle .icon-bar {
+  background-color: #DC0000; }
 
 .modal-dialog {
   margin-top: 12%; }

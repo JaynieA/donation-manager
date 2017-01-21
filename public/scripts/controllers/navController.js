@@ -1,5 +1,11 @@
-myApp.controller('NavController', function (AuthFactory, $window) {
+myApp.controller('NavController', function (AuthFactory, $window, $scope) {
   console.log('in nav controller');
+
+  //control ui.bootstrap.collapse
+  $scope.isNavCollapsed = true;
+  $scope.isCollapsed = false;
+  $scope.isCollapsedHorizontal = false;
+
   var _this = this;
   var authFactory = AuthFactory;
   _this.displayLogout = false; // should we display the logout option on the DOM?

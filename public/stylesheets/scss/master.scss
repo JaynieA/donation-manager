@@ -18,18 +18,29 @@ html, body {
 	height: 0;
 }
 .wrapper {
-  min-height: 78%;
+  min-height: 84%;
   height: auto !important;
   height: 100%;
   margin: 0 auto -60px; // the bottom margin is the negative value of the footer's height
 }
 
 // -- NAVBAR -- //
+.logo_img {
+  max-height: 50px;
+  border: 1px solid $white;
+  margin-top: -14px;
+  padding-top: 2px;
+}
 .navbar  {
   background-color: $white;
   box-shadow: 0 3px 6px -6px $shadowColor;
   a {
     color: $slsRed;
+  }
+}
+.navbar-toggle  {
+  .icon-bar {
+    background-color: #DC0000;
   }
 }
 
