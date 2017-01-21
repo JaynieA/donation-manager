@@ -131,10 +131,19 @@ html, body {
       padding: 20px;
       color: #333; }
 
+.rzslider {
+  margin-bottom: 50px; }
+  .rzslider .rz-tick-legend,
+  .rzslider .rz-bubble {
+    display: none; }
+
 /* Small devices (tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
   .shadowed-sm {
-    width: 50%; } }
+    width: 50%; }
+
+  .rzslider .rz-tick-legend {
+    display: inline-block; } }
 /* Medium devices (desktops, 992px and up) */
 /* Large devices (large desktops, 1200px and up) */
 /* Xtra Large devices (Xlarge desktops, 1500px and up) */

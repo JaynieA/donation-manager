@@ -4,8 +4,6 @@ myApp.controller('HomeController', ['$scope', '$http', '$location', function ($s
 
   $scope.currentYear = new Date().getFullYear();
 
-
-
   $scope.data = '';
   //check if the user is allowed to see this page
   $http.get('/private/home')
@@ -37,7 +35,7 @@ myApp.controller('HomeController', ['$scope', '$http', '$location', function ($s
       change: 0,
       end: 0
   }; // end otherData
-  $scope.month_slider = {
+  $scope.slider = {
     value: getCurrentMonth(),
     options: {
       floor: 0,
@@ -59,16 +57,16 @@ myApp.controller('HomeController', ['$scope', '$http', '$location', function ($s
         ],
       showTicks: true,
       onStart: function () {
-                $scope.slideChangeData.start = $scope.month_slider.value;
+                $scope.slideChangeData.start = $scope.slider.value;
       },
       onChange: function () {
-          $scope.slideChangeData.change = $scope.month_slider.value;
+          $scope.slideChangeData.change = $scope.slider.value;
       },
       onEnd: function () {
-          $scope.slideChangeData.end = $scope.month_slider.value;
+          $scope.slideChangeData.end = $scope.slider.value;
       }
     } // end options
-  }; // end month_slider
+  }; // end slider
 
 
 

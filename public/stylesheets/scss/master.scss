@@ -169,14 +169,28 @@ html, body {
     }
   }
 }
+// -- CUSTOM SLIDER -- //
+.rzslider {
+  margin-bottom: 50px;
+  .rz-tick-legend,
+  .rz-bubble {
+    display: none;
+  }
+}
 
 
-
+// -- MEDIA QUERIES -- //
 /* Small devices (tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
   // -- LOGIN & ERROR -- //
   .shadowed-sm {
     width: 50%;
+  }
+  // -- CUSTOM SLIDER -- //
+  .rzslider {
+    .rz-tick-legend {
+      display: inline-block;
+    }
   }
 }
 

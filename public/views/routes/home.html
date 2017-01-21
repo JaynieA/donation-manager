@@ -4,13 +4,12 @@
     <!-- Shown for users that are logged in -->
     <section ng-if="data">
         <h2>Total Donations in {{ currentYear }}</h2>
-        <h3>$yearly total goes here</h3>
-        <div>
-            <p>Start: {{ slideChangeData.start }}, </p>
-            <p>Change: {{ slideChangeData.change }}</p>
-            <p>End: {{ slideChangeData.end }}</p>
-            <rzslider rz-slider-model="month_slider.value" rz-slider-options="month_slider.options"></rzslider>
-        </div>
+        <h3>$3,564.14</h3>
+
+        <rzslider class="custom-slider" rz-slider-model="slider.value" rz-slider-options="slider.options"></rzslider>
+        <p>Start: {{ slideChangeData.start }}, </p>
+        <p>Change: {{ slideChangeData.change }}</p>
+        <p>End: {{ slideChangeData.end }}</p>
 
         <!-- UPLOAD MODAL -->
         <div ng-controller="ModalCtrl" class="modal-demo">
@@ -49,9 +48,6 @@
                     <button type="button" class="btn btn-success" ng-click="open('lg')">Get Started</button>
                 </div>
             </div>
-
-
-
         </div>
     </section>
 
