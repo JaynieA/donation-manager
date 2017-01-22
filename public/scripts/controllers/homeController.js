@@ -19,8 +19,30 @@ myApp.controller('HomeController', ['$scope', '$http', '$location', function ($s
         //else, get server response of true
         $scope.data = response.data.authStatus;
         console.log('HC. You are logged in:', response.data.authStatus);
-      }
+        getCurrentYearsDonations();
+      } // end else
   }); // end get
+
+  var getCurrentYearsDonations = function() {
+    console.log('in getCurrentYearsDonations');
+    $http({
+      method: 'GET',
+      url: '/private/home/donations'
+    }).then(function(response) {
+      calculateCurrentYearTotalDonations(response.data);
+    }); // end $http
+  }; // end getCurrentYearsDonations
+
+  var calculateCurrentYearTotalDonations = function(responseArray) {
+    console.log('in calculateCurrentYearTotalDonations', responseArray);
+    var totalDonations = 0;
+    for (var i = 0; i < responseArray.length; i++) {
+      totalDonations += responseArray[i].donation_amt;
+    } // end for
+    console.log(totalDonations);
+    $scope.yearTotal = totalDonations;
+    return totalDonations;
+  }; // end calculateCurrentYearTotalDonations
 
   var getCurrentMonth = function() {
     var month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];

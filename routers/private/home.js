@@ -11,6 +11,20 @@ router.get('/', function (req, res) {
   res.send({ authStatus: true });
 });
 
+//GET /private/home/donations
+router.get('/donations', function(req, res) {
+  console.log('home donations route hit');
+  //get all donations from current year
+  Donation.find({donation_year: new Date().getFullYear()}, function(err, results) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(results);
+      res.send(results);
+    } // end else
+  }); // end find
+}); // end get
+
 //POST /private/home
 router.post('/', function(req,res) {
   console.log(req.body.donations);
