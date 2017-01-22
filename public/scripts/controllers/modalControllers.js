@@ -1,5 +1,5 @@
 //ModalCtrl
-myApp.controller('ModalCtrl', ['$scope','$uibModal',function ($scope, $uibModal) {
+myApp.controller('ModalCtrl', ['$scope','$uibModal', '$timeout',function ($scope, $uibModal, $timeout) {
   //open the modal
   //the open method returns a modal instance
   $scope.open = function (size) {
@@ -10,6 +10,52 @@ myApp.controller('ModalCtrl', ['$scope','$uibModal',function ($scope, $uibModal)
       size: size,
     }); // end modalInstance
   }; // end open
+
+  var getEndTime = function() {
+    var now = new Date();
+    //set current to the third day of the next month
+    endTime = new Date(now.getFullYear(), now.getMonth()+1, 3);
+    return endTime;
+  }; // end getEndTime
+
+  var getTimeRemaining = function(endtime){
+    var t = Date.parse(endtime) - Date.parse(new Date());
+    var seconds = Math.floor( (t/1000) % 60 );
+    var minutes = Math.floor( (t/1000/60) % 60 );
+    var hours = Math.floor( (t/(1000*60*60)) % 24 );
+    var days = Math.floor( t/(1000*60*60*24) );
+    return {
+      'total': t,
+      'days': days,
+      'hours': hours,
+      'minutes': minutes,
+      'seconds': seconds
+    }; // end object
+  }; // end getTimeRemaining
+
+  //initialize the countdown
+  $scope.days = 0;
+  $scope.hours = 0;
+  $scope.minutes = 0;
+  $scope.seconds = 0;
+  var updateClock = function() {
+    $timeout(function() {
+     var t = getTimeRemaining(getEndTime());
+     $scope.clock = 'days: ' + t.days + '<br>' +
+                       'hours: '+ t.hours + '<br>' +
+                       'minutes: ' + t.minutes + '<br>' +
+                       'seconds: ' + t.seconds;
+     $scope.days = t.days;
+     $scope.hours = t.hours;
+     $scope.minutes = t.minutes;
+     $scope.seconds = t.seconds;
+
+     updateClock();
+    }, 1000);
+  };
+
+  updateClock();
+
 }]); // end ModalCtrl
 
 //In ModalInstanceController, we have passed $modalInstance

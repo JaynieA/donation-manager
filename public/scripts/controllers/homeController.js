@@ -46,14 +46,6 @@ myApp.controller('HomeController', ['$scope', '$http', '$location', function ($s
     }); // end get
   }; // end checkAuth
 
-  var getCountdownDates = function() {
-    console.log('in getCountdownDates');
-    var now = new Date();
-    console.log('NOW-->', now);
-    current = new Date(now.getFullYear(), now.getMonth()+1, 1);
-    console.log('NEXT MONTH-->', current);
-  }; // end getCountdownDates
-
   var getCurrentMonth = function() {
     var month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     var d = new Date();
@@ -143,7 +135,6 @@ myApp.controller('HomeController', ['$scope', '$http', '$location', function ($s
     //get monthly donations for current month
     var currentMonthNum = new Date().getMonth() + 1;
     getMonthlyDonations(currentMonthNum);
-    getCountdownDates();
   }; // end init
 
   init();
