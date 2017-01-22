@@ -8,7 +8,9 @@ var nodemailer = require('nodemailer');
 //require custom app modules
 var postmark = require('../../config/postmark');
 
-var sendEmail = function(donation) {
+// POST --> send email
+router.post('/', function(req,res) {
+  var donation = req.body;
   //TODO: add template text to text and html below
 
   //create email text
@@ -45,20 +47,14 @@ var sendEmail = function(donation) {
     //if there was an error, log it
     if (error) {
       console.log(error);
+      res.sendStatus(500);
     // else, print success message
     } else {
       console.log('Message %s sent: %s', message.messageId, message.response);
+      res.sendStatus(201);
     } // end else
   }); // end sendMail
 
-}; // end sendEmail
-
-// POST
-router.post('/', function(req,res) {
-  console.log(req.body);
-  var donation = req.body;
-  sendEmail(donation);
-  res.send(donation);
 }); // end post
 
 module.exports = router;
