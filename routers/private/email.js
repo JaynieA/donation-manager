@@ -5,28 +5,24 @@
 var express = require('express');
 var router = express.Router();
 var nodemailer = require('nodemailer');
+//require custom app modules
+var postmark = require('../../config/postmark');
 
 var sendEmail = function() {
 
-  //create email message
-  var sendmail_email = {
-    from: 'mrs.jaynie.anderson@gmail.com',
-    to: 'mrs.jaynie.anderson@gmail.com',
-    subject: 'Hello World',
-    text: 'sendmail is working'
-  }; // end sendmail_email
   //create sendmail transport
   var transporter = nodemailer.createTransport({
-    service: 'gmail',
+    //use postmark api credentials
+    service: 'postmark',
     auth: {
-      user: 'mrs.jaynie.anderson@gmail.com',
-      pass: 'Reginald52'
+      user: postmark.user,
+      pass: postmark.pass
     } // end auth
   }); // end createTransport
 
   //set up options
   var mailOptions = {
-    from: '<mrs.jaynie.anderson@gmail.com>', // sender address
+    from: postmark.email, // sender address
     to: '<mrs.jaynie.anderson@gmail.com>', //receiver
     subject: 'Hello World', //subject line
     text: 'doggy foo', // plain text

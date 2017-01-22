@@ -3,3 +3,4 @@ node_modules
 *.log
 *.sass-cache/
 config/auth.js
+config/email.js
