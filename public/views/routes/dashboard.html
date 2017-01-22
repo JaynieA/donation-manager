@@ -42,7 +42,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="donation in donations | orderBy: 'date'">
+          <tr ng-repeat="donation in donations | orderBy: '-date'">
 
             <td>{{ donation.date | date:'MM/dd/yyyy' }}</td>
             <td>{{ donation.donor_name }}</td>
