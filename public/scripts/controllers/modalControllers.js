@@ -1,29 +1,33 @@
 //ModalCtrl
 myApp.controller('ModalCtrl', ['$scope','$uibModal', '$timeout',function ($scope, $uibModal, $timeout) {
-  //open the modal
-  //the open method returns a modal instance
-  $scope.open = function (size) {
-    console.log('opening pop up');
-    var modalInstance = $uibModal.open({
-      templateUrl: 'uploadReportsModal.html',
-      controller: 'ModalInstanceController',
-      size: size,
-    }); // end modalInstance
-  }; // end open
 
+  //get the the time that the countdown is counting down to
   var getEndTime = function() {
     var now = new Date();
-    //set current to the third day of the next month
-    endTime = new Date(now.getFullYear(), now.getMonth()+1, 3);
+    var endTime;
+    var currentDay = now.getDate();
+    if (currentDay < 3) {
+      //If the current date (1-31) < 3
+      //set endTime to the 3rd of the current month
+      endTime = new Date(now.getFullYear(), now.getMonth(), 3);
+    } else {
+      //if current date >= 3
+      //set endTime to the third day of the next month
+      endTime = new Date(now.getFullYear(), now.getMonth()+1, 3);
+    } // end else
     return endTime;
   }; // end getEndTime
 
+  //get time remaining between current date and endtime
   var getTimeRemaining = function(endtime){
+    //var t holds remaining time before endtime
     var t = Date.parse(endtime) - Date.parse(new Date());
+    //converts time strings into values in milliseconds
     var seconds = Math.floor( (t/1000) % 60 );
     var minutes = Math.floor( (t/1000/60) % 60 );
     var hours = Math.floor( (t/(1000*60*60)) % 24 );
     var days = Math.floor( t/(1000*60*60*24) );
+    //Output the Clock Data as a Reusable Object
     return {
       'total': t,
       'days': days,
@@ -33,34 +37,50 @@ myApp.controller('ModalCtrl', ['$scope','$uibModal', '$timeout',function ($scope
     }; // end object
   }; // end getTimeRemaining
 
+  //open the modal (returns a modal instance)
+  $scope.open = function (size) {
+    console.log('opening pop up');
+    var modalInstance = $uibModal.open({
+      templateUrl: 'uploadReportsModal.html',
+      controller: 'ModalInstanceController',
+      size: size,
+    }); // end modalInstance
+  }; // end open
+
   //initialize the countdown
-  $scope.days = 0;
-  $scope.hours = 0;
-  $scope.minutes = 0;
-  $scope.seconds = 0;
+  //TODO: PREVENT countdown and display "overdue" message if the admin has not updated since last month
+  //TODO: handle what happens to the countdown when it hits zero
   var updateClock = function() {
+    //execute the function every second
     $timeout(function() {
+      //Calculate the remaining time
      var t = getTimeRemaining(getEndTime());
-     $scope.clock = 'days: ' + t.days + '<br>' +
-                       'hours: '+ t.hours + '<br>' +
-                       'minutes: ' + t.minutes + '<br>' +
-                       'seconds: ' + t.seconds;
+     //Output the remaining time to the DOM
      $scope.days = t.days;
      $scope.hours = t.hours;
      $scope.minutes = t.minutes;
      $scope.seconds = t.seconds;
-
      updateClock();
-    }, 1000);
-  };
+   }, 1000); // end $timeout
+  }; // end updateClock
 
-  updateClock();
+  //initialize the view
+  var init = function() {
+    console.log('in init modalCtrl');
+    $scope.days = 0;
+    $scope.hours = 0;
+    $scope.minutes = 0;
+    $scope.seconds = 0;
+    updateClock();
+  }; // end init
+
+  init();
 
 }]); // end ModalCtrl
 
-//In ModalInstanceController, we have passed $modalInstance
+//ModalInstanceController is passed $modalInstance
 //which is the instance of modal returned by the open() function.
-//We need to pass this instance because dismiss is the property of
+//This instance needs to be passed because dismiss is the property of
 //this instance object which is used to close the modal.
 
 //ModalInstanceController
