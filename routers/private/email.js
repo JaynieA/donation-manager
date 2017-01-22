@@ -32,13 +32,13 @@ var sendEmail = function(donation) {
   //set up options
   var mailOptions = {
     from: postmark.email, // sender address
-    to: '<'+donation.donor_email+'>', //receiver
-    subject: 'Spot\s last stop thanks you for your donation', //subject line
+    //TODO: change this before deploying-- currently, all emails just send to me
+    //to: '<'+donation.donor_email+'>', //receiver
+    to: '<mrs.jaynie.anderson@gmail.com>',
+    subject: 'Thank you for your donation', //subject line
     text: textEmail, // plain text
     html: htmlEmail //html
   }; // end mailOptions
-
-  console.log(mailOptions);
 
   //send the email
   transporter.sendMail( mailOptions, function(error, message ) {
@@ -58,7 +58,7 @@ router.post('/', function(req,res) {
   console.log(req.body);
   var donation = req.body;
   sendEmail(donation);
-  res.send(req.body);
+  res.send(donation);
 }); // end post
 
 module.exports = router;

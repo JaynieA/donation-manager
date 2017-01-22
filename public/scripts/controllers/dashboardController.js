@@ -127,6 +127,7 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', function
       data: objectToSend
     }).then(function(response) {
       console.log('send email response-->',response.data);
+      //TODO edit this donation._id to have thanked status of true (do this completely on server side?)
     }); // end $http
   }; // end getEmails
 
