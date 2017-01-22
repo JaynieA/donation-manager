@@ -8,7 +8,16 @@ var nodemailer = require('nodemailer');
 //require custom app modules
 var postmark = require('../../config/postmark');
 
-var sendEmail = function() {
+var sendEmail = function(donation) {
+  //TODO: add template text to text and html below
+
+  //create email text
+  var textEmail = 'Dear ' + donation.donor_name + ',\n';
+  textEmail += 'Thank you for your donation of $' + donation.donation_amt + '.';
+
+  //create email html
+  var htmlEmail = '<b>Dear ' + donation.donor_name + ' ,</b>\n';
+  htmlEmail += '<p>Thank you for your donation of $' + donation.donation_amt + '.</p>';
 
   //create sendmail transport
   var transporter = nodemailer.createTransport({
@@ -23,11 +32,13 @@ var sendEmail = function() {
   //set up options
   var mailOptions = {
     from: postmark.email, // sender address
-    to: '<mrs.jaynie.anderson@gmail.com>', //receiver
-    subject: 'Hello World', //subject line
-    text: 'doggy foo', // plain text
-    html: '<b>doggy foo</b>'//html
+    to: '<'+donation.donor_email+'>', //receiver
+    subject: 'Spot\s last stop thanks you for your donation', //subject line
+    text: textEmail, // plain text
+    html: htmlEmail //html
   }; // end mailOptions
+
+  console.log(mailOptions);
 
   //send the email
   transporter.sendMail( mailOptions, function(error, message ) {
@@ -45,7 +56,8 @@ var sendEmail = function() {
 // POST
 router.post('/', function(req,res) {
   console.log(req.body);
-  sendEmail();
+  var donation = req.body;
+  sendEmail(donation);
   res.send(req.body);
 }); // end post
 
