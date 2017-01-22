@@ -25,18 +25,7 @@ router.get('/donations', function(req,res) {
   }); // end find
 }); // end get
 
-//get months/year of donatios
-router.get('/dates', function(req,res) {
-  console.log('/private/dashboard/dates get route hit');
-  Donation.aggregate([{$project:{year: { $year: "$date" },month: { $month: "$date" }}}], function(err, results) {
-    if (err) {
-      console.log(err);
-    } else {
-      res.send(results);
-    } // end else
-  }); // end aggregate
-}); // end get
-
+// PUT private/dashboard/thank
 router.put('/thank', function(req,res) {
   console.log('dashboard put route hit', req.body);
   var id = req.body.id;
@@ -52,5 +41,18 @@ router.put('/thank', function(req,res) {
     } // end else
   }); // end update
 }); // end put
+
+// GET private/dashboard/dates
+//gets months/year of donations
+router.get('/dates', function(req,res) {
+  console.log('/private/dashboard/dates get route hit');
+  Donation.aggregate([{$project:{year: { $year: "$date" },month: { $month: "$date" }}}], function(err, results) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(results);
+    } // end else
+  }); // end aggregate
+}); // end get
 
 module.exports = router;

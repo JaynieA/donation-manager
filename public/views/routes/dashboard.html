@@ -11,7 +11,7 @@
         <select ng-model="dateSelect" ng-change="setDateFilter(dateSelect)" class="form-control">
           <option value="" selected disabled>Month:</option>
           <option ng-repeat="date in selectDates | orderBy: ['-year', 'month_num']">
-            {{date.month_str}} {{date.year}}
+            {{date.month_str}}, {{date.year}}
           </option>
         </select>
 

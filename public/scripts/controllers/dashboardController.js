@@ -3,6 +3,27 @@
 myApp.controller('DashboardController', ['$scope', '$http','$location', function($scope, $http, $location) {
   console.log('in DashboardController');
 
+  var condenseDateResults = function(responseArray) {
+    console.log('in condenseDateResults');
+    var dates = [];
+    //push the responses into dates array (if not already in)
+    for (var i = 0; i < responseArray.length; i++) {
+      var dateString = responseArray[i].month + ',' + responseArray[i].year;
+      //if the date is not in dates array, push it in
+      if (dates.indexOf(dateString) === -1) {
+        dates.push(dateString);
+      } // end if
+    } // end for
+    return dates;
+  }; // end condenseDateResults
+
+  var convertToMonthName = function(monthNumber) {
+    //takes a month number and returns the name of that month
+    var months = ['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August',
+                  'September', 'October', 'November', 'December'];
+    return months[monthNumber];
+  }; // end convertToMonthName
+
   var getAuthStatus = function() {
     //get authentication that user is logged in and has admin status
     $http.get('/private/dashboard')
@@ -28,6 +49,40 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', function
         $scope.donations = response.data.donations;
       }); // end $http
   }; // end getDonations
+
+  var getDonationDates = function() {
+    console.log('in getDonationDates');
+    //get aggregate dates of all donations
+    $http.get('/private/dashboard/dates')
+      .then(function(response) {
+        console.log('get dates response-->', response);
+        //condense the dates returned, attach month string, and scope for select
+        var condensedDates = condenseDateResults(response.data);
+        $scope.selectDates = makeDateObjects(condensedDates);
+    }); // end $http
+  }; // end getDonationDates
+
+  var makeDateObjects = function(array) {
+    //convert array of date strings into objects containing their data
+    console.log('in makeDateObjects');
+    var dates = [];
+    for (var i = 0; i < array.length; i++) {
+      //split date strings on ','
+      array[i].split(',');
+      //marshall variables
+      var year = array[i].split(',')[1];
+      var monthNum =  array[i].split(',')[0];
+      var monthString = convertToMonthName(Number(monthNum));
+      //construct object containing date info
+      var newDate = {
+        month_num: monthNum,
+        month_str: monthString,
+        year: year
+      }; // end newDate
+      dates.push(newDate);
+    } // end for
+    return dates;
+  }; // end makeDateObjects
 
   var sendEmail = function(donation) {
     console.log('in sendEmail', donation);
@@ -83,88 +138,15 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', function
 
   var init = function() {
     console.log('in init');
+    //make sure user it authorized
     getAuthStatus();
+    //get donations to populate table
     getDonations();
+    //get donation dates for select filter
+    getDonationDates();
   }; // end init
 
   init();
-
-  //get aggregate dates of all donations
-  // $http.get('/private/dashboard/dates')
-  //   .then(function(response) {
-  //     //condense the dates returned, attach month string, and scope for select
-  //     var condensedDates = condenseDateResponse(response.data);
-  //     $scope.selectDates = makeDateObjects(condensedDates);
-  // }); // end $http
-
-  //condese results of .../dates get
-  // var condenseDateResponse = function(responseArray) {
-  //   console.log('in condenseDateResponse');
-  //   var dates = [];
-  //   //push the responses into dates array (if not already in)
-  //   for (var i = 0; i < responseArray.length; i++) {
-  //     var dateString = responseArray[i].month + ',' + responseArray[i].year;
-  //     //if the date is not in dates array, push it in
-  //     if (dates.indexOf(dateString) === -1) {
-  //       dates.push(dateString);
-  //     } // end if
-  //   } // end for
-  //   return dates;
-  // }; // end condenseDateResponse
-
-  //convert month from number to string
-  // var convertMonth = function(monthNumber) {
-  //   switch (monthNumber) {
-  //     case 1:
-  //       return 'January';
-  //     case 2:
-  //       return 'February';
-  //     case 3:
-  //       return 'March';
-  //     case 4:
-  //       return 'April';
-  //     case 5:
-  //       return 'May';
-  //     case 6:
-  //       return 'June';
-  //     case 7:
-  //       return 'July';
-  //     case 8:
-  //       return 'August';
-  //     case 8:
-  //       return 'September';
-  //     case 9:
-  //       return 'October';
-  //     case 10:
-  //       return 'November';
-  //     case 12:
-  //       return 'December';
-  //     default:
-  //       return 'Error';
-  //   } // end switch
-  // }; // end convertMonth
-
-  //convert array of date strings into date-like objects
-  // var makeDateObjects = function(array) {
-  //   console.log('in makeDateObjects');
-  //   var dates = [];
-  //   for (var i = 0; i < array.length; i++) {
-  //     //split date strings on ','
-  //     array[i].split(',');
-  //     //marshall variables
-  //     var year = array[i].split(',')[1];
-  //     var monthNum =  array[i].split(',')[0];
-  //     var monthString = convertMonth(Number(monthNum));
-  //     //construct object containing date info
-  //     var newDate = {
-  //       month_num: monthNum,
-  //       month_str: monthString,
-  //       year: year
-  //     }; // end newDate
-  //     dates.push(newDate);
-  //   } // end for
-  //   return dates;
-  // }; // end makeDateObjects
 
   // $scope.setDateFilter = function(value) {
   //   console.log('in setDateFilter');
