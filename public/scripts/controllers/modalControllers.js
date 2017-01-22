@@ -51,27 +51,25 @@ myApp.controller('ModalCtrl', ['$scope','$uibModal', '$timeout',function ($scope
   //TODO: PREVENT countdown and display "overdue" message if the admin has not updated since last month
   //TODO: handle what happens to the countdown when it hits zero
   var updateClock = function() {
-    //execute the function every second
+    //Calculate the remaining time
+    var t = getTimeRemaining(getEndTime());
+    //Output the remaining time to the DOM
+    $scope.days = t.days;
+    $scope.hours = t.hours;
+    $scope.minutes = t.minutes;
+    //add a leading zero to the “seconds” value
+    //adds a string of ‘0′ to the beginning of the number and then slices off the last two digits
+    $scope.seconds = ('0' + t.seconds).slice(-2);
+    //continue to execute the function every second
     $timeout(function() {
-      //Calculate the remaining time
-     var t = getTimeRemaining(getEndTime());
-     //Output the remaining time to the DOM
-     $scope.days = t.days;
-     $scope.hours = t.hours;
-     $scope.minutes = t.minutes;
-     $scope.seconds = t.seconds;
-     updateClock();
-   }, 1000); // end $timeout
+      updateClock();
+    }, 1000); // end $timeout
   }; // end updateClock
 
   //initialize the view
   var init = function() {
     console.log('in init modalCtrl');
-    $scope.days = 0;
-    $scope.hours = 0;
-    $scope.minutes = 0;
-    $scope.seconds = 0;
-    updateClock();
+    updateClock(); //run function once at first to avoid delay on load
   }; // end init
 
   init();

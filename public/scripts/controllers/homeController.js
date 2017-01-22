@@ -139,7 +139,4 @@ myApp.controller('HomeController', ['$scope', '$http', '$location', function ($s
 
   init();
 
-
-
-
 }]);
