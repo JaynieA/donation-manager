@@ -2,26 +2,29 @@
 myApp.controller('HomeController', ['$scope', '$http', '$location', function ($scope, $http, $location) {
   console.log('loaded HomeController');
 
-  $scope.currentYear = new Date().getFullYear();
-
   $scope.data = '';
-  //check if the user is allowed to see this page
-  $http.get('/private/home')
-    .then(function (response) {
-      //if the authStatus is false or undefined...
-      if (response.data.authStatus === undefined || response.data.authStatus === false) {
-        //if not logged in/authorized as admin set data to false
-        console.log('Sorry, you are not logged in.');
-        $scope.data = false;
-        //redirect to the login page
-        $location.path("/#!/login");
-      } else {
-        //else, get server response of true
-        $scope.data = response.data.authStatus;
-        console.log('HC. You are logged in:', response.data.authStatus);
-        getCurrentYearsDonations();
-      } // end else
-  }); // end get
+
+
+  var checkAuth = function() {
+    console.log('in checkAuth');
+    //check if the user is allowed to see this page
+    $http.get('/private/home')
+      .then(function (response) {
+        //if the authStatus is false or undefined...
+        if (response.data.authStatus === undefined || response.data.authStatus === false) {
+          //if not logged in/authorized as admin set data to false
+          console.log('Sorry, you are not logged in.');
+          $scope.data = false;
+          //redirect to the login page
+          $location.path("/#!/login");
+        } else {
+          //else, get server response of true
+          $scope.data = response.data.authStatus;
+          console.log('HC. You are logged in:', response.data.authStatus);
+          getCurrentYearsDonations();
+        } // end else
+    }); // end get
+  }; // end checkAuth
 
   var getCurrentYearsDonations = function() {
     console.log('in getCurrentYearsDonations');
@@ -34,7 +37,7 @@ myApp.controller('HomeController', ['$scope', '$http', '$location', function ($s
   }; // end getCurrentYearsDonations
 
   var calculateCurrentYearTotalDonations = function(responseArray) {
-    console.log('in calculateCurrentYearTotalDonations', responseArray);
+    console.log('in calculateCurrentYearTotalDonations');
     //initialize yearly donation total to zero
     var totalDonations = 0;
     //for each donation this year, add donation amount to total
@@ -53,51 +56,47 @@ myApp.controller('HomeController', ['$scope', '$http', '$location', function ($s
     return month[d.getMonth()];
   }; // end getCurrentMonth
 
-  //Initialize slider directive
-  $scope.slideChangeData = {
-      start: getCurrentMonth(),
-      change: 0,
-      end: 0
-  }; // end otherData
-  $scope.slider = {
-    value: getCurrentMonth(),
-    options: {
-      floor: 0,
-      ceil: 12,
-      showSelectionBar: true,
-      stepsArray: [
-          {value: 1, legend: 'Jan'},
-          {value: 2, legend: 'Feb'},
-          {value: 3, legend: 'Mar'},
-          {value: 4, legend: 'Apr'},
-          {value: 5, legend: 'May'},
-          {value: 6, legend: 'Jun'},
-          {value: 7, legend: 'Jul'},
-          {value: 8, legend: 'Aug'},
-          {value: 9, legend: 'Sep'},
-          {value: 10, legend: 'Oct'},
-          {value: 11, legend: 'Nov'},
-          {value: 12, legend: 'Dec'}
-        ],
-      showTicks: true,
-      onChange: function () {
-          //get the month number the slider was changed to
-          $scope.slideChangeData.change = $scope.slider.value;
-          //get month total
-          getMonthlyDonations($scope.slider.value);
-          //get donation total
-          //make a call to the server for all donations with donation_year of current year and donation month between 0-change val
-          //add up the total
-          //display on dom
-      }
-    } // end options
-  }; // end slider
-
-  // year to date total
-  // monthly totals
+  var initializeSlider = function() {
+    console.log('in initializeSlider');
+    //Initialize slider directive
+    $scope.slideChangeData = {
+        start: getCurrentMonth(),
+        change: 0,
+        end: 0
+    }; // end otherData
+    $scope.slider = {
+      value: getCurrentMonth(),
+      options: {
+        floor: 0,
+        ceil: 12,
+        showSelectionBar: true,
+        stepsArray: [
+            {value: 1, legend: 'Jan'},
+            {value: 2, legend: 'Feb'},
+            {value: 3, legend: 'Mar'},
+            {value: 4, legend: 'Apr'},
+            {value: 5, legend: 'May'},
+            {value: 6, legend: 'Jun'},
+            {value: 7, legend: 'Jul'},
+            {value: 8, legend: 'Aug'},
+            {value: 9, legend: 'Sep'},
+            {value: 10, legend: 'Oct'},
+            {value: 11, legend: 'Nov'},
+            {value: 12, legend: 'Dec'}
+          ],
+        showTicks: true,
+        onChange: function () {
+            //get the month number the slider was changed to
+            $scope.slideChangeData.change = $scope.slider.value;
+            //get month total donations and sipaly them
+            getMonthlyDonations($scope.slider.value);
+        }
+      } // end options
+    }; // end slider
+  }; // end initializeSlider
 
   //get donation total for singular month
-  var getMonthlyDonations = function(monthNum) {
+  var getMonthlyDonations = function(monthNum, type) {
     console.log('in getMonthlyDonations', monthNum);
     //assemble url string
     var urlString = '/private/home/monthlyTotal/' + monthNum;
@@ -105,15 +104,13 @@ myApp.controller('HomeController', ['$scope', '$http', '$location', function ($s
       method: 'GET',
       url: urlString
     }).then(function(response) {
-        console.log('monthly donation total response-->',response.data);
         $scope.monthTotal = calculateMonthlyTotal(response.data);
         $scope.monthName = getMonthByNumber(monthNum);
-        //console.log(monthName, 'Donations: ', total);
     }); // end $http
   }; // end getMonthlyDonations
 
   var getMonthByNumber = function(num) {
-    console.log('in getMonthByNumber', num);
+    console.log('in getMonthByNumber');
     var months = ["January", "February", "March", "April", "May", "June","July", "August",
                       "September", "October", "November", "December"];
     var month = months[num-1];
@@ -127,5 +124,20 @@ myApp.controller('HomeController', ['$scope', '$http', '$location', function ($s
     } // end for
     return total;
   }; // end
+
+  //initialize the view
+  var init = function() {
+    console.log('in init');
+    checkAuth();
+    //get the current year
+    $scope.currentYear = new Date().getFullYear();
+    //initialize the slider
+    initializeSlider();
+    //get monthly donations for current month
+    var currentMonthNum = new Date().getMonth() + 1;
+    getMonthlyDonations(currentMonthNum);
+  }; // end init
+
+  init();
 
 }]);

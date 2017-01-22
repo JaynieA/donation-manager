@@ -29,7 +29,8 @@ router.get('/monthlyTotal/:q?', function(req,res) {
   console.log(req.params);
   //add one to query month so results include that months donations
   var currentYear = new Date().getFullYear();
-  var month = req.params.q;
+  //subtract one to account for date formatting
+  var month = Number(req.params.q) - 1;
   console.log(month, currentYear);
   Donation.find({ donation_month: month , donation_year: currentYear }, function(err, results) {
     if (err) {
