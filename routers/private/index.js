@@ -8,11 +8,13 @@ var router  = express.Router();
 var home = require('./home');
 var dashboard = require('./dashboard');
 var templates = require('./templates');
+var email = require('./email');
 
 /** ---------- SUBROUTES ---------- **/
 router.use('/home', home);
 router.use('/dashboard', dashboard);
 router.use('/templates', templates);
+router.use('/email', email);
 
 /**
  * GET private/index

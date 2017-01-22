@@ -114,4 +114,45 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', function
     } // end if
   }; // end setStatusFilter
 
+  var sendEmail = function(donation) {
+    console.log('in sendEmail', donation);
+    var objectToSend = {
+      donor_name: donation.donor_name,
+      donor_email: donation.donor_email,
+      donation_amt: donation.donation_amt
+    }; // end objectToSend
+    $http({
+      method: 'POST',
+      url: '/private/email',
+      data: objectToSend
+    }).then(function(response) {
+      console.log('send email response-->',response.data);
+    }); // end $http
+  }; // end getEmails
+
+  //donor_email
+  //donor_address, city, state, zip
+  //donor_name
+  //donation_amt
+
+  $scope.thank = function(donationObject) {
+    console.log('in thank');
+    var donation = donationObject;
+    //if both are blank, or they are anonymous, alert user
+    if (donation.donor_email === 'anonymous') {
+      //TODO: mark as thanked anyway
+      alert('this was an anonymous email');
+    //if the donation email is blank but address is present, generate PDF
+    } else if (!donation.donor_email &&  donation.donor_address) {
+      alert('donation email is blank, but address is present.');
+    //if the donation email is present, send an email
+    } else if (donation.donor_email) {
+      //TODO: upload a case where this is true
+      sendEmail(donation);
+    } else {
+      //TODO:  handle cases where none of these are true;
+      alert('error');
+    } // end else
+  }; // end thank
+
 }]); // end DashboardController

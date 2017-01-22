@@ -43,6 +43,7 @@
         </thead>
         <tbody>
           <tr ng-repeat="donation in donations | orderBy: 'date'">
+
             <td>{{ donation.date | date:'MM/dd/yyyy' }}</td>
             <td>{{ donation.donor_name }}</td>
             <td>{{ donation.platform_name }}</td>
@@ -52,7 +53,7 @@
               <span ng-show="donation.thanked" class="glyphicon glyphicon-ok" aria-hidden="true"></span>
               <span ng-hide="donation.thanked" class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
             </td>
-            <td><button ng-hide="donation.thanked" class="btn btn-danger">Thank</button></td>
+            <td><button ng-click="thank(donation)" ng-hide="donation.thanked" class="btn btn-danger">Thank</button></td>
           </tr>
         </tbody>
       </table>
