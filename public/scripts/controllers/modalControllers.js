@@ -85,7 +85,6 @@ myApp.controller('ModalCtrl', ['$scope','$uibModal', '$timeout',function ($scope
 myApp.controller('ModalInstanceController', ['$scope','$uibModalInstance', 'Upload', '$timeout', '$http', '$location',
   function ($scope, $uibModalInstance, Upload, $timeout, $http, $location) {
     console.log('in ModalInstanceController');
-
     //Define platforms for repeat
     $scope.platforms = [
       { name: 'Paypal', fileData: undefined, progress: 0 },
@@ -309,7 +308,6 @@ myApp.controller('ModalInstanceController', ['$scope','$uibModalInstance', 'Uplo
       } // end for loop
       return paypalData;
     }; // end formatPaypalObjects
-
 
   } // end controller callback
 ]); // end ModalInstanceController
