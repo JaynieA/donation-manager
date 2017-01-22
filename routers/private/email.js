@@ -7,7 +7,6 @@ var router = express.Router();
 var nodemailer = require('nodemailer');
 //require custom app modules
 var postmark = require('../../config/postmark');
-var Donation = require('../../models/donation');
 
 // POST --> send email
 router.post('/', function(req,res) {
@@ -52,15 +51,6 @@ router.post('/', function(req,res) {
     // else, print success message
     } else {
       console.log('Message %s sent: %s', message.messageId, message.response);
-      //update thanked status of donation
-      Donation.update({'_id': donation.id },{ $set:{ 'thanked' : true } }, function(err, results) {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log('thanked-->', donation.id, results);
-        } // end else
-      }); // end update
-
       res.sendStatus(201);
     } // end else
   }); // end sendMail

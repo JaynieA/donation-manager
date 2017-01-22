@@ -53,7 +53,10 @@
               <span ng-show="donation.thanked" class="glyphicon glyphicon-ok" aria-hidden="true"></span>
               <span ng-hide="donation.thanked" class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
             </td>
-            <td><button ng-click="thank(donation)" ng-hide="donation.thanked" class="btn btn-danger">Thank</button></td>
+            <td>
+              <button ng-click="thank(donation)" ng-hide="donation.thanked" class="btn btn-danger">Thank</button>
+              <span ng-show="donation.thanked">{{ donation.thanked_date | date: 'MM/dd/yyyy' }}</span>
+            </td>
           </tr>
         </tbody>
       </table>
