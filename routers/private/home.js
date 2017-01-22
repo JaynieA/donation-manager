@@ -26,12 +26,10 @@ router.get('/donations', function(req, res) {
 
 //GET /private/home/donationByMonth
 router.get('/monthlyTotal/:q?', function(req,res) {
-  console.log(req.params);
   //add one to query month so results include that months donations
   var currentYear = new Date().getFullYear();
   //subtract one to account for date formatting
   var month = Number(req.params.q) - 1;
-  console.log(month, currentYear);
   Donation.find({ donation_month: month , donation_year: currentYear }, function(err, results) {
     if (err) {
       console.log(err);
@@ -40,7 +38,6 @@ router.get('/monthlyTotal/:q?', function(req,res) {
     } // end else
   }); // end find
 }); // end get
-
 
 //POST /private/home
 router.post('/', function(req,res) {
@@ -83,25 +80,5 @@ router.post('/', function(req,res) {
     return res.sendStatus(201);
   }); // end callback
 }); // end post
-
-//POST /private/home
-// router.post('/', function(req,res) {
-//   console.log(req.body.donations);
-//   var donations = req.body.donations;
-//   //create an entry in the database for each donation
-//   for (var i = 0; i < donations.length; i++) {
-//     //use donation model to create new donation document
-//     var newDonation = new Donation(donations[i]);
-//     //save the new donation in the database
-//     newDonation.save(function(err){
-//       if(err){
-//         console.log(err);
-//         res.sendStatus(500);
-//       } else {
-//         res.sendStatus(201);
-//       }//end else
-//     });//end save
-//   } // end for
-// }); // end pose
 
 module.exports = router;
