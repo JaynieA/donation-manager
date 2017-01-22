@@ -25,7 +25,6 @@ router.get('/donations', function(req,res) {
   }); // end find
 }); // end get
 
-
 //get months/year of donatios
 router.get('/dates', function(req,res) {
   console.log('/private/dashboard/dates get route hit');

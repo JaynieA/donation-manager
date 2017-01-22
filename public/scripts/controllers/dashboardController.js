@@ -42,8 +42,7 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', function
       data: objectToSend
     }).then(function(response) {
       console.log('send email response-->',response.data);
-      //TODO edit this donation._id to have thanked status of true (do this completely on server side?)
-      //update appearance of thanked button
+      //update thanked status for this donation
       updateThankedStatus(donation._id);
     }); // end $http
   }; // end getEmails
@@ -76,6 +75,9 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', function
       data: {id: id}
     }).then(function(response) {
       console.log(response);
+      //update donations on page
+      //TODO: handle how this works if user has filters applied
+      getDonations();
     }); // end $http
   }; // end updateThankedStatus
 
@@ -86,9 +88,6 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', function
   }; // end init
 
   init();
-
-
-
 
   //get aggregate dates of all donations
   // $http.get('/private/dashboard/dates')
@@ -183,7 +182,5 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', function
   //     console.log('in setStatusFilter', value);
   //   } // end if
   // }; // end setStatusFilter
-
-
 
 }]); // end DashboardController
