@@ -19,11 +19,27 @@ router.get('/donations', function(req, res) {
     if (err) {
       console.log(err);
     } else {
-      console.log(results);
       res.send(results);
     } // end else
   }); // end find
 }); // end get
+
+//GET /private/home/donationByMonth
+router.get('/monthlyTotal/:q?', function(req,res) {
+  console.log(req.params);
+  //add one to query month so results include that months donations
+  var currentYear = new Date().getFullYear();
+  var month = req.params.q;
+  console.log(month, currentYear);
+  Donation.find({ donation_month: month , donation_year: currentYear }, function(err, results) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(results);
+    } // end else
+  }); // end find
+}); // end get
+
 
 //POST /private/home
 router.post('/', function(req,res) {

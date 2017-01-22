@@ -35,11 +35,13 @@ myApp.controller('HomeController', ['$scope', '$http', '$location', function ($s
 
   var calculateCurrentYearTotalDonations = function(responseArray) {
     console.log('in calculateCurrentYearTotalDonations', responseArray);
+    //initialize yearly donation total to zero
     var totalDonations = 0;
+    //for each donation this year, add donation amount to total
     for (var i = 0; i < responseArray.length; i++) {
       totalDonations += responseArray[i].donation_amt;
     } // end for
-    console.log(totalDonations);
+    //scope the total for display
     $scope.yearTotal = totalDonations;
     return totalDonations;
   }; // end calculateCurrentYearTotalDonations
@@ -78,20 +80,52 @@ myApp.controller('HomeController', ['$scope', '$http', '$location', function ($s
           {value: 12, legend: 'Dec'}
         ],
       showTicks: true,
-      onStart: function () {
-                $scope.slideChangeData.start = $scope.slider.value;
-      },
       onChange: function () {
+          //get the month number the slider was changed to
           $scope.slideChangeData.change = $scope.slider.value;
-      },
-      onEnd: function () {
-          $scope.slideChangeData.end = $scope.slider.value;
+          //get month total
+          getMonthlyDonations($scope.slider.value);
+          //get donation total
+          //make a call to the server for all donations with donation_year of current year and donation month between 0-change val
+          //add up the total
+          //display on dom
       }
     } // end options
   }; // end slider
 
+  // year to date total
+  // monthly totals
 
+  //get donation total for singular month
+  var getMonthlyDonations = function(monthNum) {
+    console.log('in getMonthlyDonations', monthNum);
+    //assemble url string
+    var urlString = '/private/home/monthlyTotal/' + monthNum;
+    $http({
+      method: 'GET',
+      url: urlString
+    }).then(function(response) {
+        console.log('monthly donation total response-->',response.data);
+        $scope.monthTotal = calculateMonthlyTotal(response.data);
+        $scope.monthName = getMonthByNumber(monthNum);
+        //console.log(monthName, 'Donations: ', total);
+    }); // end $http
+  }; // end getMonthlyDonations
 
+  var getMonthByNumber = function(num) {
+    console.log('in getMonthByNumber', num);
+    var months = ["January", "February", "March", "April", "May", "June","July", "August",
+                      "September", "October", "November", "December"];
+    var month = months[num-1];
+    return month;
+  }; // end getMonthByNumber
 
+  var calculateMonthlyTotal = function(responseArray) {
+    var total = 0;
+    for (var i = 0; i < responseArray.length; i++) {
+      total += responseArray[i].donation_amt;
+    } // end for
+    return total;
+  }; // end
 
 }]);
