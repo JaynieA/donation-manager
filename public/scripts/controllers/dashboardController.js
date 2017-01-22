@@ -117,6 +117,7 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', function
   var sendEmail = function(donation) {
     console.log('in sendEmail', donation);
     var objectToSend = {
+      id: donation._id,
       donor_name: donation.donor_name,
       donor_email: donation.donor_email,
       donation_amt: donation.donation_amt
@@ -128,13 +129,9 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', function
     }).then(function(response) {
       console.log('send email response-->',response.data);
       //TODO edit this donation._id to have thanked status of true (do this completely on server side?)
+      //update appearance of thanked button
     }); // end $http
   }; // end getEmails
-
-  //donor_email
-  //donor_address, city, state, zip
-  //donor_name
-  //donation_amt
 
   $scope.thank = function(donationObject) {
     console.log('in thank');
