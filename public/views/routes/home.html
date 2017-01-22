@@ -3,11 +3,13 @@
 
     <!-- Shown for users that are logged in -->
     <section ng-if="data">
-        <h2>Total Donations in {{ currentYear }}</h2>
-        <h3>{{ yearTotal | currency }}</h3>
-        <p>{{ monthName }} Donations: {{ monthTotal | currency }}</p>
 
-        <rzslider class="custom-slider" rz-slider-model="slider.value" rz-slider-options="slider.options"></rzslider>
+        <div class="home-data">
+            <h1>Total Donations in {{ currentYear }}</h1>
+            <h2>{{ yearTotal | currency }}</h2>
+            <p>{{ monthName }} Donations: {{ monthTotal | currency }}</p>
+            <rzslider class="custom-slider" rz-slider-model="slider.value" rz-slider-options="slider.options"></rzslider>
+        </div>
 
         <!-- UPLOAD MODAL -->
         <div ng-controller="ModalCtrl" class="modal-demo">
@@ -41,10 +43,38 @@
                 </div>
             </script>
 
-            <div class="shadowed-sm">
-                <div class="inner">
-                    <button type="button" class="btn btn-success" ng-click="open('lg')">Get Started</button>
+            <h3 class="timer_hdr">Days Remaining to Next Report:</h3>
+            <div class="shadowed-lg">
+                <div class="row">
+                    <div class="col-xs-2">
+                        <h4>10</h4>
+                        <p>days</p>
+                    </div>
+                    <div class="col-xs-1">
+                        <h4>:</h4>
+                    </div>
+                    <div class="col-xs-2">
+                        <h4>22</h4>
+                        <p>hours</p>
+                    </div>
+                    <div class="col-xs-1">
+                        <h4>:</h4>
+                    </div>
+                    <div class="col-xs-2">
+                        <h4>15</h4>
+                        <p>minutes</p>
+                    </div>
+                    <div class="col-xs-1">
+                        <h4>:</h4>
+                    </div>
+                    <div class="col-xs-2">
+                        <h4>45</h4>
+                        <p>seconds</p>
+                    </div>
+
                 </div>
+                <button type="button" class="btn btn-success" ng-click="open('lg')">Get Started</button>
+
             </div>
         </div>
     </section>

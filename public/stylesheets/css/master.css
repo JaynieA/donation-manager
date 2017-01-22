@@ -132,15 +132,43 @@ html, body {
       color: #333; }
 
 .rzslider {
-  margin-bottom: 50px; }
+  margin-bottom: 50px;
+  margin-top: 20px; }
   .rzslider .rz-tick-legend,
   .rzslider .rz-bubble {
     display: none; }
+
+.home-data h2 {
+  font-size: 44px;
+  margin: 30px auto; }
+
+.timer_hdr {
+  margin: 80px auto 20px; }
+
+.shadowed-lg {
+  box-shadow: 0px 1px 5px 2px #cccccc;
+  margin: 0 auto;
+  width: 70%;
+  padding: 60px 60px 30px; }
+  .shadowed-lg .row {
+    margin-bottom: 30px; }
+    .shadowed-lg .row .col-xs-2:first-of-type {
+      margin-left: 4.555555555%; }
+    .shadowed-lg .row h4 {
+      font-size: 34px; }
+    .shadowed-lg .row p {
+      text-transform: uppercase; }
 
 /* Small devices (tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
   .shadowed-sm {
     width: 50%; }
+
+  .shadowed-lg {
+    width: 80%; }
+
+  .home-data h3 {
+    margin: 50px auto; }
 
   .rzslider .rz-tick-legend {
     display: inline-block; } }

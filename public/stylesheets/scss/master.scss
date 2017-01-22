@@ -61,7 +61,7 @@ html, body {
   min-height: 30vh;
   width: 80%;
   margin: 0 auto;
-  box-shadow: 0px 1px 5px 2px $boxShadowColor;
+  @include box-shadow($boxShadowColor);
   display: flex;
   justify-content: center;
   .inner {
@@ -172,12 +172,42 @@ html, body {
 // -- CUSTOM SLIDER -- //
 .rzslider {
   margin-bottom: 50px;
+  margin-top: 20px;
   .rz-tick-legend,
   .rz-bubble {
     display: none;
   }
 }
-
+// -- HOME -- //
+.home-data {
+  h2 {
+    font-size: 44px;
+    margin: 30px auto;
+  }
+}
+.timer_hdr {
+  margin: 80px auto 20px;;
+}
+.shadowed-lg {
+  @include box-shadow($boxShadowColor);
+  margin: 0 auto;
+  width: 70%;
+  padding: 60px 60px 30px;
+  .row {
+    margin-bottom: 30px;
+    .col-xs-2 {
+      &:first-of-type {
+        margin-left: 4.555555555%;
+      }
+    }
+    h4 {
+      font-size: 34px;
+    }
+    p {
+      text-transform: uppercase;;
+    }
+  }
+}
 
 // -- MEDIA QUERIES -- //
 /* Small devices (tablets, 768px and up) */
@@ -185,6 +215,15 @@ html, body {
   // -- LOGIN & ERROR -- //
   .shadowed-sm {
     width: 50%;
+  }
+  .shadowed-lg {
+    width: 80%;
+  }
+  // -- HOME -- //
+  .home-data {
+    h3 {
+      margin: 50px auto;
+    }
   }
   // -- CUSTOM SLIDER -- //
   .rzslider {
