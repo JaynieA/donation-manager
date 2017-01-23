@@ -2,12 +2,12 @@
   * make calls to a Google API. */
   var authConfigs = {
     googleAuth: {
-      clientId: '612305561514-e2flgvi7s2vf5f1ipcllv618trvu445q.apps.googleusercontent.com',
-      clientSecret: 'WKVVRitgoSEAm2TObcnFKNA7',
-      callbackUrl: 'http://localhost:8080/auth/google/callback',
+      clientId: process.env.GOOGLE_AUTH_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_AUTH_CLIENT_SECRET,
+      callbackUrl: process.env.GOOGLE_AUTH_CALLBACK_URL,
     }, // end googleAuth
     sessionVars: {
-      secret: 'donman-secret',
+      secret: process.env.DM_SESSION_SECRET,
     }, // end sessionVars
   }; // end authConfigs
 
