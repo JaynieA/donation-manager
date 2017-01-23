@@ -1,9 +1,9 @@
 /**
+ * @module auth/passport
  * Configure the instance of passport
  * Serialize & Deserialize user info
  * In addition, define the authentication strategy in this file.
 */
-
 // Require Node Modules
 var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth2').Strategy;
