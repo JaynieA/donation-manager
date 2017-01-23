@@ -104,6 +104,8 @@ html, body {
   margin: 20px auto 60px; }
   .table th {
     text-align: center; }
+    .table th a {
+      cursor: pointer; }
   .table td {
     vertical-align: middle !important; }
 

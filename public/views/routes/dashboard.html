@@ -27,24 +27,24 @@
 
       </div>
     </form>
+    {{sortType}} {{sortReverse}}
     <div class="table-responsive">
       <table class="table table-bordered table-striped table-hover">
         <thead>
           <tr>
-            <th>Date
-              <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
-            </th>
-            <th>Donor Name</th>
-            <th>Platform</th>
-            <th>Origin</th>
-            <th>Amount</th>
-            <th>Thanked</th>
+            <th><a ng-click="sortType = 'date'; sortReverse = !sortReverse">Date</a></th>
+            <th><a ng-click="sortType = 'donor_name'; sortReverse = !sortReverse">Donor Name</a></th>
+            <th><a ng-click="sortType = 'platform_name'; sortReverse = !sortReverse">Platform</a></th>
+            <th><a ng-click="sortType = 'origin'; sortReverse = !sortReverse">Origin</a></th>
+            <th><a ng-click="sortType = 'donation_amt'; sortReverse = !sortReverse">Amount</a></th>
+            <th><a ng-click="sortType = 'thanked'; sortReverse = !sortReverse">Thanked</a></th>
             <th>Send Thank You</th>
-            <th>Date Thanked</th>
+            <th><a ng-click="sortType = 'thanked_date'; sortReverse = !sortReverse">Date Thanked</a></th>
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="donation in donations | orderBy: '-date'">
+          <!-- '-date' -->
+          <tr ng-repeat="donation in donations | orderBy:sortType:sortReverse">
             <td>{{ donation.date | date:'MM/dd/yyyy' }}</td>
             <td>{{ donation.donor_name }}</td>
             <td>{{ donation.platform_name }}</td>

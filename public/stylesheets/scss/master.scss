@@ -134,6 +134,9 @@ html, body {
   margin: 20px auto 60px;
   th {
     text-align: center;
+    a {
+      cursor: pointer;
+    }
   }
   td {
     vertical-align: middle !important;

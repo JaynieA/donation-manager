@@ -37,10 +37,6 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', function
       }); // end get
   }; // end generatePDF
 
-  $scope.check = function($index) {
-    console.log($index);
-  }; // end check
-
   var getAuthStatus = function() {
     //get authentication that user is logged in and has admin status
     $http.get('/private/dashboard')
@@ -118,6 +114,12 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', function
       updateThankedStatus(donation._id);
     }); // end $http
   }; // end getEmails
+
+  //set sort filter defaulst
+  $scope.sortType     = 'date'; // set the default sort type
+  $scope.sortReverse  = false;  // set the default sort order
+  //$scope.searchFish   = '';     // set the default search/filter term
+
 
   $scope.thank = function(donationObject) {
     console.log('in thank');
