@@ -26,13 +26,17 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', function
 
   var generatePDF = function() {
     console.log('in generatePDF');
-    var myWindow=window.open('','','width=200,height=100');
-    myWindow.document.write("<p>This is the thank you letter'</p>");
-    myWindow.document.write();
-    myWindow.document.close();
-    myWindow.focus();
-    myWindow.print();
-    myWindow.close();
+    // var myWindow=window.open('','','width=200,height=100');
+    // myWindow.document.write("<p>This is the thank you letter'</p>");
+    // myWindow.document.write();
+    // myWindow.document.close();
+    // myWindow.focus();
+    // myWindow.print();
+    // myWindow.close();
+    $http.get('/private/pdf')
+      .then(function(response) {
+        console.log(response);
+      }); // end get
   }; // end generatePDF
 
   var getAuthStatus = function() {
