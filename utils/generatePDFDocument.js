@@ -12,10 +12,12 @@ doc = new PDF();
 //creating a write stream to write the content on the file system
 doc.pipe( fs.createWriteStream( 'pdfTemplates/NewDoc.pdf' ));
 
+
+//Add the image
+doc.image('pdfTemplates/banner.png', 50, 50, { height: 75, width: 275 } );
 //adding the text to be written,
 doc.text( text, 100, 100 ); // more things can be added here including new pages
-//Add the image
-doc.image('pdfTemplates/test_img.jpeg', 50, 50, { height: 100, width: 100 } );
+
 
 //end the document writing.
 doc.end();
