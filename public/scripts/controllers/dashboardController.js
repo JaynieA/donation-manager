@@ -24,17 +24,22 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', function
     return months[monthNumber];
   }; // end convertToMonthName
 
-  var generatePDF = function() {
-    console.log('in generatePDF');
+  var generatePDF = function(donationObject) {
+    console.log('in generatePDF', donationObject);
     $http.get('/private/pdf')
       .then(function(response) {
         console.log(response);
-        //use the printJS library and router defined in app.js
-        //to serve print window for newly created file!!!
-        //printJS('../../docs/NewDoc.pdf');
-        printJS('/private/docs/NewDoc.pdf');
+        //use the printJS library and /private/docs router
+        //to serve newly created file in a print window
+        printJS({ printable: '/private/docs/NewDoc', type:'pdf'});
+        //update thanked status
+        updateThankedStatus(donationObject._id);
       }); // end get
   }; // end generatePDF
+
+  $scope.check = function($index) {
+    console.log($index);
+  }; // end check
 
   var getAuthStatus = function() {
     //get authentication that user is logged in and has admin status
@@ -123,7 +128,7 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', function
       alert('this was an anonymous email');
     //if the donation email is blank but address is present, generate PDF
     } else if (!donation.donor_email &&  donation.donor_address) {
-      generatePDF();
+      generatePDF(donationObject);
     //if the donation email is present, send an email
     } else if (donation.donor_email) {
       //TODO: upload a case where this is true

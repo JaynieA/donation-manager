@@ -9,6 +9,6 @@ router.get('/', function (req, res) {
   //require custom modules
   var pdfGen = require('../../utils/generatePDFDocument.js');
   res.sendStatus(200);
-});
+}); // end get
 
 module.exports = router;
