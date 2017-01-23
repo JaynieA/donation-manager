@@ -32,14 +32,45 @@
       <table class="table table-bordered table-striped table-hover">
         <thead>
           <tr>
-            <th><a ng-click="sortType = 'date'; sortReverse = !sortReverse">Date</a></th>
-            <th><a ng-click="sortType = 'donor_name'; sortReverse = !sortReverse">Donor Name</a></th>
-            <th><a ng-click="sortType = 'platform_name'; sortReverse = !sortReverse">Platform</a></th>
-            <th><a ng-click="sortType = 'origin'; sortReverse = !sortReverse">Origin</a></th>
-            <th><a ng-click="sortType = 'donation_amt'; sortReverse = !sortReverse">Amount</a></th>
-            <th><a ng-click="sortType = 'thanked'; sortReverse = !sortReverse">Thanked</a></th>
+            <th>
+              <a ng-click="sortType = 'date'; sortReverse = !sortReverse">Date
+                <span ng-show="sortType == 'date' && !sortReverse" class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+                <span ng-show="sortType == 'date' && sortReverse" class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+              </a>
+            </th>
+
+            <th>
+              <a ng-click="sortType = 'donor_name'; sortReverse = !sortReverse">Donor Name
+                <span ng-show="sortType == 'donor_name' && !sortReverse" class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+                <span ng-show="sortType == 'donor_name' && sortReverse" class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+              </a>
+            </th>
+
+            <th>Platform</th>
+            <th>Origin</th>
+
+            <th>
+              <a ng-click="sortType = 'donation_amt'; sortReverse = !sortReverse">Amount
+                <span ng-show="sortType == 'donation_amt' && !sortReverse" class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+                <span ng-show="sortType == 'donation_amt' && sortReverse" class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+              </a>
+            </th>
+
+            <th>
+              <a ng-click="sortType = 'thanked'; sortReverse = !sortReverse">Thanked
+                <span ng-show="sortType == 'thanked' && !sortReverse" class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+                <span ng-show="sortType == 'thanked' && sortReverse" class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+              </a>
+            </th>
+
             <th>Send Thank You</th>
-            <th><a ng-click="sortType = 'thanked_date'; sortReverse = !sortReverse">Date Thanked</a></th>
+
+            <th>
+              <a ng-click="sortType = 'thanked_date'; sortReverse = !sortReverse">Date Thanked
+                <span ng-show="sortType == 'thanked_date' && !sortReverse" class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+                <span ng-show="sortType == 'thanked_date' && sortReverse" class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+              </a>
+            </th>
           </tr>
         </thead>
         <tbody>
