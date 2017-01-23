@@ -16,12 +16,12 @@ var signatureTwo = 'Founder and Directors';
 doc = new PDF();
 
 //creating a write stream to write the content on the file system
-doc.pipe( fs.createWriteStream( 'pdfTemplates/NewDoc.pdf' ));
+doc.pipe( fs.createWriteStream( 'docs/NewDoc.pdf' ));
 
 //Set the font size
 doc.fontSize(14);
 //Add the image
-doc.image('pdfTemplates/banner.png', 165, 50, { height: 75, width: 275 } );
+doc.image('docs/banner.png', 165, 50, { height: 75, width: 275 } );
 //adding the text to be written,
 doc.text( greeting, 100, 150);
 doc.moveDown();
