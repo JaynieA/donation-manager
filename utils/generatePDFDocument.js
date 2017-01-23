@@ -14,7 +14,7 @@ doc.pipe( fs.createWriteStream( 'pdfTemplates/NewDoc.pdf' ));
 
 
 //Add the image
-doc.image('pdfTemplates/banner.png', 50, 50, { height: 75, width: 275 } );
+doc.image('pdfTemplates/banner.png', 165, 30, { height: 75, width: 275 } );
 //adding the text to be written,
 doc.text( text, 100, 100 ); // more things can be added here including new pages
 
