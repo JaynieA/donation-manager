@@ -31,7 +31,8 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', function
         console.log(response);
         //use the printJS library and router defined in app.js
         //to serve print window for newly created file!!!
-        printJS('../../docs/NewDoc.pdf');
+        //printJS('../../docs/NewDoc.pdf');
+        printJS('/private/docs/NewDoc.pdf');
       }); // end get
   }; // end generatePDF
 

@@ -10,6 +10,7 @@ var dashboard = require('./dashboard');
 var templates = require('./templates');
 var email = require('./email');
 var pdf = require('./pdf');
+var docs = require('./docs');
 
 /** ---------- SUBROUTES ---------- **/
 router.use('/home', home);
@@ -17,6 +18,7 @@ router.use('/dashboard', dashboard);
 router.use('/templates', templates);
 router.use('/email', email);
 router.use('/pdf', pdf);
+router.use('/docs', docs);
 
 /**
  * GET private/index
