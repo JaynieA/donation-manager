@@ -24,6 +24,17 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', function
     return months[monthNumber];
   }; // end convertToMonthName
 
+  var generatePDF = function() {
+    console.log('in generatePDF');
+    var myWindow=window.open('','','width=200,height=100');
+    myWindow.document.write("<p>This is the thank you letter'</p>");
+    myWindow.document.write();
+    myWindow.document.close();
+    myWindow.focus();
+    myWindow.print();
+    myWindow.close();
+  }; // end generatePDF
+
   var getAuthStatus = function() {
     //get authentication that user is logged in and has admin status
     $http.get('/private/dashboard')
@@ -111,7 +122,7 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', function
       alert('this was an anonymous email');
     //if the donation email is blank but address is present, generate PDF
     } else if (!donation.donor_email &&  donation.donor_address) {
-      alert('donation email is blank, but address is present.');
+      generatePDF();
     //if the donation email is present, send an email
     } else if (donation.donor_email) {
       //TODO: upload a case where this is true
