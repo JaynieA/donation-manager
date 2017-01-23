@@ -40,11 +40,11 @@
             <th>Amount</th>
             <th>Thanked</th>
             <th>Send Thank You</th>
+            <th>Date Thanked</th>
           </tr>
         </thead>
         <tbody>
           <tr ng-repeat="donation in donations | orderBy: '-date'">
-
             <td>{{ donation.date | date:'MM/dd/yyyy' }}</td>
             <td>{{ donation.donor_name }}</td>
             <td>{{ donation.platform_name }}</td>
@@ -56,9 +56,11 @@
             </td>
             <td>
               <button ng-click="thank(donation)" ng-hide="donation.thanked" class="btn btn-danger">Thank</button>
-              <span ng-show="donation.thanked">{{ donation.thanked_date | date: 'MM/dd/yyyy' }}</span>
               <!-- show the reprint button if donation thanked = true, address exists, email does not exist -->
-              <button ng-click="thank(donation)" ng-hide="!donation.donor_address || !donation.thanked || donation.donor_email.length > 1" class="btn btn-xs" type="button">re-print</button>
+              <button ng-click="thank(donation)" ng-hide="!donation.donor_address || !donation.thanked || donation.donor_email.length > 1" class="btn btn-xs btn-primary" type="button">re-print</button>
+            </td>
+            <td>
+              <span ng-show="donation.thanked">{{ donation.thanked_date | date: 'MM/dd/yyyy' }}</span>
             </td>
           </tr>
         </tbody>
