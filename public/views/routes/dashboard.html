@@ -69,33 +69,27 @@
                 <span ng-show="sortType == 'date' && sortReverse" class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
               </a>
             </th>
-
             <th>
               <a ng-click="sortType = 'donor_name'; sortReverse = !sortReverse">Donor Name
                 <span ng-show="sortType == 'donor_name' && !sortReverse" class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
                 <span ng-show="sortType == 'donor_name' && sortReverse" class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
               </a>
             </th>
-
             <th>Platform</th>
             <th>Origin</th>
-
             <th>
               <a ng-click="sortType = 'donation_amt'; sortReverse = !sortReverse">Amount
                 <span ng-show="sortType == 'donation_amt' && !sortReverse" class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
                 <span ng-show="sortType == 'donation_amt' && sortReverse" class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
               </a>
             </th>
-
             <th>
               <a ng-click="sortType = 'thanked'; sortReverse = !sortReverse">Thanked
                 <span ng-show="sortType == 'thanked' && !sortReverse" class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
                 <span ng-show="sortType == 'thanked' && sortReverse" class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
               </a>
             </th>
-
             <th>Send Thank You</th>
-
             <th>
               <a ng-click="sortType = 'thanked_date'; sortReverse = !sortReverse">Date Thanked
                 <span ng-show="sortType == 'thanked_date' && !sortReverse" class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
@@ -107,7 +101,9 @@
         <tbody>
 
           <!-- <tr ng-repeat="donation in donations | orderBy:sortType:sortReverse | filter:statusSelect"> -->
-          <tr ng-repeat="donation in donations | orderBy:sortType:sortReverse | filter: (shouldFilter ? {thanked: statusSelect} : '')">
+          <!-- <tr ng-repeat="donation in donations | orderBy:sortType:sortReverse | filter: (shouldFilter ? {thanked: statusSelect} : '')"> -->
+          {{selected.value.month_num}}
+          <tr ng-repeat="donation in donations | orderBy:sortType:sortReverse | filter: ({donation_month: selected.value.month_num})">
             <td>{{ donation.date | date:'MM/dd/yyyy' }}</td>
             <td>{{ donation.donor_name }}</td>
             <td>{{ donation.platform_name }}</td>
