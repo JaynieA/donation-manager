@@ -72,6 +72,8 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', function
         //condense the dates returned, attach month string, and scope for select
         var condensedDates = condenseDateResults(response.data);
         $scope.selectDates = makeDateObjects(condensedDates);
+        $scope.itemArray = makeDateObjects(condensedDates);
+        console.log($scope.itemArray);
     }); // end $http
   }; // end getDonationDates
 
@@ -132,13 +134,13 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', function
     $scope.shouldFilter = true;
   }; // end enableFilters
 
-  $scope.itemArray = [
-        {id: 1, name: 'first'},
-        {id: 2, name: 'second'},
-        {id: 3, name: 'third'},
-        {id: 4, name: 'fourth'},
-        {id: 5, name: 'fifth'},
-    ];
+  // $scope.itemArray = [
+  //       {id: 1, name: 'first'},
+  //       {id: 2, name: 'second'},
+  //       {id: 3, name: 'third'},
+  //       {id: 4, name: 'fourth'},
+  //       {id: 5, name: 'fifth'},
+  //   ];
 
   //$scope.selected = { value: $scope.itemArray[0] };
   $scope.selected = { value: undefined };

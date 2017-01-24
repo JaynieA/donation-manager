@@ -6,6 +6,7 @@
     <h2>Donation Dashboard</h2>
 
 
+
     <form class="form-horizontal">
       <fieldset>
         <div class="form-group">
@@ -13,9 +14,9 @@
         <div class="col-sm-6">
           <div class="input-group">
             <ui-select allow-clear ng-model="selected.value" theme="bootstrap">
-              <ui-select-match placeholder="Select a month..." >{{$select.selected.name}}</ui-select-match>
-              <ui-select-choices repeat="item in (itemArray | filter: $select.search) track by item.id">
-                <span ng-bind-html="item.name"></span>
+              <ui-select-match placeholder="Select a month..." >{{$select.selected.month_str}}, {{$select.selected.year}}</ui-select-match>
+              <ui-select-choices repeat="item in (itemArray | filter: $select.search) track by item.month_str">
+                <span ng-bind-html="(item.month_str) + ', ' + (item.year)"></span>
               </ui-select-choices>
             </ui-select>
             <span class="input-group-btn">
