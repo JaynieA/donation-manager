@@ -99,6 +99,8 @@ html, body {
 
 .filters-form {
   margin-top: 30px; }
+  .filters-form .col-sm-4 {
+    padding-left: 0; }
 
 .table {
   margin: 20px auto 60px; }
