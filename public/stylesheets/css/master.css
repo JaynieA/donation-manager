@@ -127,6 +127,8 @@ html, body {
   .signature p {
     display: block;
     text-align: left; }
+    .signature p:first-of-type {
+      margin-bottom: 30px; }
 
 .footer, .push {
   height: 60px; }

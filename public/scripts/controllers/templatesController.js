@@ -21,10 +21,31 @@ myApp.controller('TemplatesController', ['$scope', '$http', '$location', functio
       }); // end $http
   }; // end getAuthStatus
 
+  $scope.saveTemplate = function() {
+    console.log('in saveTemplate', $scope.template.email);
+    //assemble object to send
+    var objectToSend = {
+      type: 'email',
+      default: true,
+      text: $scope.template.email,
+    }; // end objectToSend
+    //post info to the server
+    $http({
+      method: 'POST',
+      url: '/private/templates',
+      data: objectToSend
+    }).then( function(response) {
+      console.log(response);
+    }); // end $http
+  }; // end saveTemplate
+
   var init = function() {
     console.log('in init');
     $scope.data = '';
     getAuthStatus();
+    $scope.template = {
+      email: "Email template stuff goes here"
+    };
   }; // end init
 
   init();

@@ -150,7 +150,7 @@ html, body {
   margin-top: 30px;
   .wrapper {
     padding: 20px;
-    border: 1px solid #ddd;
+    border: 1px solid $outlineColor;
     border-top: none;
     min-height: 50vh;
     .intro {
@@ -162,6 +162,9 @@ html, body {
 .signature {
   margin-top: 25px;
   p {
+    &:first-of-type {
+      margin-bottom: 30px;
+    }
     display: block;
     text-align: left;
   }

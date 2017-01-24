@@ -12,14 +12,15 @@
           <div class="wrapper">
             <div class="form-group">
               <p class="intro">Dear _____________,</p>
-              <textarea class="form-control" rows="8" cols="80">Email Template Stuff here</textarea>
+              <textarea ng-model="template.email" class="form-control" rows="8" cols="80"></textarea>
               <div class="signature">
+                <p>Again, Thank you!</p>
                 <p>Grant and Casey Adams</p>
                 <p>Founders of Spot's Last Stop</p>
                 <p>info@spotslaststop.org</p>
               </div>
             </div>
-            <button class="btn btn-success">Save</button>
+            <button ng-click="saveTemplate()" class="btn btn-success">Save</button>
           </div>
         </ng-form>
       </uib-tab>
@@ -35,6 +36,7 @@
               <p class="intro">Dear _____________,</p>
               <textarea class="form-control" rows="8" cols="80">Letter template stuff here</textarea>
               <div class="signature">
+                <p>Again, Thank you!</p>
                 <p>Grant and Casey Adams</p>
                 <p>Founders of Spot's Last Stop</p>
                 <p>info@spotslaststop.org</p>
