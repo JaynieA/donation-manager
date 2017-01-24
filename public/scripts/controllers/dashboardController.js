@@ -140,16 +140,8 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', function
         {id: 5, name: 'fifth'},
     ];
 
-    $scope.selected = { value: $scope.itemArray[0] };
-
-    $scope.clear = function($event) {
-      $scope.selected = undefined;
-      $event.stopPropagation();
-      $timeout(function() {
-        $scope.focusser[0].focus();
-      }, 0, false);
-    };
-
+  //$scope.selected = { value: $scope.itemArray[0] };
+  $scope.selected = { value: undefined };
 
 
   $scope.thank = function(donationObject) {
