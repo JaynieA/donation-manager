@@ -118,7 +118,19 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', function
   //set sort filter defaulst
   $scope.sortType     = 'date'; // set the default sort type
   $scope.sortReverse  = true;  // set the default sort order
-  //$scope.searchFish   = '';     // set the default search/filter term
+  $scope.shouldFilter = true;
+  //$scope.statusSelect = undefined;
+  //$scope.disableFilter = '';
+
+  $scope.clearStatusSelect = function() {
+    console.log('in clearStatusSelect');
+    $scope.statusSelect = '';
+    $scope.shouldFilter = false;
+  }; // end clearStatusSelect
+
+  $scope.enableFilters = function() {
+    $scope.shouldFilter = true;
+  }; // end enableFilters
 
 
   $scope.thank = function(donationObject) {

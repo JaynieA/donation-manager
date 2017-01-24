@@ -18,16 +18,17 @@
 
         <button class="btn btn-danger btn-sm">&times;</button>
 
-        <select ng-model="statusSelect" ng-change="setStatusFilter(statusSelect)" class="form-control">
-          <option value="" selected disabled>Status:</option>
-          <option value="thanked">Thanked</option>
-          <option value="not-thanked">Not Thanked</option>
+        <select ng-model="statusSelect" ng-change="enableFilters()"  class="form-control">
+          <option selected disabled>Status:</option>
+          <option value="true">Thanked</option>
+          <option value="false">Not Thanked</option>
         </select>
-        <button class="btn btn-danger btn-sm">&times;</button>
+        <button ng-click="clearStatusSelect()" class="btn btn-danger btn-sm">&times;</button>
+        statusSelect: {{statusSelect}}
 
       </div>
     </form>
-    {{sortType}} {{sortReverse}}
+
     <div class="table-responsive">
       <table class="table table-bordered table-striped table-hover">
         <thead>
@@ -74,8 +75,9 @@
           </tr>
         </thead>
         <tbody>
-          <!-- '-date' -->
-          <tr ng-repeat="donation in donations | orderBy:sortType:sortReverse">
+
+          <!-- <tr ng-repeat="donation in donations | orderBy:sortType:sortReverse | filter:statusSelect"> -->
+          <tr ng-repeat="donation in donations | orderBy:sortType:sortReverse | filter: (shouldFilter ? {thanked: statusSelect} : '')">
             <td>{{ donation.date | date:'MM/dd/yyyy' }}</td>
             <td>{{ donation.donor_name }}</td>
             <td>{{ donation.platform_name }}</td>
