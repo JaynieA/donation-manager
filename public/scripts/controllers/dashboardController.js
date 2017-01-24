@@ -73,7 +73,6 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', function
         var condensedDates = condenseDateResults(response.data);
         $scope.selectDates = makeDateObjects(condensedDates);
         $scope.itemArray = makeDateObjects(condensedDates);
-        console.log($scope.itemArray);
     }); // end $http
   }; // end getDonationDates
 
@@ -120,19 +119,18 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', function
   //set sort filter defaults
   $scope.sortType     = 'date'; // set the default sort type
   $scope.sortReverse  = true;  // set the default sort order
-  $scope.shouldFilter = true;
 
-  // $scope.clearStatusSelect = function() {
-  //   console.log('in clearStatusSelect');
-  //   $scope.statusSelect = '';
-  //   $scope.shouldFilter = false;
-  // }; // end clearStatusSelect
-  //
-  // $scope.enableFilters = function() {
-  //   $scope.shouldFilter = true;
-  // }; // end enableFilters
 
   $scope.selected = { value: undefined };
+
+  $scope.statusArray = [
+    {value: true,
+    display: 'Thanked'},
+    {value: false,
+    display: 'Not Thanked'}
+  ]; // end statusArray
+
+  $scope.thankSelected = { value: undefined };
 
   $scope.thank = function(donationObject) {
     console.log('in thank');

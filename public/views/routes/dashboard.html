@@ -10,54 +10,51 @@
     <form class="form-horizontal">
       <fieldset>
         <div class="form-group">
-          <label class="col-sm-3 control-label">Filter By Month:</label>
-        <div class="col-sm-6">
-          <div class="input-group">
-            <ui-select allow-clear ng-model="selected.value" theme="bootstrap">
-              <ui-select-match placeholder="Select a month..." >{{$select.selected.month_str}}, {{$select.selected.year}}</ui-select-match>
-              <ui-select-choices repeat="item in (itemArray | filter: $select.search) track by item.month_str">
-                <span ng-bind-html="(item.month_str) + ', ' + (item.year)"></span>
-              </ui-select-choices>
-            </ui-select>
-            <span class="input-group-btn">
-              <button type="button" ng-click="selected.value = undefined" class="btn btn-default">
-                <span class="glyphicon glyphicon-trash"></span>
-              </button>
-            </span>
+          <label class="col-sm-2 control-label">Filter By Month:</label>
+          <div class="col-sm-4">
+            <div class="input-group">
+              <ui-select allow-clear ng-model="selected.value" theme="bootstrap">
+                <ui-select-match placeholder="Select a month..." >{{$select.selected.month_str}}, {{$select.selected.year}}</ui-select-match>
+                <ui-select-choices repeat="item in (itemArray | filter: $select.search) track by item.month_str">
+                  <span ng-bind-html="(item.month_str) + ', ' + (item.year)"></span>
+                </ui-select-choices>
+              </ui-select>
+              <span class="input-group-btn">
+                <button type="button" ng-click="selected.value = undefined" class="btn btn-default">
+                  <span class="glyphicon glyphicon-trash"></span>
+                </button>
+              </span>
+            </div>
           </div>
         </div>
+
+        {{selected}}
+
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Filter By Status:</label>
+          <div class="col-sm-4">
+            <div class="input-group">
+              <ui-select allow-clear ng-model="thankSelected.value" theme="bootstrap">
+                <ui-select-match placeholder="Select a Status..." >{{$select.selected.display}}</ui-select-match>
+                <ui-select-choices repeat="status in (statusArray | filter: $select.search) track by status.display">
+                  <span ng-bind-html="status.display"></span>
+                </ui-select-choices>
+              </ui-select>
+              <span class="input-group-btn">
+                <button type="button" ng-click="thankSelected.value = undefined" class="btn btn-default">
+                  <span class="glyphicon glyphicon-trash"></span>
+                </button>
+              </span>
+            </div>
+          </div>
         </div>
       </fieldset>
     </form>
-    {{selected}}
+
+    {{thankSelected}}
 
 
 
-
-
-    <form class="form-inline text-left filters-form">
-      <div class="form-group">
-        <label>Filter Results:</label>
-
-        <select ng-model="dateSelect" ng-change="setDateFilter(dateSelect)" class="form-control">
-          <option value="" selected disabled>Month:</option>
-          <option ng-repeat="date in selectDates | orderBy: ['-year', 'month_num']">
-            {{date.month_str}}, {{date.year}}
-          </option>
-        </select>
-
-        <button class="btn btn-danger btn-sm">&times;</button>
-
-        <select ng-model="statusSelect" ng-change="enableFilters()"  class="form-control">
-          <option selected disabled>Status:</option>
-          <option value="true">Thanked</option>
-          <option value="false">Not Thanked</option>
-        </select>
-        <button ng-click="clearStatusSelect()" class="btn btn-danger btn-sm">&times;</button>
-        statusSelect: {{statusSelect}}
-
-      </div>
-    </form>
 
     <div class="table-responsive">
       <table class="table table-bordered table-striped table-hover">
