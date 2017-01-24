@@ -116,22 +116,6 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', function
     }); // end $http
   }; // end getEmails
 
-  //set sort filter defaults
-  $scope.sortType     = 'date'; // set the default sort type
-  $scope.sortReverse  = true;  // set the default sort order
-
-
-  $scope.selected = { value: undefined };
-
-  $scope.statusArray = [
-    {value: true,
-    display: 'Thanked'},
-    {value: false,
-    display: 'Not Thanked'}
-  ]; // end statusArray
-
-  $scope.thankSelected = { value: undefined };
-
   $scope.thank = function(donationObject) {
     console.log('in thank');
     var donation = donationObject;
@@ -174,6 +158,15 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', function
     getDonations();
     //get donation dates for select filter
     getDonationDates();
+    //set filter defaults
+    $scope.statusArray = [
+      {value: true,
+      display: 'Thanked'},
+      {value: false,
+      display: 'Not Thanked'}
+    ]; // end statusArray
+    $scope.selected = { value: undefined };
+    $scope.thankSelected = { value: undefined };
   }; // end init
 
   init();

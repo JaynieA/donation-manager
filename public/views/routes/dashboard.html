@@ -5,10 +5,9 @@
   <div ng-if="data">
     <h2>Donation Dashboard</h2>
 
-
-
     <form class="form-horizontal">
       <fieldset>
+        <!-- Filter by month select group  -->
         <div class="form-group">
           <label class="col-sm-2 control-label">Filter By Month:</label>
           <div class="col-sm-4">
@@ -27,9 +26,7 @@
             </div>
           </div>
         </div>
-
-        {{selected}}
-
+        <!-- Filter by Status select group  -->
         <div class="form-group">
           <label class="col-sm-2 control-label">Filter By Status:</label>
           <div class="col-sm-4">
@@ -50,11 +47,6 @@
         </div>
       </fieldset>
     </form>
-
-    {{thankSelected}}
-
-
-
 
     <div class="table-responsive">
       <table class="table table-bordered table-striped table-hover">
@@ -96,11 +88,7 @@
           </tr>
         </thead>
         <tbody>
-
-          <!-- <tr ng-repeat="donation in donations | orderBy:sortType:sortReverse | filter:statusSelect"> -->
-          <!-- <tr ng-repeat="donation in donations | orderBy:sortType:sortReverse | filter: (shouldFilter ? {thanked: statusSelect} : '')"> -->
-          {{selected.value.year}}
-          <tr ng-repeat="donation in donations | orderBy:sortType:sortReverse | filter: ({donation_month: selected.value.month_num, donation_year: selected.value.year})">
+          <tr ng-repeat="donation in donations | orderBy:sortType:sortReverse | filter: ({donation_month: selected.value.month_num, donation_year: selected.value.year, thanked: thankSelected.value.value})">
             <td>{{ donation.date | date:'MM/dd/yyyy' }}</td>
             <td>{{ donation.donor_name }}</td>
             <td>{{ donation.platform_name }}</td>
