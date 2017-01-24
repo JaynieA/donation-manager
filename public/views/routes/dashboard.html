@@ -5,6 +5,15 @@
   <div ng-if="data">
     <h2>Donation Dashboard</h2>
 
+    <ui-select ng-model="selected.value">
+    <ui-select-match>
+        <span ng-bind="$select.selected.name"></span>
+    </ui-select-match>
+    <ui-select-choices repeat="item in (itemArray | filter: $select.search) track by item.id">
+        <span ng-bind="item.name"></span>
+    </ui-select-choices>
+</ui-select>
+
     <form class="form-inline text-left filters-form">
       <div class="form-group">
         <label>Filter Results:</label>
