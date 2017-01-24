@@ -5,14 +5,34 @@
   <div ng-if="data">
     <h2>Donation Dashboard</h2>
 
-    <ui-select ng-model="selected.value">
-    <ui-select-match>
-        <span ng-bind="$select.selected.name"></span>
-    </ui-select-match>
-    <ui-select-choices repeat="item in (itemArray | filter: $select.search) track by item.id">
-        <span ng-bind="item.name"></span>
-    </ui-select-choices>
-</ui-select>
+
+    <form class="form-horizontal">
+      <fieldset>
+        <div class="form-group">
+          <label class="col-sm-3 control-label">Filter By Month:</label>
+        <div class="col-sm-6">
+          <div class="input-group">
+            <ui-select allow-clear ng-model="selected.value" theme="bootstrap">
+              <ui-select-match placeholder="Select a month..." >{{$select.selected.name}}</ui-select-match>
+              <ui-select-choices repeat="item in (itemArray | filter: $select.search) track by item.id">
+                <span ng-bind-html="item.name"></span>
+              </ui-select-choices>
+            </ui-select>
+            <span class="input-group-btn">
+              <button type="button" ng-click="selected.value = undefined" class="btn btn-default">
+                <span class="glyphicon glyphicon-trash"></span>
+              </button>
+            </span>
+          </div>
+        </div>
+        </div>
+      </fieldset>
+    </form>
+    {{selected}}
+
+
+
+
 
     <form class="form-inline text-left filters-form">
       <div class="form-group">
