@@ -44,13 +44,13 @@ myApp.controller('TemplatesController', ['$scope', '$http', '$location', functio
       text: $scope.template.email,
     }; // end objectToSend
     //post info to the server
-    // $http({
-    //   method: 'POST',
-    //   url: '/private/templates',
-    //   data: objectToSend
-    // }).then( function(response) {
-    //   console.log(response);
-    // }); // end $http
+    $http({
+      method: 'PUT',
+      url: '/private/templates/email',
+      data: objectToSend
+    }).then( function(response) {
+      console.log(response);
+    }); // end $http
   }; // end saveTemplate
 
   var init = function() {

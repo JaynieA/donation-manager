@@ -23,10 +23,10 @@ router.get('/default', function(req,res) {
   }); // end find
 }); // end get
 
-router.post('/', function(req,res) {
+router.put('/email', function(req,res) {
   console.log(req.body);
-  var newTemplate = new Template(req.body);
-  newTemplate.save(function(err) {
+  res.sendStatus(200);
+  Donation.update({'default': true, 'type':'email' },{ $set:{ 'text' : req.body.text } }, function(err, results) {
     if (err) {
       console.log(err);
     } else {
