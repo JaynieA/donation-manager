@@ -102,8 +102,8 @@
 
           <!-- <tr ng-repeat="donation in donations | orderBy:sortType:sortReverse | filter:statusSelect"> -->
           <!-- <tr ng-repeat="donation in donations | orderBy:sortType:sortReverse | filter: (shouldFilter ? {thanked: statusSelect} : '')"> -->
-          {{selected.value.month_num}}
-          <tr ng-repeat="donation in donations | orderBy:sortType:sortReverse | filter: ({donation_month: selected.value.month_num})">
+          {{selected.value.year}}
+          <tr ng-repeat="donation in donations | orderBy:sortType:sortReverse | filter: ({donation_month: selected.value.month_num, donation_year: selected.value.year})">
             <td>{{ donation.date | date:'MM/dd/yyyy' }}</td>
             <td>{{ donation.donor_name }}</td>
             <td>{{ donation.platform_name }}</td>

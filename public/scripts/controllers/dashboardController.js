@@ -117,26 +117,22 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', function
     }); // end $http
   }; // end getEmails
 
-  //set sort filter defaulst
+  //set sort filter defaults
   $scope.sortType     = 'date'; // set the default sort type
   $scope.sortReverse  = true;  // set the default sort order
   $scope.shouldFilter = true;
-  //$scope.statusSelect = undefined;
-  //$scope.disableFilter = '';
 
-  $scope.clearStatusSelect = function() {
-    console.log('in clearStatusSelect');
-    $scope.statusSelect = '';
-    $scope.shouldFilter = false;
-  }; // end clearStatusSelect
-
-  $scope.enableFilters = function() {
-    $scope.shouldFilter = true;
-  }; // end enableFilters
-
+  // $scope.clearStatusSelect = function() {
+  //   console.log('in clearStatusSelect');
+  //   $scope.statusSelect = '';
+  //   $scope.shouldFilter = false;
+  // }; // end clearStatusSelect
+  //
+  // $scope.enableFilters = function() {
+  //   $scope.shouldFilter = true;
+  // }; // end enableFilters
 
   $scope.selected = { value: undefined };
-
 
   $scope.thank = function(donationObject) {
     console.log('in thank');
@@ -183,22 +179,5 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', function
   }; // end init
 
   init();
-
-  // $scope.setDateFilter = function(value) {
-  //   console.log('in setDateFilter');
-  //   var year = new Date(value).getFullYear();
-  //   var month = new Date(value).getMonth();
-  //   //TODO: figure out how to correct this running on load without this hard-coded value
-  //   if (year !== 1969) {
-  //     console.log(month, year);
-  //   }
-  // }; // end setDateFilter
-
-  // $scope.setStatusFilter = function(value) {
-  //   //TODO: prevent this running on controller load
-  //   if (value) {
-  //     console.log('in setStatusFilter', value);
-  //   } // end if
-  // }; // end setStatusFilter
 
 }]); // end DashboardController
