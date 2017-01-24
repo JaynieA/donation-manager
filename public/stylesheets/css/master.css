@@ -111,6 +111,23 @@ html, body {
   .table td {
     vertical-align: middle !important; }
 
+.template-tabs {
+  margin-top: 30px; }
+  .template-tabs .wrapper {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-top: none;
+    min-height: 50vh; }
+    .template-tabs .wrapper .intro {
+      text-align: left;
+      padding: 20px 0; }
+
+.signature {
+  margin-top: 25px; }
+  .signature p {
+    display: block;
+    text-align: left; }
+
 .footer, .push {
   height: 60px; }
 

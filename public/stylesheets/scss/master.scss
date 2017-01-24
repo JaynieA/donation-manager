@@ -145,6 +145,27 @@ html, body {
     vertical-align: middle !important;
   }
 }
+// -- TEMPLATES -- //
+.template-tabs {
+  margin-top: 30px;
+  .wrapper {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-top: none;
+    min-height: 50vh;
+    .intro {
+      text-align: left;
+      padding: 20px 0;
+    }
+  }
+}
+.signature {
+  margin-top: 25px;
+  p {
+    display: block;
+    text-align: left;
+  }
+}
 
 // -- FOOTER -- //
 .footer, .push {

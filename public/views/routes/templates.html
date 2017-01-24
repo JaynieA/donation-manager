@@ -1,12 +1,50 @@
 <!-- Templates View -->
 <div class="text-center">
-  
+
   <!-- Shown for users that are logged in -->
   <section ng-if="data">
     <h2>Templates</h2>
-    <p>You are logged in!</p>
-    <div class="">
 
-    </div>
+    <uib-tabset active="active" class="template-tabs">
+      <!-- Email Template tab -->
+      <uib-tab index="0" heading="Email Template">
+        <ng-form>
+          <div class="wrapper">
+            <div class="form-group">
+              <p class="intro">Dear _____________,</p>
+              <textarea class="form-control" rows="8" cols="80">Email Template Stuff here</textarea>
+              <div class="signature">
+                <p>Grant and Casey Adams</p>
+                <p>Founders of Spot's Last Stop</p>
+                <p>info@spotslaststop.org</p>
+              </div>
+            </div>
+            <button class="btn btn-success">Save</button>
+          </div>
+        </ng-form>
+      </uib-tab>
+
+      <!-- PDF Template Tab -->
+      <uib-tab index="1">
+        <uib-tab-heading>
+          Letter Template
+        </uib-tab-heading>
+        <ng-form>
+          <div class="wrapper">
+            <div class="form-group">
+              <p class="intro">Dear _____________,</p>
+              <textarea class="form-control" rows="8" cols="80">Letter template stuff here</textarea>
+              <div class="signature">
+                <p>Grant and Casey Adams</p>
+                <p>Founders of Spot's Last Stop</p>
+                <p>info@spotslaststop.org</p>
+              </div>
+            </div>
+            <button class="btn btn-success">Save</button>
+          </div>
+        </ng-form>
+      </uib-tab>
+    </uib-tabset>
+
   </section>
 </div>
