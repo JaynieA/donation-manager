@@ -121,14 +121,18 @@ html, body {
     .template-tabs .wrapper .intro {
       text-align: left;
       padding: 20px 0; }
+  .template-tabs span {
+    color: #c4c4c4;
+    margin: 0 5px; }
 
 .signature {
   margin-top: 25px; }
   .signature p {
     display: block;
-    text-align: left; }
+    text-align: left;
+    margin-bottom: 0px; }
     .signature p:first-of-type {
-      margin-bottom: 30px; }
+      margin-bottom: 20px; }
 
 .footer, .push {
   height: 60px; }

@@ -158,15 +158,20 @@ html, body {
       padding: 20px 0;
     }
   }
+  span {
+    color: darken(#ddd, 10%);
+    margin: 0 5px;
+  }
 }
 .signature {
   margin-top: 25px;
   p {
     &:first-of-type {
-      margin-bottom: 30px;
+      margin-bottom: 20px;
     }
     display: block;
     text-align: left;
+    margin-bottom: 0px;
   }
 }
 
