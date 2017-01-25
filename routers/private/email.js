@@ -22,7 +22,6 @@ router.post('/', function(req,res) {
       res.sendStatus(500);
     } else {
       //if the default text is found, continue
-      console.log(results);
       var templateText = results[0].text;
       var signature1 = "Grant and Casey Adams" + '\n';
       var signature2 = 'Founders of Spot\s Last Stop' + '\n';
@@ -32,22 +31,21 @@ router.post('/', function(req,res) {
       textEmail += 'Thank you for your recent donation of $' + donation.donation_amt + ' to Spot\'s Last Stop. ';
       textEmail += templateText + '\n\n';
       textEmail += 'Again, Thank You!' + '\n\n';
-      //Signature
+      //add signature
       textEmail += signature1 + '\n';
       textEmail += signature2 + '\n';
       textEmail += signature3 + '\n';
       //create email html
       var htmlEmail = '<p style="font-size:15px;">Dear ' + donation.donor_name + ' ,</p>\n';
-      htmlEmail += '<p style="font-size:14px;">Thank you for your recent donation of $' + donation.donation_amt + ' to Spot\s Last Stop. ';
+      htmlEmail += '<p style="font-size:14px; white-space:pre-wrap;">Thank you for your recent donation of $' + donation.donation_amt + ' to Spot\s Last Stop. ';
       htmlEmail += templateText + '</p>';
       htmlEmail += '<p style="font-size:15px;">Again, Thank You!</p>' + '\n';
       //Inline the base64 encoded banner image
       htmlEmail += banner_img;
-      //Signature
+      //add signature
       htmlEmail += '<p style="margin-top:0">' + signature1 + '<br>';
       htmlEmail +=  signature2 + '<br>';
       htmlEmail +=  signature3 + '</p>\n';
-
       //create sendmail transport
       var transporter = nodemailer.createTransport({
         //use postmark api credentials

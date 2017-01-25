@@ -25,9 +25,9 @@ myApp.controller('TemplatesController', ['$scope', '$http', '$location', functio
     console.log('in getTemplates');
     $http({
       method: 'GET',
-      url: '/private/templates/default'
+      url: '/private/templates/emailDefault'
     }).then(function(response) {
-      console.log(response.data.text);
+      console.log('getTemplates response-->',response);
       //set the template email display
       $scope.template.email = response.data.text;
     }); // end $http
