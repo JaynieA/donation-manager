@@ -12,8 +12,6 @@ var Template = require('../../models/template');
 // POST --> send email
 router.post('/', function(req,res) {
   var donation = req.body;
-  //TODO: add template text to text and html below
-
   //get default email template text
   Template.find({default:true, type:'email'}, function(err, results) {
     if (err) {
@@ -24,26 +22,25 @@ router.post('/', function(req,res) {
       //if the default text is found, continue
       console.log(results);
       var templateText = results[0].text;
-      var signature = "Grant and Casey Adams" + '\n';
-      signature += 'Founders of Spot\s Last Stop' + '\n';
-      signature += 'info@spotslaststop.org' + '\n';
-
-
+      var signature1 = "Grant and Casey Adams" + '\n';
+      var signature2 = 'Founders of Spot\s Last Stop' + '\n';
+      var signature3 = 'info@spotslaststop.org' + '\n';
       //create email text
-      var textEmail = 'Dear ' + donation.donor_name + ',\n';
-      //textEmail += 'Thank you for your donation of $' + donation.donation_amt + '.';
-      textEmail += templateText + '\n';
-      textEmail += 'Again, Thank You!' + '\n';
-      textEmail += signature;
-
-
+      var textEmail = 'Dear ' + donation.donor_name + ',\n\n';
+      textEmail += 'Thank you for your recent donation of $' + donation.donation_amt + ' to Spot\'s Last Stop. ';
+      textEmail += templateText + '\n\n';
+      textEmail += 'Again, Thank You!' + '\n\n';
+      textEmail += signature1 + '\n';
+      textEmail += signature2 + '\n';
+      textEmail += signature3 + '\n';
       //create email html
-      var htmlEmail = '<b>Dear ' + donation.donor_name + ' ,</b>\n';
-      //htmlEmail += '<p>Thank you for your donation of $' + donation.donation_amt + '.</p>';
-      htmlEmail += '<p>' + templateText + '</p>';
+      var htmlEmail = '<p>Dear ' + donation.donor_name + ' ,</p>\n';
+      htmlEmail += '<p>Thank you for your recent donation of $' + donation.donation_amt + ' to Spot\s Last Stop. ';
+      htmlEmail += templateText + '</p>';
       htmlEmail += '<p>Again, Thank You!</p>' + '\n';
-      htmlEmail += '<p>' + signature + '</p>';
-
+      htmlEmail += '<p>' + signature1 + '<br>';
+      htmlEmail +=  signature2 + '<br>';
+      htmlEmail +=  signature3 + '</p>\n';
       //create sendmail transport
       var transporter = nodemailer.createTransport({
         //use postmark api credentials
@@ -53,7 +50,6 @@ router.post('/', function(req,res) {
           pass: postmark.pass
         } // end auth
       }); // end createTransport
-
       //set up options
       var mailOptions = {
         from: postmark.email, // sender address
@@ -64,10 +60,6 @@ router.post('/', function(req,res) {
         text: textEmail, // plain text
         html: htmlEmail //html
       }; // end mailOptions
-
-      console.log('text email-->',textEmail);
-      console.log('html email-->', htmlEmail);
-
       //send the email
       transporter.sendMail( mailOptions, function(error, message ) {
         //if there was an error, log it
@@ -80,12 +72,8 @@ router.post('/', function(req,res) {
           res.sendStatus(201);
         } // end else
       }); // end sendMail
-
-      //res.sendStatus(201);
-
     } // end else
   }); // end find
-
 }); // end post
 
 module.exports = router;

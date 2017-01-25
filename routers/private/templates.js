@@ -14,7 +14,7 @@ router.get('/', function (req, res) {
 
 //GET default email template
 router.get('/default', function(req,res) {
-  Template.findOne({type: 'email', default: true}, function(err, results) {
+  Template.findOne({type:'email', default: true}, function(err, results) {
     if (err) {
       console.log(err);
     } else {
@@ -25,10 +25,10 @@ router.get('/default', function(req,res) {
 
 router.put('/email', function(req,res) {
   console.log(req.body);
-  res.sendStatus(200);
-  Donation.update({'default': true, 'type':'email' },{ $set:{ 'text' : req.body.text } }, function(err, results) {
+  Template.update({ default: true, type:'email' },{ $set: { text: req.body.text } }, function(err, results) {
     if (err) {
       console.log(err);
+      res.sendStatus(500);
     } else {
       res.sendStatus(201);
     } // end else
