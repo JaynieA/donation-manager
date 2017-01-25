@@ -5,9 +5,11 @@
 var express = require('express');
 var router = express.Router();
 var nodemailer = require('nodemailer');
+var inlineBase64 = require('nodemailer-plugin-inline-base64');
 //require custom app modules
 var postmark = require('../../config/postmark');
 var Template = require('../../models/template');
+var banner_img = require('../../docs/base64_banner.html');
 
 // POST --> send email
 router.post('/', function(req,res) {
@@ -30,17 +32,22 @@ router.post('/', function(req,res) {
       textEmail += 'Thank you for your recent donation of $' + donation.donation_amt + ' to Spot\'s Last Stop. ';
       textEmail += templateText + '\n\n';
       textEmail += 'Again, Thank You!' + '\n\n';
+      //Signature
       textEmail += signature1 + '\n';
       textEmail += signature2 + '\n';
       textEmail += signature3 + '\n';
       //create email html
-      var htmlEmail = '<p>Dear ' + donation.donor_name + ' ,</p>\n';
-      htmlEmail += '<p>Thank you for your recent donation of $' + donation.donation_amt + ' to Spot\s Last Stop. ';
+      var htmlEmail = '<p style="font-size:15px;">Dear ' + donation.donor_name + ' ,</p>\n';
+      htmlEmail += '<p style="font-size:14px;">Thank you for your recent donation of $' + donation.donation_amt + ' to Spot\s Last Stop. ';
       htmlEmail += templateText + '</p>';
-      htmlEmail += '<p>Again, Thank You!</p>' + '\n';
-      htmlEmail += '<p>' + signature1 + '<br>';
+      htmlEmail += '<p style="font-size:15px;">Again, Thank You!</p>' + '\n';
+      //Inline the base64 encoded banner image
+      htmlEmail += banner_img;
+      //Signature
+      htmlEmail += '<p style="margin-top:0">' + signature1 + '<br>';
       htmlEmail +=  signature2 + '<br>';
       htmlEmail +=  signature3 + '</p>\n';
+
       //create sendmail transport
       var transporter = nodemailer.createTransport({
         //use postmark api credentials
@@ -50,6 +57,8 @@ router.post('/', function(req,res) {
           pass: postmark.pass
         } // end auth
       }); // end createTransport
+      //Attach inlineBase64 as a 'compile' handler for a nodemailer transport object
+      transporter.use('compile', inlineBase64());
       //set up options
       var mailOptions = {
         from: postmark.email, // sender address
