@@ -40,8 +40,6 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', function
         url: '/private/docs/NewDoc',
         method: 'GET'
       }).then(function(response) {
-        console.log('get file -->',response);
-        var pdf = response.data;
         printJS({ printable: '/private/docs/NewDoc', type:'pdf'});
         updateThankedStatus(donationObject._id);
       });
