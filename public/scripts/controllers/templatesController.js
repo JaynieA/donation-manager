@@ -1,6 +1,6 @@
 //Templates Controller
 
-myApp.controller('TemplatesController', ['$scope', '$http', '$location', function ($scope, $http, $location) {
+myApp.controller('TemplatesController', ['$scope', '$http', '$location', '$timeout', function ($scope, $http, $location, $timeout) {
   console.log('loaded TemplatesController');
 
   var getAuthStatus = function() {
@@ -48,12 +48,25 @@ myApp.controller('TemplatesController', ['$scope', '$http', '$location', functio
       data: objectToSend
     }).then( function(response) {
       console.log(response);
+      //show the success alert
+
+      hideAlert();
+
     }); // end $http
   }; // end updateEmailTemplate
+
+  var hideAlert = function() {
+    console.log('in hideAlert');
+    //show saved alert
+    $scope.saveSuccess = true;
+    //re-hide saved alert after a few seconds
+    $timeout(function () { $scope.saveSuccess = false; }, 3000);
+  }; // end hideAlert
 
   var init = function() {
     console.log('in init');
     $scope.data = '';
+    $scope.saveSuccess = false;
     getAuthStatus();
     getTemplates();
     $scope.template = {

@@ -117,10 +117,14 @@ html, body {
     padding: 20px;
     border: 1px solid #ddd;
     border-top: none;
-    min-height: 50vh; }
+    min-height: 50vh;
+    margin-bottom: 20px; }
     .template-tabs .wrapper .intro {
       text-align: left;
       padding: 20px 0; }
+    .template-tabs .wrapper .alert {
+      margin: -5px auto 0;
+      width: 50%; }
   .template-tabs span {
     color: #c4c4c4;
     margin: 0 5px; }

@@ -153,9 +153,14 @@ html, body {
     border: 1px solid $outlineColor;
     border-top: none;
     min-height: 50vh;
+    margin-bottom: 20px;
     .intro {
       text-align: left;
       padding: 20px 0;
+    }
+    .alert {
+      margin: -5px auto 0;
+      width: 50%;
     }
   }
   span {
