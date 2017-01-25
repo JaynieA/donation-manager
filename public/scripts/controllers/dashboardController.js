@@ -26,15 +26,18 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', function
 
   var generatePDF = function(donationObject) {
     console.log('in generatePDF', donationObject);
-    $http.get('/private/pdf')
-      .then(function(response) {
-        console.log(response);
-        //use the printJS library and /private/docs router
-        //to serve newly created file in a print window
-        printJS({ printable: '/private/docs/NewDoc', type:'pdf'});
-        //update thanked status
-        updateThankedStatus(donationObject._id);
-      }); // end get
+    $http({
+      method: 'PUT',
+      url: '/private/pdf',
+      data: donationObject
+    }).then(function(response) {
+      console.log(response);
+      //use the printJS library and /private/docs router
+      //to serve newly created file in a print window
+      printJS({ printable: '/private/docs/NewDoc', type:'pdf'});
+      //update thanked status
+      updateThankedStatus(donationObject._id);
+    }); // end $http
   }; // end generatePDF
 
   var getAuthStatus = function() {

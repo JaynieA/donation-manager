@@ -3,13 +3,11 @@ var PDF = require('pdfkit');
 var fs = require('fs');
 var Template = require('../models/template');
 
-//TODO: use Router to export this functionality...
-
-Template.findOne({default:true, type:'letter'}, function(err, results) {
+//Get the default letter text
+Template.findOne( { default:true, type:'letter' }, function(err, results) {
   if (err) {
     console.log(err);
   } else {
-    console.log('letter template response-->',results.text);
     var text = results.text;
     //define text to be contained in the pdf document
     var greeting = 'Dear Spot\s Last Stop Canine Rescue Supporter,';
@@ -30,6 +28,7 @@ Template.findOne({default:true, type:'letter'}, function(err, results) {
     doc.text( greeting, 100, 150);
     doc.moveDown();
     doc.text( text );
+    doc.moveDown();
     doc.moveDown();
     doc.moveDown();
     doc.text( signatureOne );
