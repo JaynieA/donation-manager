@@ -21,17 +21,28 @@ myApp.controller('TemplatesController', ['$scope', '$http', '$location', '$timeo
       }); // end $http
   }; // end getAuthStatus
 
-  var getTemplates = function() {
-    console.log('in getTemplates');
+  var getDefaultEmailTemplate = function() {
+    console.log('in getDefaultEmailTemplate');
     $http({
       method: 'GET',
       url: '/private/templates/emailDefault'
     }).then(function(response) {
-      console.log('getTemplates response-->',response);
+      console.log('getDefaultEmailTemplate response-->',response);
       //set the template email display
       $scope.template.email = response.data.text;
     }); // end $http
-  }; // end getTemplates
+  }; // end getDefaultEmailTemplate
+
+  var getDefaultLetterTemplate = function() {
+    console.log('in getDefaultLetterTemplate');
+    $http({
+      method: 'GET',
+      url: '/private/templates/letterDefault'
+    }).then(function(response) {
+      console.log('getDefaultLetterTemplate response -->', response);
+      $scope.template.letter = response.data.text;
+    }); // end $http
+  }; // end getDefaultLetterTemplate
 
   $scope.updateEmailTemplate = function() {
     console.log('in updateEmailTemplate', $scope.template.email);
@@ -48,14 +59,29 @@ myApp.controller('TemplatesController', ['$scope', '$http', '$location', '$timeo
       data: objectToSend
     }).then( function(response) {
       console.log(response);
-      //show the success alert
-
-      hideAlert();
-
+      //show the success alert for a few seconds
+      blinkSuccessAlert();
     }); // end $http
   }; // end updateEmailTemplate
 
-  var hideAlert = function() {
+  $scope.updateLetterTemplate = function() {
+    console.log('in updateLetterTemplate', $scope.template.letter);
+    //assemble object to send
+    var objectToSend = {
+      type: 'letter',
+      default: true,
+      text: $scope.template.letter
+    }; // end objectToSend
+    $http({
+      method: 'POST',
+      url: '/private/templates/letter',
+      data: objectToSend
+    }).then(function(response) {
+      console.log(response);
+    }); // end $http
+  }; // end updateLetterTemplate
+
+  var blinkSuccessAlert = function() {
     console.log('in hideAlert');
     //show saved alert
     $scope.saveSuccess = true;
@@ -68,10 +94,10 @@ myApp.controller('TemplatesController', ['$scope', '$http', '$location', '$timeo
     $scope.data = '';
     $scope.saveSuccess = false;
     getAuthStatus();
-    getTemplates();
-    $scope.template = {
-      //email: "Email template stuff goes here"
-    };
+    getDefaultEmailTemplate();
+    getDefaultLetterTemplate();
+    //define object to handle child scopes
+    $scope.template = {};
   }; // end init
 
   init();
