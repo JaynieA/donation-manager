@@ -31,12 +31,22 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', function
       url: '/private/pdf',
       data: donationObject
     }).then(function(response) {
-      console.log(response);
+      console.log('generate PDF response-->',response);
       //use the printJS library and /private/docs router
       //to serve newly created file in a print window
-      printJS({ printable: '/private/docs/NewDoc', type:'pdf'});
-      //update thanked status
-      updateThankedStatus(donationObject._id);
+      //TODO: look for a different library to serve the pdf file in an iframe
+      //      in order to make this next http call unnecessary
+      $http({
+        url: '/private/docs/NewDoc',
+        method: 'GET'
+      }).then(function(response) {
+        console.log('get file -->',response);
+        var pdf = response.data;
+        printJS({ printable: '/private/docs/NewDoc', type:'pdf'});
+        updateThankedStatus(donationObject._id);
+      });
+      //printJS({ printable: '/private/docs/NewDoc', type:'pdf'});
+      // updateThankedStatus(donationObject._id);
     }); // end $http
   }; // end generatePDF
 
