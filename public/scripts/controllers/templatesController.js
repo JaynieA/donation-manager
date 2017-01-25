@@ -73,11 +73,13 @@ myApp.controller('TemplatesController', ['$scope', '$http', '$location', '$timeo
       text: $scope.template.letter
     }; // end objectToSend
     $http({
-      method: 'POST',
+      method: 'PUT',
       url: '/private/templates/letter',
       data: objectToSend
     }).then(function(response) {
       console.log(response);
+      //show the success alert for a few seconds
+      blinkSuccessAlert();
     }); // end $http
   }; // end updateLetterTemplate
 

@@ -38,7 +38,6 @@ router.get('/letterDefault', function(req,res) {
 //PUT /private/templates/email
 //edits the default email text
 router.put('/email', function(req,res) {
-  console.log(req.body);
   Template.update({ default: true, type:'email' },{ $set: { text: req.body.text } }, function(err, results) {
     if (err) {
       console.log(err);
@@ -49,19 +48,17 @@ router.put('/email', function(req,res) {
   }); // end update
 }); // end post
 
-//temp --> POST/save the letter template
-router.post('/letter', function(req,res) {
-  console.log('letter template post route hit', req.body);
-  var newTemplate = new Template( req.body );
-  // newTemplate.save(function(err) {
-  //   if (err) {
-  //     console.log(err);
-  //   } else {
-  //     console.log('new letter template created');
-  //     res.sendStatus(200);
-  //   } // end else
-  // }); // end save
-  res.sendStatus(200);
+//PUT /private/templates/letter
+//edits the default letter text
+router.put('/letter', function(req,res) {
+  Template.update({ default:true, type:'letter' }, { $set: { text: req.body.text } }, function(err,results) {
+    if (err) {
+      console.log(err);
+      res.sendStatus(500);
+    } else {
+      res.sendStatus(201);
+    } // end else
+  }); // end update
 }); // end post
 
 module.exports = router;
