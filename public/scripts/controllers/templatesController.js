@@ -33,10 +33,8 @@ myApp.controller('TemplatesController', ['$scope', '$http', '$location', functio
     }); // end $http
   }; // end getTemplates
 
-  //TODO: change this to edit **email** template
-  // which means changing it to a put and editing the find() function on server....
-  $scope.saveTemplate = function() {
-    console.log('in saveTemplate', $scope.template.email);
+  $scope.updateEmailTemplate = function() {
+    console.log('in updateEmailTemplate', $scope.template.email);
     //assemble object to send
     var objectToSend = {
       type: 'email',
@@ -51,7 +49,7 @@ myApp.controller('TemplatesController', ['$scope', '$http', '$location', functio
     }).then( function(response) {
       console.log(response);
     }); // end $http
-  }; // end saveTemplate
+  }; // end updateEmailTemplate
 
   var init = function() {
     console.log('in init');
