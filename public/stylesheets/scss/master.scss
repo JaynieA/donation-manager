@@ -10,7 +10,7 @@ html, body {
   font-family: $mainFont;
   height: 100%;
   color: $mainTextColor;
-  margin-top: 50px;
+  margin-top: 35px;
 }
 .btn-accent {
   background-color: transparent;
@@ -76,6 +76,38 @@ html, body {
 }
 .navbar-collapse[aria-expanded="true"] {
   border-top: 1px solid $lightGrey;
+}
+// -- LINED HEADER --//
+/* Header */
+.hdr-logo {
+  height: 125px;
+  margin: 15px auto;
+}
+.lined {
+  line-height: 0.5;
+  text-align: center;
+  span {
+    display: inline-block;
+    position: relative;
+    &:before,
+    &:after {
+      content: "";
+      position: absolute;
+      height: 5px;
+      border-bottom: 1px solid $boxShadowColor;
+      top: 0;
+      width: 500px;
+      margin-top: 75px;
+    }
+    &:before {
+      right: 100%;
+      margin-right: 15px;
+    }
+    &:after {
+      left: 100%;
+      margin-left: 15px;
+    }
+  }
 }
 // -- LOGIN & ERROR -- //
 .shadowed-sm-hdr {
