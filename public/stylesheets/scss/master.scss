@@ -12,7 +12,14 @@ html, body {
   color: $mainTextColor;
   margin-top: 50px;
 }
-
+.btn-accent {
+  background-color: transparent;
+  border-radius: 0;
+  border: 2px solid $darkGrey;
+  color: $darkGrey;
+  text-transform: uppercase;
+  font-weight: bold;
+}
 // -- LAYOUT -- //
 .clearfix:after {
 	visibility: hidden;
@@ -144,6 +151,26 @@ html, body {
 }
 .table {
   margin: 20px auto 60px;
+  thead {
+    background-color: $footerBkgColor;
+    color: $white;
+    th:first-of-type {
+      border-bottom-left-radius: 10px;
+      border-top-left-radius: 10px;
+    }
+    a {
+      color: $white;
+
+    }
+  }
+  tbody {
+    &:before {
+      content: "-";
+      display: block;
+      line-height: 1em;
+      color: transparent;
+    }
+  }
   th {
     text-align: center;
     a {
@@ -154,6 +181,31 @@ html, body {
     vertical-align: middle !important;
   }
 }
+.input-group>.ui-select-bootstrap.dropdown {
+  &:focus {
+    outline: none !important;
+  }
+}
+.form-control {
+  &:focus {
+    box-shadow: none;
+    border-color: #ccc;
+  }
+}
+.input-group-btn {
+  .btn.active.focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus {
+    outline: none !important;
+  }
+}
+.ui-select-bootstrap .ui-select-choices-row>span:focus, .ui-select-bootstrap .ui-select-choices-row>span:hover {
+  outline: none !important;
+}
+.ui-select-match {
+  &:focus {
+    outline: none !important;
+  }
+}
+
 // -- TEMPLATES -- //
 .template-tabs {
   margin-top: 30px;
@@ -195,12 +247,12 @@ html, body {
 }
 .footer {
   color: $white;
-  background-color: $lightGrey;
+  background-color: $footerBkgColor;
   position: relative;
   bottom: 0;
   width: 100%;
   a {
-    color: $darkGrey;
+    color: $lightGrey;
   }
 }
 .footer-list {
@@ -215,7 +267,7 @@ html, body {
     &:not(:first-child):before {
       content: ' | ';
       padding: 20px;
-      color: $darkGrey;
+      color: $lightGrey;
     }
   }
 }

@@ -8,6 +8,14 @@ html, body {
   color: #515150;
   margin-top: 50px; }
 
+.btn-accent {
+  background-color: transparent;
+  border-radius: 0;
+  border: 2px solid #333;
+  color: #333;
+  text-transform: uppercase;
+  font-weight: bold; }
+
 .clearfix:after {
   visibility: hidden;
   display: block;
@@ -111,12 +119,41 @@ html, body {
 
 .table {
   margin: 20px auto 60px; }
+  .table thead {
+    background-color: #3f3f3f;
+    color: #fff; }
+    .table thead th:first-of-type {
+      border-bottom-left-radius: 10px;
+      border-top-left-radius: 10px; }
+    .table thead a {
+      color: #fff; }
+  .table tbody:before {
+    content: "-";
+    display: block;
+    line-height: 1em;
+    color: transparent; }
   .table th {
     text-align: center; }
     .table th a {
       cursor: pointer; }
   .table td {
     vertical-align: middle !important; }
+
+.input-group > .ui-select-bootstrap.dropdown:focus {
+  outline: none !important; }
+
+.form-control:focus {
+  box-shadow: none;
+  border-color: #ccc; }
+
+.input-group-btn .btn.active.focus, .input-group-btn .btn.active:focus, .input-group-btn .btn.focus, .input-group-btn .btn:active.focus, .input-group-btn .btn:active:focus, .input-group-btn .btn:focus {
+  outline: none !important; }
+
+.ui-select-bootstrap .ui-select-choices-row > span:focus, .ui-select-bootstrap .ui-select-choices-row > span:hover {
+  outline: none !important; }
+
+.ui-select-match:focus {
+  outline: none !important; }
 
 .template-tabs {
   margin-top: 30px; }
@@ -150,12 +187,12 @@ html, body {
 
 .footer {
   color: #fff;
-  background-color: #eee;
+  background-color: #3f3f3f;
   position: relative;
   bottom: 0;
   width: 100%; }
   .footer a {
-    color: #333; }
+    color: #eee; }
 
 .footer-list {
   list-style: none;
@@ -168,7 +205,7 @@ html, body {
     .footer-list li:not(:first-child):before {
       content: ' | ';
       padding: 20px;
-      color: #333; }
+      color: #eee; }
 
 .rzslider {
   margin-bottom: 50px;
