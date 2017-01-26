@@ -191,7 +191,7 @@ html, body {
 
 // -- FOOTER -- //
 .footer, .push {
-  height: 60px; // '.push' must be the same height as 'footer'
+  height: 120px; // '.push' must be the same height as 'footer' + 50px
 }
 .footer {
   color: $white;
@@ -208,6 +208,7 @@ html, body {
   padding-left: 0;
   padding: 20px 0 0 0;
   text-align: center;
+  margin-top: 35px;
   li {
     //color: $mutedGrey;
     display: inline;
@@ -232,6 +233,7 @@ html, body {
     }
   }
 }
+
 // -- HOME -- //
 .home-data {
   h2 {

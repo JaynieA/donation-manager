@@ -146,7 +146,7 @@ html, body {
       margin-bottom: 20px; }
 
 .footer, .push {
-  height: 60px; }
+  height: 120px; }
 
 .footer {
   color: #fff;
@@ -161,7 +161,8 @@ html, body {
   list-style: none;
   padding-left: 0;
   padding: 20px 0 0 0;
-  text-align: center; }
+  text-align: center;
+  margin-top: 35px; }
   .footer-list li {
     display: inline; }
     .footer-list li:not(:first-child):before {
