@@ -443,6 +443,17 @@ html, body {
     .rz-tick-legend {
       display: inline-block;
     }
+    .rz-pointer {
+      &:after {
+        display: none;
+      }
+    }
+    .rz-selection {
+      background-color: $secondaryAccentColor;
+    }
+    .rz-tick.rz-selected {
+      background-color: $secondaryAccentColor;
+    }
   }
   // -- DASHBOARD --//
   .filters-form {
