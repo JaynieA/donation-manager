@@ -59,6 +59,7 @@ html, body {
 }
 .navbar  {
   background-color: $white;
+  //background-color: $footerBkgColor;
   box-shadow: 0 3px 6px -6px $shadowColor;
   a {
     color: $accentRed;
@@ -77,6 +78,7 @@ html, body {
 .navbar-collapse[aria-expanded="true"] {
   border-top: 1px solid $lightGrey;
 }
+//.nav>li>a:focus, .nav>li>a:hover {background-color: lighten($secondaryAccentColor, 45%);}
 // -- LINED HEADER --//
 /* Header */
 .hdr-logo {
@@ -86,6 +88,7 @@ html, body {
 .lined {
   line-height: 0.5;
   text-align: center;
+  //margin: -20px 0 -15px;
   span {
     display: inline-block;
     position: relative;
@@ -94,7 +97,7 @@ html, body {
       content: "";
       position: absolute;
       height: 5px;
-      border-bottom: 1px solid $boxShadowColor;
+      border-bottom: 1px solid $secondaryAccentColor;
       top: 0;
       width: 500px;
       margin-top: 75px;
@@ -371,6 +374,9 @@ html, body {
   .rz-bubble {
     display: none;
   }
+  .rz-pointer {
+    background-color: $secondaryAccentColor;
+  }
   span {
     &:focus {
         outline: none;
@@ -402,6 +408,7 @@ html, body {
     }
     h4 {
       font-size: 34px;
+      color: $secondaryAccentColor;
     }
     p {
       text-transform: uppercase;;
