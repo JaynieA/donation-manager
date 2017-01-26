@@ -161,8 +161,21 @@ html, body {
 .table > thead > tr > th {
   border-bottom: none; }
 
+.table > tbody > tr > td {
+  border-top: none; }
+
 .table-responsive {
   border: none; }
+
+.table > tbody > tr > td {
+  padding: 12px; }
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+  background-color: #d9f3f3; }
+
+.ui-select-bootstrap .ui-select-choices-row.active > span {
+  background-color: #d9f3f3;
+  color: #515150; }
 
 .table {
   margin: 20px auto 60px; }
@@ -185,6 +198,13 @@ html, body {
     color: transparent; }
   .table tbody span.glyphicon-ok {
     color: #37aeb0; }
+  .table tbody tr {
+    border-right: 2px solid #ddd;
+    border-left: 2px solid #ddd; }
+    .table tbody tr:first-of-type {
+      border-top: 2px solid #ddd; }
+    .table tbody tr:last-of-type {
+      border-bottom: 2px solid #ddd; }
   .table th {
     text-align: center; }
     .table th a {
