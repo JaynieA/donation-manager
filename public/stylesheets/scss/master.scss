@@ -15,10 +15,24 @@ html, body {
 .btn-accent {
   background-color: transparent;
   border-radius: 0;
-  border: 2px solid $darkGrey;
-  color: $darkGrey;
+  border: 2px solid $accentRed;
+  color: $accentRed;
   text-transform: uppercase;
   font-weight: bold;
+  transition: all 0.2s ease;
+  &:hover {
+    background-color: $accentRed;
+    border: 2px solid transparent;
+    color: $white;
+  }
+}
+.btn-accent-secondary {
+  @extend .btn-accent;
+  border-color: $secondaryAccentColor;
+  color: $secondaryAccentColor;
+  &:hover {
+    background-color: $secondaryAccentColor;
+  }
 }
 // -- LAYOUT -- //
 .clearfix:after {
@@ -47,7 +61,7 @@ html, body {
   background-color: $white;
   box-shadow: 0 3px 6px -6px $shadowColor;
   a {
-    color: $slsRed;
+    color: $accentRed;
   }
 }
 .navbar-toggle  {
@@ -68,7 +82,7 @@ html, body {
   text-transform: uppercase;
   margin: 10vh auto 15px;
   &.error {
-    color: $slsRed;
+    color: $accentRed;
     text-shadow: 1px 1px $boxShadowColor;
     text-transform: none;
   }
@@ -147,20 +161,39 @@ html, body {
   margin-top: 30px;
   .col-sm-4 {
     padding-left: 0;
+    &:first-of-type {
+      margin-bottom: 10px;
+    }
   }
+  span.glyphicon-trash {
+    color: darken($accentRed, 10%);
+    //color: $secondaryAccentColor;
+  }
+}
+.table>thead>tr>th  { //Get rid of thead border-bottom
+  border-bottom: none;
+}
+.table-responsive {
+  border: none;
 }
 .table {
   margin: 20px auto 60px;
   thead {
-    background-color: $footerBkgColor;
+    // background-color: lighten($footerBkgColor, 5%);
+    background-color: $accentGrey;
     color: $white;
-    th:first-of-type {
-      border-bottom-left-radius: 10px;
-      border-top-left-radius: 10px;
+    th {
+      padding: 12px !important;
+      &:first-of-type {
+        border-radius: 10px 0 0 10px;
+      }
+      &:last-of-type {
+        border-radius: 0 10px 10px 0;
+      }
     }
     a {
       color: $white;
-
+      text-decoration: underline;
     }
   }
   tbody {
@@ -169,6 +202,9 @@ html, body {
       display: block;
       line-height: 1em;
       color: transparent;
+    }
+    span.glyphicon-ok {
+      color: $secondaryAccentColor;
     }
   }
   th {
@@ -343,6 +379,14 @@ html, body {
   .rzslider {
     .rz-tick-legend {
       display: inline-block;
+    }
+  }
+  // -- DASHBOARD --//
+  .filters-form {
+    .col-sm-4 {
+      &:first-of-type {
+        margin-bottom: 0;
+      }
     }
   }
 }

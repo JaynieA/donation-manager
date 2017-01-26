@@ -5,12 +5,16 @@ $mainFont: 'Open Sans', sans-serif;
 $white: #fff;
 $black: #000;
 $shadowColor: #222;
-$slsRed: #DC0000;
+//$slsRed: #DC0000;
+//$accentRed: #e94b3f;
+$accentRed: #e54b45;
 $darkGrey: #333;
 $boxShadowColor: rgba(204,204,204,1);
 $mainTextColor: #515150;
 $outlineColor: #ddd;
-$footerBkgColor: lighten(#191919, 15%);
+$accentGrey: lighten(#191919, 15%);
+$footerBkgColor: #273238;
+$secondaryAccentColor: #37aeb0;
 
 //temp colors
 $lightGrey: #eee;

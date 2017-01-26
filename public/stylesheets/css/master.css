@@ -8,13 +8,24 @@ html, body {
   color: #515150;
   margin-top: 50px; }
 
-.btn-accent {
+.btn-accent, .btn-accent-secondary {
   background-color: transparent;
   border-radius: 0;
-  border: 2px solid #333;
-  color: #333;
+  border: 2px solid #e54b45;
+  color: #e54b45;
   text-transform: uppercase;
-  font-weight: bold; }
+  font-weight: bold;
+  transition: all 0.2s ease; }
+  .btn-accent:hover, .btn-accent-secondary:hover {
+    background-color: #e54b45;
+    border: 2px solid transparent;
+    color: #fff; }
+
+.btn-accent-secondary {
+  border-color: #37aeb0;
+  color: #37aeb0; }
+  .btn-accent-secondary:hover {
+    background-color: #37aeb0; }
 
 .clearfix:after {
   visibility: hidden;
@@ -40,7 +51,7 @@ html, body {
   background-color: #fff;
   box-shadow: 0 3px 6px -6px #222; }
   .navbar a {
-    color: #DC0000; }
+    color: #e54b45; }
 
 .navbar-toggle .icon-bar {
   background-color: #DC0000; }
@@ -55,7 +66,7 @@ html, body {
   text-transform: uppercase;
   margin: 10vh auto 15px; }
   .shadowed-sm-hdr.error {
-    color: #DC0000;
+    color: #e54b45;
     text-shadow: 1px 1px #cccccc;
     text-transform: none; }
 
@@ -116,22 +127,38 @@ html, body {
   margin-top: 30px; }
   .filters-form .col-sm-4 {
     padding-left: 0; }
+    .filters-form .col-sm-4:first-of-type {
+      margin-bottom: 10px; }
+  .filters-form span.glyphicon-trash {
+    color: #d9251e; }
+
+.table > thead > tr > th {
+  border-bottom: none; }
+
+.table-responsive {
+  border: none; }
 
 .table {
   margin: 20px auto 60px; }
   .table thead {
     background-color: #3f3f3f;
     color: #fff; }
-    .table thead th:first-of-type {
-      border-bottom-left-radius: 10px;
-      border-top-left-radius: 10px; }
+    .table thead th {
+      padding: 12px !important; }
+      .table thead th:first-of-type {
+        border-radius: 10px 0 0 10px; }
+      .table thead th:last-of-type {
+        border-radius: 0 10px 10px 0; }
     .table thead a {
-      color: #fff; }
+      color: #fff;
+      text-decoration: underline; }
   .table tbody:before {
     content: "-";
     display: block;
     line-height: 1em;
     color: transparent; }
+  .table tbody span.glyphicon-ok {
+    color: #37aeb0; }
   .table th {
     text-align: center; }
     .table th a {
@@ -187,7 +214,7 @@ html, body {
 
 .footer {
   color: #fff;
-  background-color: #3f3f3f;
+  background-color: #273238;
   position: relative;
   bottom: 0;
   width: 100%; }
@@ -252,7 +279,10 @@ html, body {
     float: right !important; }
 
   .rzslider .rz-tick-legend {
-    display: inline-block; } }
+    display: inline-block; }
+
+  .filters-form .col-sm-4:first-of-type {
+    margin-bottom: 0; } }
 /* Medium devices (desktops, 992px and up) */
 /* Large devices (large desktops, 1200px and up) */
 /* Xtra Large devices (Xlarge desktops, 1500px and up) */

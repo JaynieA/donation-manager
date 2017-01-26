@@ -97,7 +97,7 @@
             <td>
               <button ng-click="thank(donation)" ng-hide="donation.thanked" class="btn btn-sm btn-accent">Thank</button>
               <!-- show the reprint button if donation thanked = true, address exists, email does not exist -->
-              <button ng-click="thank(donation)" ng-hide="!donation.donor_address || !donation.thanked || donation.donor_email.length > 1" class="btn btn-xs btn-primary" type="button">re-print</button>
+              <button ng-click="thank(donation)" ng-hide="!donation.donor_address || !donation.thanked || donation.donor_email.length > 1" class="btn btn-xs btn-accent-secondary" type="button">re-print</button>
             </td>
             <td>
               <span ng-show="donation.thanked">{{ donation.thanked_date | date: 'MM/dd/yyyy' }}</span>
