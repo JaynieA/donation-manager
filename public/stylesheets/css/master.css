@@ -5,7 +5,8 @@
 html, body {
   font-family: "Open Sans", sans-serif;
   height: 100%;
-  color: #515150; }
+  color: #515150;
+  margin-top: 50px; }
 
 .clearfix:after {
   visibility: hidden;
@@ -22,7 +23,7 @@ html, body {
   margin: 0 auto -60px; }
 
 .logo_img {
-  max-height: 50px;
+  max-height: 49px;
   border: 1px solid #fff;
   margin-top: -14px;
   padding-top: 2px; }
@@ -35,6 +36,12 @@ html, body {
 
 .navbar-toggle .icon-bar {
   background-color: #DC0000; }
+
+.nav > li {
+  text-align: right; }
+
+.navbar-collapse[aria-expanded="true"] {
+  border-top: 1px solid #eee; }
 
 .shadowed-sm-hdr {
   text-transform: uppercase;
@@ -168,6 +175,8 @@ html, body {
   .rzslider .rz-tick-legend,
   .rzslider .rz-bubble {
     display: none; }
+  .rzslider span:focus {
+    outline: none; }
 
 .home-data h2 {
   font-size: 44px;
@@ -200,6 +209,9 @@ html, body {
 
   .home-data h3 {
     margin: 50px auto; }
+
+  .navbar .navbar-nav {
+    float: right !important; }
 
   .rzslider .rz-tick-legend {
     display: inline-block; } }
