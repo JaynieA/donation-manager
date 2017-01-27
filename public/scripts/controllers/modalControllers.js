@@ -111,9 +111,8 @@ myApp.controller('ModalInstanceController', ['$scope','$uibModalInstance', 'Uplo
         console.log(response);
         //close the modal
         $uibModalInstance.close();
-        //TODO: reroute the user to dahsboard view
-        //currently--> this redirects to dashboard and then gets redirected to login??
-        //$location.path( "/#!/dashboard" );
+        //Reroute the user to dahsboard view
+        $location.path( "/dashboard" );
       }); // end then
     }; // end save
 
