@@ -8,6 +8,14 @@ html, body {
   color: #515150;
   margin-top: 35px; }
 
+.btn.active.focus,
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn:active:focus,
+.btn:focus {
+  outline: none; }
+
 .btn-accent, .btn-accent-secondary, .btn-accent-tertiary {
   background-color: transparent;
   border-radius: 0;
@@ -20,18 +28,26 @@ html, body {
     background-color: #e54b45;
     border: 2px solid transparent;
     color: #fff; }
+  .btn-accent:focus, .btn-accent-secondary:focus, .btn-accent-tertiary:focus {
+    color: #e54b45; }
+  .btn-accent:focus:hover, .btn-accent-secondary:focus:hover, .btn-accent-tertiary:focus:hover {
+    color: #fff; }
 
 .btn-accent-secondary {
   border-color: #37aeb0;
   color: #37aeb0; }
   .btn-accent-secondary:hover {
     background-color: #37aeb0; }
+  .btn-accent-secondary:focus {
+    color: #37aeb0; }
 
 .btn-accent-tertiary {
   border-color: #439f46;
   color: #439f46; }
   .btn-accent-tertiary:hover {
     background-color: #439f46; }
+  .btn-accent-tertiary:focus {
+    color: #439f46; }
 
 .clearfix:after {
   visibility: hidden;

@@ -12,6 +12,14 @@ html, body {
   color: $mainTextColor;
   margin-top: 35px;
 }
+.btn.active.focus,
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn:active:focus,
+.btn:focus {
+  outline: none;
+}
 .btn-accent {
   background-color: transparent;
   border-radius: 0;
@@ -25,6 +33,12 @@ html, body {
     border: 2px solid transparent;
     color: $white;
   }
+  &:focus {
+    color: $accentRed;
+  }
+  &:focus:hover {
+    color: $white;
+  }
 }
 .btn-accent-secondary {
   @extend .btn-accent;
@@ -33,6 +47,9 @@ html, body {
   &:hover {
     background-color: $secondaryAccentColor;
   }
+  &:focus {
+    color: $secondaryAccentColor;
+  }
 }
 .btn-accent-tertiary {
   @extend .btn-accent;
@@ -40,6 +57,9 @@ html, body {
   color: $tertiaryAccentColor;
   &:hover {
     background-color: $tertiaryAccentColor;
+  }
+  &:focus {
+    color: $tertiaryAccentColor;
   }
 }
 // -- LAYOUT -- //
