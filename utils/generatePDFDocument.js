@@ -11,6 +11,7 @@ var generatePDF = function(object, res) {
   var donor_city = object.donor_city;
   var donor_state = object.donor_state;
   var donor_zip = object.donor_zip;
+  var donation_amt = object.donation_amt;
   //Get the default letter text
   Template.findOne( { default:true, type:'letter' }, function(err, results) {
     if (err) {
@@ -33,6 +34,7 @@ var generatePDF = function(object, res) {
       //adding the text to be written,
       doc.text( greeting, 100, 150);
       doc.moveDown();
+      doc.text( 'Thank you for your recent donation of $' + donation_amt + ' to Spot\'s Last Stop.\n\n');
       doc.text( text );
       doc.moveDown(3);
       doc.text( signatureOne );
