@@ -1,5 +1,7 @@
+var verbose = false;
+
 myApp.controller('NavController', function (AuthFactory, $window, $scope) {
-  console.log('in nav controller');
+  if (verbose) console.log('in nav controller');
 
   //control ui.bootstrap.collapse
   $scope.isNavCollapsed = true;

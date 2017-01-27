@@ -1,5 +1,7 @@
+var verbose = false;
+
 myApp.factory('AuthFactory', function ($http) {
-  console.log('in auth factory');
+  if (verbose) console.log('in auth factory');
   var Status = {
     loggedIn: false,
   };

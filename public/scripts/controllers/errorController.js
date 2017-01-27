@@ -1,4 +1,5 @@
+var verbose = false;
 //Error Controller
 myApp.controller('ErrorController', function ($http) {
-  console.log('loaded ErrorController');
+  if (verbose) console.log('loaded ErrorController');
 }); // end ErrorController

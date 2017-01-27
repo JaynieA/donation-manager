@@ -1,11 +1,12 @@
+var verbose = false;
 //Home Controller
 myApp.controller('HomeController', ['$scope', '$http', '$location', function ($scope, $http, $location) {
-  console.log('loaded HomeController');
+  if (verbose) console.log('loaded HomeController');
 
   $scope.data = '';
 
   var calculateCurrentYearTotalDonations = function(responseArray) {
-    console.log('in calculateCurrentYearTotalDonations');
+    if (verbose) console.log('in calculateCurrentYearTotalDonations');
     //initialize yearly donation total to zero
     var totalDonations = 0;
     //for each donation this year, add donation amount to total
@@ -26,21 +27,21 @@ myApp.controller('HomeController', ['$scope', '$http', '$location', function ($s
   }; // end
 
   var checkAuth = function() {
-    console.log('in checkAuth');
+    if (verbose) console.log('in checkAuth');
     //check if the user is allowed to see this page
     $http.get('/private/home')
       .then(function (response) {
         //if the authStatus is false or undefined...
         if (response.data.authStatus === undefined || response.data.authStatus === false) {
           //if not logged in/authorized as admin set data to false
-          console.log('Sorry, you are not logged in.');
+          if (verbose) console.log('Sorry, you are not logged in.');
           $scope.data = false;
           //redirect to the login page
           $location.path("/#!/login");
         } else {
           //else, get server response of true
           $scope.data = response.data.authStatus;
-          console.log('HC. You are logged in:', response.data.authStatus);
+          if (verbose) console.log('HC. You are logged in:', response.data.authStatus);
           getCurrentYearsDonations();
         } // end else
     }); // end get
@@ -49,12 +50,12 @@ myApp.controller('HomeController', ['$scope', '$http', '$location', function ($s
   var getCurrentMonth = function() {
     var month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     var d = new Date();
-    console.log(month[d.getMonth()]);
+    if (verbose) console.log(month[d.getMonth()]);
     return month[d.getMonth()];
   }; // end getCurrentMonth
 
   var getCurrentYearsDonations = function() {
-    console.log('in getCurrentYearsDonations');
+    if (verbose) console.log('in getCurrentYearsDonations');
     $http({
       method: 'GET',
       url: '/private/home/donations'
@@ -64,7 +65,7 @@ myApp.controller('HomeController', ['$scope', '$http', '$location', function ($s
   }; // end getCurrentYearsDonations
 
   var getMonthByNumber = function(num) {
-    console.log('in getMonthByNumber');
+    if (verbose) console.log('in getMonthByNumber');
     var months = ["January", "February", "March", "April", "May", "June","July", "August",
                       "September", "October", "November", "December"];
     var month = months[num-1];
@@ -73,7 +74,7 @@ myApp.controller('HomeController', ['$scope', '$http', '$location', function ($s
 
   //get donation total for singular month
   var getMonthlyDonations = function(monthNum, type) {
-    console.log('in getMonthlyDonations', monthNum);
+    if (verbose) console.log('in getMonthlyDonations', monthNum);
     //assemble url string
     var urlString = '/private/home/monthlyTotal/' + monthNum;
     $http({
@@ -86,7 +87,7 @@ myApp.controller('HomeController', ['$scope', '$http', '$location', function ($s
   }; // end getMonthlyDonations
 
   var initializeSlider = function() {
-    console.log('in initializeSlider');
+    if (verbose) console.log('in initializeSlider');
     //Initialize slider directive
     $scope.slideChangeData = {
         start: getCurrentMonth(),
@@ -126,7 +127,7 @@ myApp.controller('HomeController', ['$scope', '$http', '$location', function ($s
 
   //initialize the view
   var init = function() {
-    console.log('in init');
+    if (verbose) console.log('in init');
     checkAuth();
     //get the current year
     $scope.currentYear = new Date().getFullYear();

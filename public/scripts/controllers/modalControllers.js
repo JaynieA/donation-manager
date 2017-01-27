@@ -1,3 +1,5 @@
+var verbose = false;
+
 //ModalCtrl
 myApp.controller('ModalCtrl', ['$scope','$uibModal', '$timeout',function ($scope, $uibModal, $timeout) {
 
@@ -39,7 +41,7 @@ myApp.controller('ModalCtrl', ['$scope','$uibModal', '$timeout',function ($scope
 
   //open the modal (returns a modal instance)
   $scope.open = function (size) {
-    console.log('opening pop up');
+    if (verbose) console.log('opening pop up');
     var modalInstance = $uibModal.open({
       templateUrl: 'uploadReportsModal.html',
       controller: 'ModalInstanceController',
@@ -68,7 +70,7 @@ myApp.controller('ModalCtrl', ['$scope','$uibModal', '$timeout',function ($scope
 
   //initialize the view
   var init = function() {
-    console.log('in init modalCtrl');
+    if (verbose) console.log('in init modalCtrl');
     updateClock(); //run function once at first to avoid delay on load
   }; // end init
 
@@ -84,7 +86,7 @@ myApp.controller('ModalCtrl', ['$scope','$uibModal', '$timeout',function ($scope
 //ModalInstanceController
 myApp.controller('ModalInstanceController', ['$scope','$uibModalInstance', 'Upload', '$timeout', '$http', '$location',
   function ($scope, $uibModalInstance, Upload, $timeout, $http, $location) {
-    console.log('in ModalInstanceController');
+    if (verbose) console.log('in ModalInstanceController');
     //Define platforms for repeat
     $scope.platforms = [
       { name: 'Paypal', fileData: undefined, progress: 0 },
@@ -101,14 +103,14 @@ myApp.controller('ModalInstanceController', ['$scope','$uibModalInstance', 'Uplo
 
     //save info received from uploads
     $scope.save = function () {
-      console.log('in save-->', completeUploadResults);
+      if (verbose) console.log('in save-->', completeUploadResults);
       //send completeUploadResults to the server
       $http({
         method: 'POST',
         url: '/private/home',
         data: { donations: completeUploadResults }
       }).then(function(response) {
-        console.log(response);
+        if (verbose) console.log(response);
         //close the modal
         $uibModalInstance.close();
         //Reroute the user to dahsboard view
@@ -118,7 +120,7 @@ myApp.controller('ModalInstanceController', ['$scope','$uibModalInstance', 'Uplo
 
     //handle CSV uploads
     $scope.uploadFile = function(file, errFiles, index) {
-        console.log('in uploadFile. uploading-->', index);
+        if (verbose) console.log('in uploadFile. uploading-->', index);
         $scope.f = file;
         $scope.errFile = errFiles && errFiles[0];
         //if a file was uploaded, continue
@@ -157,7 +159,7 @@ myApp.controller('ModalInstanceController', ['$scope','$uibModalInstance', 'Uplo
     }; // end uploadFile
 
     var formatFileData = function(nameString, resultsArray) {
-      console.log('in formatFileData--> for', nameString);
+      if (verbose) console.log('in formatFileData--> for', nameString);
       var formattedResultsArray;
       if (nameString === 'Paypal') {
         //if the data is for Paypal, format it that way
@@ -174,7 +176,7 @@ myApp.controller('ModalInstanceController', ['$scope','$uibModalInstance', 'Uplo
 
     //TODO:change to assembleYouCaringObjects? Separate the formation and the assembling into different functions?
     var formatYouCaringObjects = function(resultsArray) {
-      console.log('in formatYouCaringObjects');
+      if (verbose) console.log('in formatYouCaringObjects');
       //create empty array to push data into
       var youCaringData = [];
       for (var i = 0; i < resultsArray.length; i++) {
@@ -216,7 +218,7 @@ myApp.controller('ModalInstanceController', ['$scope','$uibModalInstance', 'Uplo
     }; // end formatYouCaringObjects
 
     var formatRazooObjects = function(resultsArray) {
-      console.log('in formatRazooObjects');
+      if (verbose) console.log('in formatRazooObjects');
       //create empty array to push result data into
       var razooData = [];
       for (var i = 0; i < resultsArray.length; i++) {
@@ -251,7 +253,7 @@ myApp.controller('ModalInstanceController', ['$scope','$uibModalInstance', 'Uplo
     }; // end formatRazooObjects
 
     var formatPaypalObjects = function(resultsArray) {
-      console.log('in formatPaypalObjects');
+      if (verbose) console.log('in formatPaypalObjects');
       //create empty array to push result data to
       var paypalData = [];
       for (var i = 0; i < resultsArray.length; i++) {

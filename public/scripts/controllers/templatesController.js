@@ -1,51 +1,53 @@
+var verbose = false;
+
 //Templates Controller
 
 myApp.controller('TemplatesController', ['$scope', '$http', '$location', '$timeout', function ($scope, $http, $location, $timeout) {
-  console.log('loaded TemplatesController');
+  if (verbose) console.log('loaded TemplatesController');
 
   var getAuthStatus = function() {
-    console.log('in getAuthStatus');
+    if (verbose) console.log('in getAuthStatus');
     //get authentication that user is logged in and has admin status
     $http.get('/private/templates')
       .then(function (response) {
         //if the authStatus is false or undefined...
         if (response.data.authStatus === undefined || response.data.authStatus === false) {
-          console.log('Sorry, you are not logged in.');
+          if (verbose) console.log('Sorry, you are not logged in.');
           $scope.data = false;
           //redirect to the login page
           $location.path("/#!/login");
         } else {
           $scope.data = response.data.authStatus;
-          console.log('TC. You are logged in:', response.data.authStatus);
+          if (verbose) console.log('TC. You are logged in:', response.data.authStatus);
         } // end else
       }); // end $http
   }; // end getAuthStatus
 
   var getDefaultEmailTemplate = function() {
-    console.log('in getDefaultEmailTemplate');
+    if (verbose) console.log('in getDefaultEmailTemplate');
     $http({
       method: 'GET',
       url: '/private/templates/emailDefault'
     }).then(function(response) {
-      console.log('getDefaultEmailTemplate response-->',response);
+      if (verbose) console.log('getDefaultEmailTemplate response-->',response);
       //set the template email display
       $scope.template.email = response.data.text;
     }); // end $http
   }; // end getDefaultEmailTemplate
 
   var getDefaultLetterTemplate = function() {
-    console.log('in getDefaultLetterTemplate');
+    if (verbose) console.log('in getDefaultLetterTemplate');
     $http({
       method: 'GET',
       url: '/private/templates/letterDefault'
     }).then(function(response) {
-      console.log('getDefaultLetterTemplate response -->', response);
+      if (verbose) console.log('getDefaultLetterTemplate response -->', response);
       $scope.template.letter = response.data.text;
     }); // end $http
   }; // end getDefaultLetterTemplate
 
   $scope.updateEmailTemplate = function() {
-    console.log('in updateEmailTemplate', $scope.template.email);
+    if (verbose) console.log('in updateEmailTemplate', $scope.template.email);
     //assemble object to send
     var objectToSend = {
       type: 'email',
@@ -58,14 +60,14 @@ myApp.controller('TemplatesController', ['$scope', '$http', '$location', '$timeo
       url: '/private/templates/email',
       data: objectToSend
     }).then( function(response) {
-      console.log(response);
+      if (verbose) console.log(response);
       //show the success alert for a few seconds
       blinkSuccessAlert();
     }); // end $http
   }; // end updateEmailTemplate
 
   $scope.updateLetterTemplate = function() {
-    console.log('in updateLetterTemplate', $scope.template.letter);
+    if (verbose) console.log('in updateLetterTemplate', $scope.template.letter);
     //assemble object to send
     var objectToSend = {
       type: 'letter',
@@ -77,14 +79,14 @@ myApp.controller('TemplatesController', ['$scope', '$http', '$location', '$timeo
       url: '/private/templates/letter',
       data: objectToSend
     }).then(function(response) {
-      console.log(response);
+      if (verbose) console.log(response);
       //show the success alert for a few seconds
       blinkSuccessAlert();
     }); // end $http
   }; // end updateLetterTemplate
 
   var blinkSuccessAlert = function() {
-    console.log('in hideAlert');
+    if (verbose) console.log('in hideAlert');
     //show saved alert
     $scope.saveSuccess = true;
     //re-hide saved alert after a few seconds
@@ -92,7 +94,7 @@ myApp.controller('TemplatesController', ['$scope', '$http', '$location', '$timeo
   }; // end hideAlert
 
   var init = function() {
-    console.log('in init');
+    if (verbose) console.log('in init');
     $scope.data = '';
     $scope.saveSuccess = false;
     getAuthStatus();

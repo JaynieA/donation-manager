@@ -1,10 +1,11 @@
-// //Dashboard Controller
+var verbose = false;
 
+// //Dashboard Controller
 myApp.controller('DashboardController', ['$scope', '$http','$location', function($scope, $http, $location) {
-  console.log('in DashboardController');
+  if (verbose) console.log('in DashboardController');
 
   var condenseDateResults = function(responseArray) {
-    console.log('in condenseDateResults');
+    if (verbose) console.log('in condenseDateResults');
     var dates = [];
     //push the responses into dates array (if not already in)
     for (var i = 0; i < responseArray.length; i++) {
@@ -25,13 +26,13 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', function
   }; // end convertToMonthName
 
   var generatePDF = function(donationObject) {
-    console.log('in generatePDF', donationObject);
+    if (verbose) console.log('in generatePDF', donationObject);
     $http({
       method: 'PUT',
       url: '/private/pdf',
       data: donationObject
     }).then(function(response) {
-      console.log('generate PDF response-->',response);
+      if (verbose) console.log('generate PDF response-->',response);
       //use the printJS library and /private/docs router
       //to serve newly created file in a print window
       //TODO: look for a different library to serve the pdf file in an iframe
@@ -54,20 +55,20 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', function
       .then(function (response) {
       //if the authStatus is not true...
       if (response.data.authStatus !== true) {
-        console.log('Sorry, you are not logged in.');
+        if (verbose) console.log('Sorry, you are not logged in.');
         $scope.data = false;
         //redirect to the login page
         $location.path("/#!/login");
       } else {
         //else (if user is authed), show them the page
         $scope.data = response.data.authStatus;
-        console.log('DC. You are logged in:', response.data.authStatus);
+        if (verbose) console.log('DC. You are logged in:', response.data.authStatus);
       } // end else
     }); // end $http
   }; // end getAuthStatus
 
   var getDonations = function() {
-    console.log('in getDonations');
+    if (verbose) console.log('in getDonations');
     $http.get('/private/dashboard/donations')
       .then(function(response) {
         $scope.donations = response.data.donations;
@@ -75,11 +76,11 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', function
   }; // end getDonations
 
   var getDonationDates = function() {
-    console.log('in getDonationDates');
+    if (verbose) console.log('in getDonationDates');
     //get aggregate dates of all donations
     $http.get('/private/dashboard/dates')
       .then(function(response) {
-        console.log('get dates response-->', response);
+        if (verbose) console.log('get dates response-->', response);
         //condense the dates returned, attach month string, and scope for select
         var condensedDates = condenseDateResults(response.data);
         $scope.selectDates = makeDateObjects(condensedDates);
@@ -89,7 +90,7 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', function
 
   var makeDateObjects = function(array) {
     //convert array of date strings into objects containing their data
-    console.log('in makeDateObjects');
+    if (verbose) console.log('in makeDateObjects');
     var dates = [];
     for (var i = 0; i < array.length; i++) {
       //split date strings on ','
@@ -110,7 +111,7 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', function
   }; // end makeDateObjects
 
   var sendEmail = function(donation) {
-    console.log('in sendEmail', donation);
+    if (verbose) console.log('in sendEmail', donation);
     var objectToSend = {
       donor_name: donation.donor_name,
       donor_email: donation.donor_email,
@@ -121,14 +122,14 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', function
       url: '/private/email',
       data: objectToSend
     }).then(function(response) {
-      console.log('send email response-->',response.data);
+      if (verbose) console.log('send email response-->',response.data);
       //update thanked status for this donation
       updateThankedStatus(donation._id);
     }); // end $http
   }; // end getEmails
 
   $scope.thank = function(donationObject) {
-    console.log('in thank');
+    if (verbose) console.log('in thank');
     var donation = donationObject;
     //if both are blank, or they are anonymous
     if (donation.donor_email === 'anonymous') {
@@ -139,7 +140,6 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', function
       generatePDF(donationObject);
     //if the donation email is present, send an email
     } else if (donation.donor_email) {
-      //TODO: upload a case where this is true
       sendEmail(donation);
     } else {
       //TODO:  handle cases where none of these are true;
@@ -148,13 +148,13 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', function
   }; // end thank
 
   var updateThankedStatus = function(id) {
-    console.log('in updateThankedStatus', id);
+    if (verbose) console.log('in updateThankedStatus', id);
     $http({
       method: 'PUT',
       url: '/private/dashboard/thank',
       data: {id: id}
     }).then(function(response) {
-      console.log(response);
+      if (verbose) console.log(response);
       //update donations on page
       //TODO: handle how this works if user has filters applied
       getDonations();
@@ -162,7 +162,7 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', function
   }; // end updateThankedStatus
 
   var init = function() {
-    console.log('in init');
+    if (verbose) console.log('in init');
     //make sure user it authorized
     getAuthStatus();
     //get donations to populate table
