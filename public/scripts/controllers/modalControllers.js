@@ -172,6 +172,7 @@ myApp.controller('ModalInstanceController', ['$scope','$uibModalInstance', 'Uplo
       return formattedResultsArray;
     }; // end formatFileData
 
+    //TODO:change to assembleYouCaringObjects? Separate the formation and the assembling into different functions?
     var formatYouCaringObjects = function(resultsArray) {
       console.log('in formatYouCaringObjects');
       //create empty array to push data into
@@ -180,24 +181,15 @@ myApp.controller('ModalInstanceController', ['$scope','$uibModalInstance', 'Uplo
         //for every row that contains a donation, format a donationObject
         if (resultsArray[i][' Amount']) {
           //format the variables
-          var email = resultsArray[i][' Email'].replace(' ', '');
-          var name = resultsArray[i][' Display Name'].replace(' ', '');
-          var amount = resultsArray[i][' Amount'].replace(' ', '');
+          var email = setUndefinedIfBlank(resultsArray[i][' Email'].trim());
+          var name = resultsArray[i][' Display Name'].trim();
+          var amount = resultsArray[i][' Amount'].trim();
           //format address variables
-          var address = resultsArray[i][' Address 1'].replace(' ', '');
-            if (address === '') {
-              address = undefined;
-            } // end if
-          var city = resultsArray[i][' City'].replace(' ', '');
-            if (city === '') {
-              city = undefined;
-            } // end if
-          var state = resultsArray[i][' State'].replace(' ', '');
-            if (state === '') {
-              state = undefined;
-            } // end if
-          var zip = resultsArray[i][' Zip'].replace(' ', '');
-            if (zip === '') {
+          var address = setUndefinedIfBlank(resultsArray[i][' Address 1'].trim());
+          var city = setUndefinedIfBlank(resultsArray[i][' City'].trim());
+          var state = setUndefinedIfBlank(resultsArray[i][' State'].trim());
+          var zip = Number(resultsArray[i][' Zip'].trim());
+            if (zip === 0) {
               zip = undefined;
             } // end if
           //assemble donationObject
@@ -210,7 +202,7 @@ myApp.controller('ModalInstanceController', ['$scope','$uibModalInstance', 'Uplo
             donor_address: address,
             donor_city: city,
             donor_state: state,
-            donor_zip: Number(zip),
+            donor_zip: zip,
             reference_id: undefined,
             origin: resultsArray[i].Title,
             donation_month: new Date(resultsArray[i][' Date']).getMonth(),
@@ -231,10 +223,10 @@ myApp.controller('ModalInstanceController', ['$scope','$uibModalInstance', 'Uplo
         //for every row that contains a donation, format a donationObject
         if(resultsArray[i].Amount) {
           //concatenate first and last names to make full name
-          var full_name = resultsArray[i]['Donor First Name'] + resultsArray[i]['Donor Last Name'];
+          var full_name = resultsArray[i]['Donor First Name'] + ' ' + resultsArray[i]['Donor Last Name'];
           //Format amount- remove the '$ ' at the beginning
           var amount = resultsArray[i].Amount.replace('$', '');
-          amount = amount.replace(' ', '');
+          amount = amount.trim();
           //assemble donation object
           var donationObject = {
             platform_name: "Razoo",
@@ -271,12 +263,12 @@ myApp.controller('ModalInstanceController', ['$scope','$uibModalInstance', 'Uplo
           // if the first item in the array is "US", the address exists
           if (addressArray[0] === ' US') {
             //define and format address variables
-            zip = addressArray[1].replace(' ', '');
-            state = addressArray[2].replace(' ', '');
-            city = addressArray[3].replace(' ', '').toLowerCase();
+            zip = addressArray[1].trim();
+            state = addressArray[2].trim();
+            city = addressArray[3].trim().toLowerCase();
             //convert city to lowercase, capitilize first letter
             city = city.charAt(0).toUpperCase() + city.slice(1);
-            address = addressArray[4].replace(' ', '');
+            address = addressArray[4].trim();
           } else {
             //else, the address does not exist
             //address variables should all be set to undefined
@@ -307,6 +299,15 @@ myApp.controller('ModalInstanceController', ['$scope','$uibModalInstance', 'Uplo
       } // end for loop
       return paypalData;
     }; // end formatPaypalObjects
+
+    var setUndefinedIfBlank = function(string) {
+      //set value as undefined if it is a blank string
+      if (string === '') {
+        return undefined;
+      } else {
+        return string;
+      } // end else
+    }; // end setUndefinedIfBlank
 
   } // end controller callback
 ]); // end ModalInstanceController
