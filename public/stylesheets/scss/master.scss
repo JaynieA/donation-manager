@@ -83,7 +83,7 @@ html, body {
 /* Header */
 .hdr-logo {
   height: 125px;
-  margin: 15px auto;
+  margin: 0 auto;
 }
 .lined {
   line-height: 0.5;
@@ -100,7 +100,7 @@ html, body {
       border-bottom: 1px solid $secondaryAccentColor;
       top: 0;
       width: 500px;
-      margin-top: 75px;
+      margin-top: 60px;
     }
     &:before {
       right: 100%;
@@ -306,13 +306,20 @@ html, body {
   margin-top: 30px;
   .wrapper {
     padding: 20px;
-    border: 1px solid $outlineColor;
+    //border: 1px solid $outlineColor;
+    border: 2px solid $accentGrey;
     border-top: none;
     min-height: 50vh;
     margin-bottom: 20px;
+    //background-color: $accentGrey;
+    //color: $white;
+    color: $secondaryAccentColor;
     .intro {
       text-align: left;
       padding: 20px 0;
+    }
+    textarea {
+      @include box-shadow-sm($boxShadowColor);
     }
     .alert {
       margin: -5px auto 0;
@@ -320,9 +327,45 @@ html, body {
     }
   }
   span {
-    color: darken(#ddd, 10%);
+    //color: darken(#ddd, 10%);
+    color: lighten($secondaryAccentColor, 20%);
     margin: 0 5px;
   }
+}
+.nav-tabs>li>a:hover {
+  border-color: $white;
+  //margin-bottom: -1px;
+  //border-bottom: 1px solid green;
+  //border-bottom: 1px solid $accentGrey;
+}
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover, .nav-tabs>li>a, uib-tab-heading {
+  text-transform: uppercase;
+  color: $accentRed;
+  //margin-bottom: -1px;
+  //border: 2px solid $accentGrey;
+  //border-bottom: none;
+}
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover{
+  margin-bottom: -1px;
+  border: 2px solid $accentGrey;
+  border-bottom: none;
+}
+.nav-tabs>li>a  {
+  margin-bottom: -1px;
+}
+.nav-tabs>li>a:hover {
+  background-color: $white;
+  // border-top-color: $white;
+}
+
+
+
+// .nav-tabs>li.active>a, .nav-tabs > li.active > a:hover {
+//   border: 2px solid $accentGrey;
+//   border-bottom-color: $white;
+// }
+.nav-tabs {
+  border-bottom: 2px solid $accentGrey;
 }
 .signature {
   margin-top: 25px;
@@ -368,6 +411,7 @@ html, body {
 }
 // -- CUSTOM SLIDER -- //
 .rzslider {
+  width: 90%;
   margin-bottom: 50px;
   margin-top: 20px;
   .rz-tick-legend,

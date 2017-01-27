@@ -14,6 +14,7 @@ $mainTextColor: #515150;
 $outlineColor: #ddd;
 $accentGrey: lighten(#191919, 15%);
 $footerBkgColor: #273238;
+$lightFooterColor: #303d45;
 $secondaryAccentColor: #37aeb0;
 
 //temp colors
@@ -21,5 +22,8 @@ $lightGrey: #eee;
 
 //MIXINS
 @mixin box-shadow($color) {
+  box-shadow: 0px 1px 18px 2px $color;
+}
+@mixin box-shadow-sm($color) {
   box-shadow: 0px 1px 5px 2px $color;
 }

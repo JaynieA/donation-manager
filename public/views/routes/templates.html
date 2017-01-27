@@ -21,7 +21,7 @@
                 <p>info@spotslaststop.org</p>
               </div>
             </div>
-            <button ng-hide="saveSuccess" ng-click="updateEmailTemplate()" class="btn btn-success">Save</button>
+            <button ng-hide="saveSuccess" ng-click="updateEmailTemplate()" class="btn btn-accent">Save</button>
             <div ng-show="saveSuccess" class="alert alert-success" role="alert">Template Saved
               <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
             </div>
@@ -41,14 +41,14 @@
                 <p>Dear <span>_____________</span>,</p>
                 <p>Thank you for your recent donation of <span>$_______ </span> to Spot's Last Stop.</p>
               </div>
-              <textarea ng-model="template.letter" class="form-control" rows="8" cols="80"></textarea>
+              <textarea ng-model="template.letter" class="form-control" rows="19" cols="80"></textarea>
               <div class="signature">
                 <p>Thank you again!</p>
                 <p>Casey and Grant Adams</p>
                 <p>Founder and Directors</p>
               </div>
             </div>
-            <button ng-hide="saveSuccess" ng-click="updateLetterTemplate()" class="btn btn-success">Save</button>
+            <button ng-hide="saveSuccess" ng-click="updateLetterTemplate()" class="btn btn-accent">Save</button>
             <div ng-show="saveSuccess" class="alert alert-success" role="alert">Template Saved
               <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
             </div>
