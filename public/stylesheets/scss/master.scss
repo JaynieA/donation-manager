@@ -87,7 +87,6 @@ html, body {
 }
 .navbar  {
   background-color: $white;
-  //background-color: $footerBkgColor;
   box-shadow: 0 3px 6px -6px $shadowColor;
   a {
     color: $accentRed;
@@ -106,7 +105,7 @@ html, body {
 .navbar-collapse[aria-expanded="true"] {
   border-top: 1px solid $lightGrey;
 }
-//.nav>li>a:focus, .nav>li>a:hover {background-color: lighten($secondaryAccentColor, 45%);}
+
 // -- LINED HEADER --//
 /* Header */
 .hdr-logo {
@@ -116,6 +115,7 @@ html, body {
 .lined {
   line-height: 0.5;
   text-align: center;
+  display: none;
   //margin: -20px 0 -15px;
   span {
     display: inline-block;
@@ -259,7 +259,6 @@ html, body {
 .table {
   margin: 20px auto 60px;
   thead {
-    // background-color: lighten($footerBkgColor, 5%);
     background-color: $accentGrey;
     color: $white;
     th {
@@ -336,6 +335,7 @@ html, body {
 .template-tabs {
   margin-top: 30px;
   .wrapper {
+    //background-color: $accentGrey;
     padding: 20px;
     border: 2px solid $accentGrey;
     border-top: none;
@@ -370,12 +370,15 @@ html, body {
   margin-bottom: -1px;
   border: 2px solid $accentGrey;
   border-bottom: none;
+  //background-color: $accentGrey;
 }
 .nav-tabs>li>a  {
   margin-bottom: -1px;
 }
 .nav-tabs>li>a:hover {
-  background-color: $white;
+  //background-color: $white;
+  //border-bottom: 1px solid $accentGrey;
+  border: 1px solid $accentGrey;
 }
 .nav-tabs {
   border-bottom: 2px solid $accentGrey;
@@ -445,7 +448,7 @@ html, body {
 .home-stats {
   margin-top: 30px;
   background-color: $accentGrey;
-  padding: 45px;
+  padding: 30px 20px;
 }
 .home-data {
   background-color: $white;
@@ -460,15 +463,16 @@ html, body {
   }
 }
 .timer_hdr {
-  margin: 80px auto 20px;
+  margin: 30px auto 20px;
   color:$white;
+  font-size: 20px;
 }
 .shadowed-lg {
   @include box-shadow(black);
   background-color: $white;
   margin: 0 auto;
-  width: 70%;
-  padding: 60px 60px 30px;
+  width: 100%;
+  padding: 60px 0 30px;
   .row {
     margin-bottom: 30px;
     .col-xs-2 {
@@ -477,11 +481,12 @@ html, body {
       }
     }
     h4 {
-      font-size: 34px;
+      font-size: 24px;
       color: $secondaryAccentColor;
     }
     p {
-      text-transform: uppercase;;
+      text-transform: uppercase;
+      display: none;
     }
   }
 }
@@ -489,14 +494,30 @@ html, body {
 // -- MEDIA QUERIES -- //
 /* Small devices (tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
+  // -- GLOBAL --//
+  .lined {
+    display: block;
+  }
   // -- LOGIN & ERROR -- //
   .shadowed-sm {
     width: 50%;
   }
   .shadowed-lg {
+    padding: 60px 60px 30px;
     width: 80%;
+     .row {
+       h4 {
+         font-size: 34px;
+       }
+       p {
+         display: inline-block;
+       }
+     }
   }
   // -- HOME -- //
+  .home-stats {
+    padding: 45px;
+  }
   .home-data {
     margin: 0 auto;
     width: 90%;
@@ -508,6 +529,13 @@ html, body {
     .navbar-nav {
       float: right !important;
     }
+  }
+  .shadowed-lg {
+    width: 70%;
+  }
+  .timer_hdr {
+    font-size: 24px;
+    margin: 80px auto 20px;
   }
 
   // -- CUSTOM SLIDER -- //

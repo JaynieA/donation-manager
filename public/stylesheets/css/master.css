@@ -91,7 +91,8 @@ html, body {
 
 .lined {
   line-height: 0.5;
-  text-align: center; }
+  text-align: center;
+  display: none; }
   .lined span {
     display: inline-block;
     position: relative; }
@@ -289,7 +290,7 @@ html, body {
   margin-bottom: -1px; }
 
 .nav-tabs > li > a:hover {
-  background-color: #fff; }
+  border: 1px solid #3f3f3f; }
 
 .nav-tabs {
   border-bottom: 2px solid #3f3f3f; }
@@ -343,7 +344,7 @@ html, body {
 .home-stats {
   margin-top: 30px;
   background-color: #3f3f3f;
-  padding: 45px; }
+  padding: 30px 20px; }
 
 .home-data {
   background-color: #fff;
@@ -356,32 +357,45 @@ html, body {
     color: #37aeb0; }
 
 .timer_hdr {
-  margin: 80px auto 20px;
-  color: #fff; }
+  margin: 30px auto 20px;
+  color: #fff;
+  font-size: 20px; }
 
 .shadowed-lg {
   box-shadow: 0px 1px 28px 2px black;
   background-color: #fff;
   margin: 0 auto;
-  width: 70%;
-  padding: 60px 60px 30px; }
+  width: 100%;
+  padding: 60px 0 30px; }
   .shadowed-lg .row {
     margin-bottom: 30px; }
     .shadowed-lg .row .col-xs-2:first-of-type {
       margin-left: 4.555555555%; }
     .shadowed-lg .row h4 {
-      font-size: 34px;
+      font-size: 24px;
       color: #37aeb0; }
     .shadowed-lg .row p {
-      text-transform: uppercase; }
+      text-transform: uppercase;
+      display: none; }
 
 /* Small devices (tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
+  .lined {
+    display: block; }
+
   .shadowed-sm {
     width: 50%; }
 
   .shadowed-lg {
+    padding: 60px 60px 30px;
     width: 80%; }
+    .shadowed-lg .row h4 {
+      font-size: 34px; }
+    .shadowed-lg .row p {
+      display: inline-block; }
+
+  .home-stats {
+    padding: 45px; }
 
   .home-data {
     margin: 0 auto;
@@ -391,6 +405,13 @@ html, body {
 
   .navbar .navbar-nav {
     float: right !important; }
+
+  .shadowed-lg {
+    width: 70%; }
+
+  .timer_hdr {
+    font-size: 24px;
+    margin: 80px auto 20px; }
 
   .rzslider .rz-tick-legend {
     display: inline-block; }
