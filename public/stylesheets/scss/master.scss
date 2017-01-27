@@ -306,13 +306,10 @@ html, body {
   margin-top: 30px;
   .wrapper {
     padding: 20px;
-    //border: 1px solid $outlineColor;
     border: 2px solid $accentGrey;
     border-top: none;
     min-height: 50vh;
     margin-bottom: 20px;
-    //background-color: $accentGrey;
-    //color: $white;
     color: $secondaryAccentColor;
     .intro {
       text-align: left;
@@ -327,23 +324,16 @@ html, body {
     }
   }
   span {
-    //color: darken(#ddd, 10%);
     color: lighten($secondaryAccentColor, 20%);
     margin: 0 5px;
   }
 }
 .nav-tabs>li>a:hover {
   border-color: $white;
-  //margin-bottom: -1px;
-  //border-bottom: 1px solid green;
-  //border-bottom: 1px solid $accentGrey;
 }
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover, .nav-tabs>li>a, uib-tab-heading {
   text-transform: uppercase;
   color: $accentRed;
-  //margin-bottom: -1px;
-  //border: 2px solid $accentGrey;
-  //border-bottom: none;
 }
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover{
   margin-bottom: -1px;
@@ -355,15 +345,7 @@ html, body {
 }
 .nav-tabs>li>a:hover {
   background-color: $white;
-  // border-top-color: $white;
 }
-
-
-
-// .nav-tabs>li.active>a, .nav-tabs > li.active > a:hover {
-//   border: 2px solid $accentGrey;
-//   border-bottom-color: $white;
-// }
 .nav-tabs {
   border-bottom: 2px solid $accentGrey;
 }
@@ -411,7 +393,7 @@ html, body {
 }
 // -- CUSTOM SLIDER -- //
 .rzslider {
-  width: 90%;
+  width: 80%;
   margin-bottom: 50px;
   margin-top: 20px;
   .rz-tick-legend,
@@ -429,17 +411,29 @@ html, body {
 }
 
 // -- HOME -- //
+.home-stats {
+  background-color: $accentGrey;
+  padding: 45px;
+}
 .home-data {
+  background-color: $white;
+  @include box-shadow(black);
+  padding: 20px;
+  box-sizing: border-box;
+  //border: 5px solid $accentRed;
   h2 {
     font-size: 44px;
     margin: 30px auto;
+    color: $secondaryAccentColor;
   }
 }
 .timer_hdr {
-  margin: 80px auto 20px;;
+  margin: 80px auto 20px;
+  color:$white;
 }
 .shadowed-lg {
-  @include box-shadow($boxShadowColor);
+  @include box-shadow(black);
+  background-color: $white;
   margin: 0 auto;
   width: 70%;
   padding: 60px 60px 30px;

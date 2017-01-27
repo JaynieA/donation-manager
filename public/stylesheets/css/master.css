@@ -100,7 +100,7 @@ html, body {
   min-height: 30vh;
   width: 80%;
   margin: 0 auto;
-  box-shadow: 0px 1px 18px 2px #cccccc;
+  box-shadow: 0px 1px 28px 2px #cccccc;
   display: flex;
   justify-content: center; }
   .shadowed-sm .inner {
@@ -305,7 +305,7 @@ html, body {
       color: #eee; }
 
 .rzslider {
-  width: 90%;
+  width: 80%;
   margin-bottom: 50px;
   margin-top: 20px; }
   .rzslider .rz-tick-legend,
@@ -316,15 +316,27 @@ html, body {
   .rzslider span:focus {
     outline: none; }
 
-.home-data h2 {
-  font-size: 44px;
-  margin: 30px auto; }
+.home-stats {
+  background-color: #3f3f3f;
+  padding: 45px; }
+
+.home-data {
+  background-color: #fff;
+  box-shadow: 0px 1px 28px 2px black;
+  padding: 20px;
+  box-sizing: border-box; }
+  .home-data h2 {
+    font-size: 44px;
+    margin: 30px auto;
+    color: #37aeb0; }
 
 .timer_hdr {
-  margin: 80px auto 20px; }
+  margin: 80px auto 20px;
+  color: #fff; }
 
 .shadowed-lg {
-  box-shadow: 0px 1px 18px 2px #cccccc;
+  box-shadow: 0px 1px 28px 2px black;
+  background-color: #fff;
   margin: 0 auto;
   width: 70%;
   padding: 60px 60px 30px; }
