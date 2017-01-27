@@ -159,7 +159,7 @@ html, body {
 
 // -- MODAL -- //
 .modal-dialog {
-  margin-top: 12%;
+  margin-top: 10%;
 }
 .modal-header {
   padding: 20px;
@@ -478,6 +478,8 @@ html, body {
   }
   // -- HOME -- //
   .home-data {
+    margin: 0 auto;
+    width: 90%;
     h3 {
       margin: 50px auto;
     }

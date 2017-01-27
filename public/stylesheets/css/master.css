@@ -124,7 +124,7 @@ html, body {
     font-size: 18px; }
 
 .modal-dialog {
-  margin-top: 12%; }
+  margin-top: 10%; }
 
 .modal-header {
   padding: 20px; }
@@ -367,8 +367,11 @@ html, body {
   .shadowed-lg {
     width: 80%; }
 
-  .home-data h3 {
-    margin: 50px auto; }
+  .home-data {
+    margin: 0 auto;
+    width: 90%; }
+    .home-data h3 {
+      margin: 50px auto; }
 
   .navbar .navbar-nav {
     float: right !important; }
