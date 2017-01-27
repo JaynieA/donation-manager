@@ -427,7 +427,7 @@ html, body {
 }
 // -- CUSTOM SLIDER -- //
 .rzslider {
-  width: 80%;
+  width: 100%;
   margin-bottom: 50px;
   margin-top: 20px;
   .rz-tick-legend,
@@ -436,10 +436,25 @@ html, body {
   }
   .rz-pointer {
     background-color: $secondaryAccentColor;
+    width: 20px;
+    height: 20px;
+    top: -9px;
+    margin-left: 5px;
   }
   span {
     &:focus {
         outline: none;
+    }
+  }
+  .rz-selection {
+    background-color: $secondaryAccentColor;
+  }
+  .rz-tick.rz-selected {
+    background-color: $secondaryAccentColor;
+  }
+  .rz-pointer {
+    &:after {
+      display: none;
     }
   }
 }
@@ -540,19 +555,9 @@ html, body {
 
   // -- CUSTOM SLIDER -- //
   .rzslider {
+    width: 80%;
     .rz-tick-legend {
       display: inline-block;
-    }
-    .rz-pointer {
-      &:after {
-        display: none;
-      }
-    }
-    .rz-selection {
-      background-color: $secondaryAccentColor;
-    }
-    .rz-tick.rz-selected {
-      background-color: $secondaryAccentColor;
     }
   }
   // -- DASHBOARD --//
