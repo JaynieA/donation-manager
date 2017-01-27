@@ -8,7 +8,7 @@ html, body {
   color: #515150;
   margin-top: 35px; }
 
-.btn-accent, .btn-accent-secondary {
+.btn-accent, .btn-accent-secondary, .btn-accent-tertiary {
   background-color: transparent;
   border-radius: 0;
   border: 2px solid #e54b45;
@@ -16,7 +16,7 @@ html, body {
   text-transform: uppercase;
   font-weight: bold;
   transition: all 0.2s ease; }
-  .btn-accent:hover, .btn-accent-secondary:hover {
+  .btn-accent:hover, .btn-accent-secondary:hover, .btn-accent-tertiary:hover {
     background-color: #e54b45;
     border: 2px solid transparent;
     color: #fff; }
@@ -26,6 +26,12 @@ html, body {
   color: #37aeb0; }
   .btn-accent-secondary:hover {
     background-color: #37aeb0; }
+
+.btn-accent-tertiary {
+  border-color: #439f46;
+  color: #439f46; }
+  .btn-accent-tertiary:hover {
+    background-color: #439f46; }
 
 .clearfix:after {
   visibility: hidden;
@@ -145,6 +151,8 @@ html, body {
     opacity: 1; }
   .modal-body .animate-show.ng-hide {
     opacity: 0; }
+  .modal-body .progress-bar-success {
+    color: #439f46; }
 
 .modal-footer {
   padding: 20px; }
@@ -317,6 +325,7 @@ html, body {
     outline: none; }
 
 .home-stats {
+  margin-top: 30px;
   background-color: #3f3f3f;
   padding: 45px; }
 

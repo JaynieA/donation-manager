@@ -34,6 +34,14 @@ html, body {
     background-color: $secondaryAccentColor;
   }
 }
+.btn-accent-tertiary {
+  @extend .btn-accent;
+  border-color: $tertiaryAccentColor;
+  color: $tertiaryAccentColor;
+  &:hover {
+    background-color: $tertiaryAccentColor;
+  }
+}
 // -- LAYOUT -- //
 .clearfix:after {
 	visibility: hidden;
@@ -186,6 +194,9 @@ html, body {
   }
   .animate-show.ng-hide {
     opacity:0;
+  }
+  .progress-bar-success {
+    color: $tertiaryAccentColor;
   }
 }
 .modal-footer {
@@ -412,6 +423,7 @@ html, body {
 
 // -- HOME -- //
 .home-stats {
+  margin-top: 30px;
   background-color: $accentGrey;
   padding: 45px;
 }

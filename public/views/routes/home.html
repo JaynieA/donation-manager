@@ -22,7 +22,7 @@
                     <div ng-repeat="platform in platforms">
                         <div class="row">
                             <div class="col-xs-4 text-center">
-                                <label class="btn btn-primary btn-file" >
+                                <label class="btn btn-accent-secondary btn-file" >
                                     {{ platform.name }}
                                     <input type="file" class="hidden" ng-model="upload.file" ngf-select="uploadFile($file, $invalidFiles, $index)" ngf-max-size="25MB" required>
                                 </label>
@@ -38,8 +38,8 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-success" type="button" ng-click="save()">Save</button>
-                    <button class="btn btn-warning" type="button" ng-click="close()">Cancel</button>
+                    <button class="btn btn-accent-tertiary" type="button" ng-click="save()">Save</button>
+                    <button class="btn btn-accent" type="button" ng-click="close()">Cancel</button>
                 </div>
             </script>
 
