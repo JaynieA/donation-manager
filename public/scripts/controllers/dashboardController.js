@@ -130,10 +130,10 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', function
   $scope.thank = function(donationObject) {
     console.log('in thank');
     var donation = donationObject;
-    //if both are blank, or they are anonymous, alert user
+    //if both are blank, or they are anonymous
     if (donation.donor_email === 'anonymous') {
-      //TODO: mark as thanked anyway
-      alert('this was an anonymous email');
+      //set the status of this donation to thanked
+      updateThankedStatus(donation._id);
     //if the donation email is blank but address is present, generate PDF
     } else if (!donation.donor_email &&  donation.donor_address) {
       generatePDF(donationObject);
