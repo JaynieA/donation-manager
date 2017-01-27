@@ -329,6 +329,16 @@ html, body {
       padding: 20px;
       color: #eee; }
 
+.copyright {
+  margin: 5px 0 5px;
+  color: #6b6b69;
+  font-size: 12px; }
+  .copyright span {
+    color: #e54b45;
+    margin: 0 5px; }
+    .copyright span.org-name {
+      margin-left: 0; }
+
 .rzslider {
   width: 100%;
   margin-bottom: 50px;
@@ -429,7 +439,10 @@ html, body {
       display: inline-block; }
 
   .filters-form .col-sm-4:first-of-type {
-    margin-bottom: 0; } }
+    margin-bottom: 0; }
+
+  .copyright {
+    font-size: 14px; } }
 /* Medium devices (desktops, 992px and up) */
 /* Large devices (large desktops, 1200px and up) */
 /* Xtra Large devices (Xlarge desktops, 1500px and up) */

@@ -425,6 +425,18 @@ html, body {
     }
   }
 }
+.copyright {
+  margin: 5px 0 5px;
+  color: lighten($mainTextColor, 10%);
+  font-size: 12px;
+  span {
+    color: $accentRed;
+    margin: 0 5px;
+    &.org-name {
+      margin-left: 0;
+    }
+  }
+}
 // -- CUSTOM SLIDER -- //
 .rzslider {
   width: 100%;
@@ -567,6 +579,10 @@ html, body {
         margin-bottom: 0;
       }
     }
+  }
+  // -- FOOTER -- //
+  .copyright {
+    font-size: 14px;
   }
 }
 
