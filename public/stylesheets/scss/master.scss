@@ -362,7 +362,7 @@ html, body {
       padding: 7px;
       box-shadow: inset 0 0 10px darken(#f9f9f9, 10%);
       &:focus {
-        @include box-shadow-sm(#6EACFD);
+        @include box-shadow-xs(#6EACFD);
       }
     }
     .alert {
@@ -379,18 +379,6 @@ html, body {
 .uib-tab-heading {
   text-transform: uppercase;
   color: $accentRed;
-}
-.nav {
-  > li:nth-child(2) {
-    margin-left: 3px;
-  }
-  > li {
-    > a {
-      &:hover {
-        background-color: transparent;
-      }
-    }
-  }
 }
 .nav-tabs {
   box-sizing: border-box;
@@ -424,7 +412,11 @@ html, body {
         border: 5px solid $accentGrey;
         border-bottom: none;
         font-style: italic;
+        background-color: transparent;
       }
+    }
+    &:nth-child(2) {
+      margin-left: 3px;
     }
   }
 }
@@ -539,25 +531,29 @@ html, body {
   }
 }
 .timer_hdr {
-  margin: 30px auto 20px;
-  color:$white;
+  //margin: 30px auto 20px;
+  margin: 0 auto 20px;
+  //color:$white;
+  color: $mainTextColor;
   font-size: 20px;
 }
 .shadowed-lg {
   @include box-shadow(darken($footerBkgColor, 12%));
   background-color: $white;
-  margin: 0 auto;
+  margin: 40px auto 0;
   width: 100%;
-  padding: 60px 0 30px;
+  padding: 50px 0 30px;
   .row {
     margin-bottom: 30px;
     .col-xs-2 {
+      padding-right: 5px;
+      padding-left: 5px;
       &:first-of-type {
         margin-left: 4.555555555%;
       }
     }
     h4 {
-      font-size: 24px;
+      font-size: 44px;
       color: $secondaryAccentColor;
     }
     p {
@@ -579,7 +575,7 @@ html, body {
     width: 50%;
   }
   .shadowed-lg {
-    padding: 60px 60px 30px;
+    padding: 20px 60px 40px;
     width: 80%;
      .row {
        h4 {
@@ -611,7 +607,7 @@ html, body {
   }
   .timer_hdr {
     font-size: 24px;
-    margin: 80px auto 20px;
+    margin: 20px auto 25px;
   }
 
   // -- CUSTOM SLIDER -- //

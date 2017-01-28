@@ -276,7 +276,7 @@ html, body {
       padding: 7px;
       box-shadow: inset 0 0 10px #e0e0e0; }
       .template-tabs .wrapper textarea:focus {
-        box-shadow: 0px 1px 5px 2px #6EACFD; }
+        box-shadow: 0px 0px 2px 1px #6EACFD; }
     .template-tabs .wrapper .alert {
       margin: -5px auto 0;
       width: 50%; }
@@ -287,11 +287,6 @@ html, body {
 .uib-tab-heading {
   text-transform: uppercase;
   color: #e54b45; }
-
-.nav > li:nth-child(2) {
-  margin-left: 3px; }
-.nav > li > a:hover {
-  background-color: transparent; }
 
 .nav-tabs {
   box-sizing: border-box;
@@ -319,7 +314,10 @@ html, body {
     .nav-tabs > li > a:hover {
       border: 5px solid #3f3f3f;
       border-bottom: none;
-      font-style: italic; }
+      font-style: italic;
+      background-color: transparent; }
+  .nav-tabs > li:nth-child(2) {
+    margin-left: 3px; }
 
 .template-tabs p {
   font-size: 15px;
@@ -407,22 +405,25 @@ html, body {
     color: #37aeb0; }
 
 .timer_hdr {
-  margin: 30px auto 20px;
-  color: #fff;
+  margin: 0 auto 20px;
+  color: #515150;
   font-size: 20px; }
 
 .shadowed-lg {
   box-shadow: 0px 1px 28px 2px #0e1214;
   background-color: #fff;
-  margin: 0 auto;
+  margin: 40px auto 0;
   width: 100%;
-  padding: 60px 0 30px; }
+  padding: 50px 0 30px; }
   .shadowed-lg .row {
     margin-bottom: 30px; }
-    .shadowed-lg .row .col-xs-2:first-of-type {
-      margin-left: 4.555555555%; }
+    .shadowed-lg .row .col-xs-2 {
+      padding-right: 5px;
+      padding-left: 5px; }
+      .shadowed-lg .row .col-xs-2:first-of-type {
+        margin-left: 4.555555555%; }
     .shadowed-lg .row h4 {
-      font-size: 24px;
+      font-size: 44px;
       color: #37aeb0; }
     .shadowed-lg .row p {
       text-transform: uppercase;
@@ -437,7 +438,7 @@ html, body {
     width: 50%; }
 
   .shadowed-lg {
-    padding: 60px 60px 30px;
+    padding: 20px 60px 40px;
     width: 80%; }
     .shadowed-lg .row h4 {
       font-size: 34px; }
@@ -461,7 +462,7 @@ html, body {
 
   .timer_hdr {
     font-size: 24px;
-    margin: 80px auto 20px; }
+    margin: 20px auto 25px; }
 
   .rzslider {
     width: 80%; }
