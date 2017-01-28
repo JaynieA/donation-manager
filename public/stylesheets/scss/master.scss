@@ -272,7 +272,12 @@ html, body {
     }
     a {
       color: $white;
-      text-decoration: underline;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+    i {
+      margin-left: 3px;
     }
   }
   tbody {

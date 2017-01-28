@@ -214,8 +214,11 @@ html, body {
       .table thead th:last-of-type {
         border-radius: 0 10px 10px 0; }
     .table thead a {
-      color: #fff;
-      text-decoration: underline; }
+      color: #fff; }
+      .table thead a:hover {
+        text-decoration: none; }
+    .table thead i {
+      margin-left: 3px; }
   .table tbody:before {
     content: "-";
     display: block;

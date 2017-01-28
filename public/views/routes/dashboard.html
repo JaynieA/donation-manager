@@ -48,12 +48,14 @@
           <tr>
             <th>
               <a ng-click="sortType = 'date'; sortReverse = !sortReverse">Date
+                <i ng-show="sortType != 'date'" class="fa fa-sort" aria-hidden="true"></i>
                 <span ng-show="sortType == 'date' && !sortReverse" class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
                 <span ng-show="sortType == 'date' && sortReverse" class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
               </a>
             </th>
             <th>
               <a ng-click="sortType = 'donor_name'; sortReverse = !sortReverse">Donor Name
+                <i ng-show="sortType != 'donor_name'" class="fa fa-sort" aria-hidden="true"></i>
                 <span ng-show="sortType == 'donor_name' && !sortReverse" class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
                 <span ng-show="sortType == 'donor_name' && sortReverse" class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
               </a>
@@ -62,12 +64,14 @@
             <th>Origin</th>
             <th>
               <a ng-click="sortType = 'donation_amt'; sortReverse = !sortReverse">Amount
+                <i ng-show="sortType != 'donation_amt'" class="fa fa-sort" aria-hidden="true"></i>
                 <span ng-show="sortType == 'donation_amt' && !sortReverse" class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
                 <span ng-show="sortType == 'donation_amt' && sortReverse" class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
               </a>
             </th>
             <th>
               <a ng-click="sortType = 'thanked'; sortReverse = !sortReverse">Thanked
+                <i ng-show="sortType != 'thanked'" class="fa fa-sort" aria-hidden="true"></i>
                 <span ng-show="sortType == 'thanked' && !sortReverse" class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
                 <span ng-show="sortType == 'thanked' && sortReverse" class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
               </a>
@@ -75,6 +79,7 @@
             <th>Thank</th>
             <th>
               <a ng-click="sortType = 'thanked_date'; sortReverse = !sortReverse">Date Thanked
+                <i ng-show="sortType != 'thanked_date'" class="fa fa-sort" aria-hidden="true"></i>
                 <span ng-show="sortType == 'thanked_date' && !sortReverse" class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
                 <span ng-show="sortType == 'thanked_date' && sortReverse" class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
               </a>
