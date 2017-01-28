@@ -1,9 +1,9 @@
 @import 'settings';
 @import 'tools';
 
-/* Responsive Styles */
-/* Extra small devices (phones, less than 768px) */
-/* No media query since this is the default in Bootstrap */
+// * * Responsive Styles * * //
+// * * Extra small devices (phones, less than 768px) * * //
+// * * No media query since this is the default in Bootstrap * * //
 
 /* -- GLOBALS -- */
 html, body {
@@ -12,9 +12,9 @@ html, body {
   color: $mainTextColor;
   margin-top: 35px;
 }
-//remove delay caused by ng-Animate on ng-hide
-.ng-hide.ng-hide-animate{
-     display: none !important;
+//remove delay caused by ng-Animate on ng-hide for buttons
+.btn.ng-hide.ng-hide-animate{
+  display: none !important;
 }
 .btn.active.focus,
 .btn.active:focus,
@@ -120,7 +120,6 @@ html, body {
   line-height: 0.5;
   text-align: center;
   display: none;
-  //margin: -20px 0 -15px;
   span {
     display: inline-block;
     position: relative;
@@ -344,19 +343,27 @@ html, body {
 .template-tabs {
   margin-top: 30px;
   .wrapper {
-    //background-color: $accentGrey;
     padding: 20px;
-    border: 2px solid $accentGrey;
+    box-sizing: border-box;
+    border: 5px solid $accentGrey;
     border-top: none;
     min-height: 50vh;
     margin-bottom: 20px;
-    color: $secondaryAccentColor;
+    color: $footerBkgColor;
+    //background-color: green;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
     .intro {
       text-align: left;
       padding: 20px 0;
     }
     textarea {
-      @include box-shadow-sm($boxShadowColor);
+      border: 2px solid $accentGrey;
+      padding: 7px;
+      box-shadow: inset 0 0 10px darken(#f9f9f9, 10%);
+      &:focus {
+        @include box-shadow-sm(#6EACFD);
+      }
     }
     .alert {
       margin: -5px auto 0;
@@ -368,29 +375,64 @@ html, body {
     margin: 0 5px;
   }
 }
-.nav-tabs>li>a:hover {
-  border-color: $white;
-}
-.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover, .nav-tabs>li>a, uib-tab-heading {
+// Template Tabs
+.uib-tab-heading {
   text-transform: uppercase;
   color: $accentRed;
 }
-.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover{
-  margin-bottom: -1px;
-  border: 2px solid $accentGrey;
-  border-bottom: none;
-  //background-color: $accentGrey;
-}
-.nav-tabs>li>a  {
-  margin-bottom: -1px;
-}
-.nav-tabs>li>a:hover {
-  //background-color: $white;
-  //border-bottom: 1px solid $accentGrey;
-  border: 1px solid $accentGrey;
+.nav {
+  > li:nth-child(2) {
+    margin-left: 3px;
+  }
+  > li {
+    > a {
+      &:hover {
+        background-color: transparent;
+      }
+    }
+  }
 }
 .nav-tabs {
-  border-bottom: 2px solid $accentGrey;
+  box-sizing: border-box;
+  border-bottom: 5px solid $accentGrey;
+  > li.active {
+    > a,
+    > a:focus,
+    > a:hover {
+      text-transform: uppercase;
+      color: $accentRed;
+    }
+    > a,
+    > a:focus,
+    > a:hover {
+      margin-bottom: -6px;
+      box-sizing: border-box;
+      border: 5px solid $accentGrey;
+      border-bottom: none;
+    }
+  }
+  > li {
+    > a {
+      text-transform: uppercase;
+      color: $accentRed;
+      margin-bottom: -4px;
+      border: 5px solid $accentGrey;
+      border-top-right-radius: 6px;
+      border-top-left-radius: 6px;
+      border-bottom: none;
+      &:hover {
+        border: 5px solid $accentGrey;
+        border-bottom: none;
+        font-style: italic;
+      }
+    }
+  }
+}
+.template-tabs {
+  p {
+    font-size: 15px;
+    color: darken($secondaryAccentColor, 10%);
+  }
 }
 .signature {
   margin-top: 25px;
@@ -425,7 +467,6 @@ html, body {
   text-align: center;
   margin-top: 35px;
   li {
-    //color: $mutedGrey;
     display: inline;
     &:not(:first-child):before {
       content: ' | ';
@@ -491,7 +532,6 @@ html, body {
   @include box-shadow(darken($footerBkgColor, 12%));
   padding: 20px;
   box-sizing: border-box;
-  //border: 5px solid $accentRed;
   h2 {
     font-size: 44px;
     margin: 30px auto;
