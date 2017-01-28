@@ -8,20 +8,21 @@ myApp.controller('NavController', function (AuthFactory, $window, $scope) {
   $scope.isCollapsed = false;
   $scope.isCollapsedHorizontal = false;
 
-  $scope.collapseNav = function() {
-    $scope.isNavCollapsed=true;
-  };
-
   var _this = this;
   var authFactory = AuthFactory;
-  _this.displayLogout = false; // should we display the logout option on the DOM?
+  _this.displayLogout = false; //controls display of logout option on the DOM
   _this.message = {
     text: false,
     type: 'info',
-  };
+  }; // end message
+
+  //collapse navbar when view is changed on mobile
+  _this.collapseNav = function() {
+    $scope.isNavCollapsed=true;
+  }; // end collapseNav
 
   authFactory.isLoggedIn()
-  .then(function (response) {
+  .then(function (response) { //success
     if (response.data.status) {
       _this.displayLogout = true;
       authFactory.setLoggedIn(true);
@@ -29,27 +30,24 @@ myApp.controller('NavController', function (AuthFactory, $window, $scope) {
     } else { // is not logged in on server
       _this.displayLogout = false;
       authFactory.setLoggedIn(false);
-    }
-  },
-
-  function () {
+    } // end else
+  }, // end then
+  function () { //error
     _this.message.text = 'Unable to properly authenticate user';
     _this.message.type = 'error';
-  });
+  }); // end isLoggedIn
 
   _this.logout = function () {
-    console.log('in logout');
     authFactory.logout()
       .then(function (response) { // success
         authFactory.setLoggedIn(false);
         _this.username = '';
-        $window.location.href = '/'; // forces a page reload which will update our NavController
-      },
-
+        $window.location.href = '/'; // forces a page reload which updates NavController
+      }, // end then
       function (response) { // error
         _this.message.text = 'Unable to logout';
         _this.message.type = 'error';
-      });
-  };
+      }); // end callback
+  }; // end logout
 
-});
+}); // end NavController
