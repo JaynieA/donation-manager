@@ -1,4 +1,4 @@
-var verbose = false;
+var verbose = true;
 
 myApp.controller('NavController', function (AuthFactory, $window, $scope) {
   if (verbose) console.log('in nav controller');
@@ -7,6 +7,10 @@ myApp.controller('NavController', function (AuthFactory, $window, $scope) {
   $scope.isNavCollapsed = true;
   $scope.isCollapsed = false;
   $scope.isCollapsedHorizontal = false;
+
+  $scope.collapseNav = function() {
+    $scope.isNavCollapsed=true;
+  };
 
   var _this = this;
   var authFactory = AuthFactory;
@@ -34,6 +38,7 @@ myApp.controller('NavController', function (AuthFactory, $window, $scope) {
   });
 
   _this.logout = function () {
+    console.log('in logout');
     authFactory.logout()
       .then(function (response) { // success
         authFactory.setLoggedIn(false);

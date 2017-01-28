@@ -56,9 +56,9 @@
       </div>
       <div class="collapse navbar-collapse" uib-collapse="isNavCollapsed">
         <ul class="nav navbar-nav">
-           <li><a href="#!/home">Home</a></li>
-           <li><a href="#!/dashboard">Dashboard</a></li>
-           <li><a href="#!/templates">Templates</a></li>
+           <li><a ng-click="collapseNav()" href="#!/home">Home</a></li>
+           <li><a ng-click="collapseNav()" href="#!/dashboard">Dashboard</a></li>
+           <li><a ng-click="collapseNav()" href="#!/templates">Templates</a></li>
            <!-- Hi {{nav.username}}! |  -->
            <li ng-show="nav.displayLogout"><a href="#" ng-click="nav.logout()">Log out</a></li>
          </ul>
@@ -73,7 +73,7 @@
 
   <div class="container wrapper">
     <p class="lined"><span><img src="/images/donmon-logo.png" alt="logo" class="hdr-logo"></span></p>
-    <main ng-view></main>
+    <main ng-view autoscroll="true"></main>
   </div>
 
   <div class="push"></div>
