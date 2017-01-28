@@ -1,6 +1,4 @@
-var verbose = false;
-
-// //Dashboard Controller
+//Dashboard Controller
 myApp.controller('DashboardController', ['$scope', '$http','$location', function($scope, $http, $location) {
   if (verbose) console.log('in DashboardController');
 
@@ -128,8 +126,8 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', function
     }); // end $http
   }; // end getEmails
 
-  $scope.thank = function(donationObject) {
-    if (verbose) console.log('in thank');
+  $scope.thank = function(donationObject, index) {
+    if (verbose) console.log('in thank', index);
     var donation = donationObject;
     //if both are blank, or they are anonymous
     if (donation.donor_email === 'anonymous') {

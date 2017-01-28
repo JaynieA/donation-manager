@@ -1,5 +1,3 @@
-var verbose = false;
-
 //Templates Controller
 
 myApp.controller('TemplatesController', ['$scope', '$http', '$location', '$timeout', function ($scope, $http, $location, $timeout) {

@@ -97,7 +97,8 @@
               <span ng-show="donation.thanked" class="glyphicon glyphicon-ok" aria-hidden="true"></span>
             </td>
             <td>
-              <button ng-click="thank(donation)" ng-hide="donation.thanked" class="btn btn-sm btn-accent">Thank</button>
+              <button ng-click="thank(donation, index)" ng-hide="donation.thanked" class="btn btn-sm btn-accent">Thank</button>
+              <!-- <i class="fa fa-spinner fa-pulse fa-fw"></i> -->
               <!-- show the reprint button if donation thanked = true, address exists, email does not exist -->
               <button ng-click="thank(donation)" ng-hide="!donation.donor_address || !donation.thanked || donation.donor_email.length > 1" class="btn btn-xs btn-accent-secondary" type="button">re-print</button>
             </td>

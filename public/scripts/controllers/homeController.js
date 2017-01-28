@@ -1,4 +1,3 @@
-var verbose = false;
 //Home Controller
 myApp.controller('HomeController', ['$scope', '$http', '$location', function ($scope, $http, $location) {
   if (verbose) console.log('loaded HomeController');

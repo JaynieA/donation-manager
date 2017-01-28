@@ -1,5 +1,3 @@
-var verbose = false;
-
 //Auth Controller
 myApp.controller('AuthController', function (AuthFactory) {
   if (verbose) console.log('in auth controller');

@@ -1,5 +1,3 @@
-var verbose = false;
-
 //ModalCtrl
 myApp.controller('ModalCtrl', ['$scope','$uibModal', '$timeout',function ($scope, $uibModal, $timeout) {
 

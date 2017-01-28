@@ -1,5 +1,4 @@
-var verbose = true;
-
+//NavController
 myApp.controller('NavController', function (AuthFactory, $window, $scope) {
   if (verbose) console.log('in nav controller');
 

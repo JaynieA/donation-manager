@@ -1,5 +1,3 @@
-var verbose = false;
-
 //Factory
 myApp.factory('donorFactory', function() {
   if (verbose) console.log('in donor factory');
