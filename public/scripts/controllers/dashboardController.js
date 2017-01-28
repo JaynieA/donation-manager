@@ -1,5 +1,5 @@
 //Dashboard Controller
-myApp.controller('DashboardController', ['$scope', '$http','$location', function($scope, $http, $location) {
+myApp.controller('DashboardController', ['$scope', '$http','$location', '$timeout', function($scope, $http, $location, $timeout) {
   if (verbose) console.log('in DashboardController');
 
   var condenseDateResults = function(responseArray) {
@@ -35,15 +35,18 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', function
       //to serve newly created file in a print window
       //TODO: look for a different library to serve the pdf file in an iframe
       //      in order to make this next http call unnecessary
-      $http({
-        url: '/private/docs/NewDoc',
-        method: 'GET'
-      }).then(function(response) {
+      // $http({
+      //   url: '/private/docs/NewDoc',
+      //   method: 'GET'
+      // }).then(function(response) {
+      //   printJS({ printable: '/private/docs/NewDoc', type:'pdf'});
+      //   updateThankedStatus(donationObject._id);
+      // });
+      //Wait to seconds for pdf to generate, then call it in print window
+      $timeout(function() {
         printJS({ printable: '/private/docs/NewDoc', type:'pdf'});
         updateThankedStatus(donationObject._id);
-      });
-      //printJS({ printable: '/private/docs/NewDoc', type:'pdf'});
-      // updateThankedStatus(donationObject._id);
+      }, 2000);
     }); // end $http
   }; // end generatePDF
 
@@ -70,6 +73,7 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', function
     $http.get('/private/dashboard/donations')
       .then(function(response) {
         $scope.donations = response.data.donations;
+        $scope.isThanking = true;
       }); // end $http
   }; // end getDonations
 
@@ -126,8 +130,10 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', function
     }); // end $http
   }; // end getEmails
 
-  $scope.thank = function(donationObject, index) {
-    if (verbose) console.log('in thank', index);
+  $scope.thank = function(donationObject) {
+    if (verbose) console.log('in thank', donationObject._id);
+    //show loading spinner while thanking
+    $scope.isThanking = donationObject._id;
     var donation = donationObject;
     //if both are blank, or they are anonymous
     if (donation.donor_email === 'anonymous') {

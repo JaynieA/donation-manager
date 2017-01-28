@@ -8,6 +8,9 @@ html, body {
   color: #515150;
   margin-top: 35px; }
 
+.ng-hide.ng-hide-animate {
+  display: none !important; }
+
 .btn.active.focus,
 .btn.active:focus,
 .btn.focus,

@@ -12,6 +12,10 @@ html, body {
   color: $mainTextColor;
   margin-top: 35px;
 }
+//remove delay caused by ng-Animate on ng-hide
+.ng-hide.ng-hide-animate{
+     display: none !important;
+}
 .btn.active.focus,
 .btn.active:focus,
 .btn.focus,
