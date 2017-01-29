@@ -1,0 +1,41 @@
+// -- FOOTER -- //
+.footer, .push {
+  height: 120px; // '.push' must be the same height as 'footer' + 50px
+}
+.footer {
+  color: $white;
+  background-color: $footerBkgColor;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  a {
+    color: $lightGrey;
+  }
+}
+.footer-list {
+  list-style: none;
+  padding-left: 0;
+  padding: 20px 0 0 0;
+  text-align: center;
+  margin-top: 35px;
+  li {
+    display: inline;
+    &:not(:first-child):before {
+      content: ' | ';
+      padding: 20px;
+      color: $lightGrey;
+    }
+  }
+}
+.copyright {
+  margin: 5px 0 5px;
+  color: lighten($mainTextColor, 10%);
+  font-size: 12px;
+  span {
+    color: $accentRed;
+    margin: 0 5px;
+    &.org-name {
+      margin-left: 0;
+    }
+  }
+}

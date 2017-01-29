@@ -1,0 +1,119 @@
+// -- DASHBOARD -- //
+.filters-form {
+  margin-top: 30px;
+  .col-sm-4 {
+    padding-left: 0;
+    &:first-of-type {
+      margin-bottom: 10px;
+    }
+  }
+  span.glyphicon-trash {
+    color: darken($accentRed, 10%);
+  }
+}
+//override bootstrap table classes
+.table-responsive {
+  border: none;
+}
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+  background-color: lighten($secondaryAccentColor, 45%); //change table-hover background color
+}
+.ui-select-bootstrap .ui-select-choices-row.active>span {
+  background-color: lighten($secondaryAccentColor, 45%); //change background color of selected filter select
+  color: $mainTextColor;
+}
+.table {
+  margin: 20px auto 60px;
+  thead {
+    background-color: $accentGrey;
+    color: $white;
+    th {
+      padding: 12px !important;
+      &:first-of-type {
+        border-radius: 10px 0 0 10px;
+      }
+      &:last-of-type {
+        border-radius: 0 10px 10px 0;
+      }
+    }
+    a {
+      color: $white;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+    i {
+      margin-left: 3px;
+    }
+  }
+  tbody {
+    &:before {
+      content: "-";
+      display: block;
+      line-height: 1em;
+      color: transparent;
+    }
+    span.glyphicon-ok {
+      color: $secondaryAccentColor;
+    }
+    tr {
+      border-right: 2px solid $outlineColor;
+      border-left: 2px solid $outlineColor;
+      &:first-of-type {
+        border-top: 2px solid $outlineColor;
+      }
+      &:last-of-type {
+        border-bottom: 2px solid $outlineColor;
+      }
+    }
+  }
+  th {
+    text-align: center;
+    a {
+      cursor: pointer;
+    }
+  }
+  td {
+    vertical-align: middle !important;
+  }
+  //override bootstrap table classes
+  > thead {
+    > tr {
+      > th {
+        border-bottom: none; //Get rid of thead border-bottom
+      }
+    }
+  }
+  > tbody {
+    > tr {
+      > td {
+        border-top: none;
+        padding: 12px; // increase td padding
+      }
+    }
+  }
+}
+.input-group>.ui-select-bootstrap.dropdown {
+  &:focus {
+    outline: none !important;
+  }
+}
+.form-control {
+  &:focus {
+    box-shadow: none;
+    border-color: #ccc;
+  }
+}
+.input-group-btn {
+  .btn.active.focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus {
+    outline: none !important;
+  }
+}
+.ui-select-bootstrap .ui-select-choices-row>span:focus, .ui-select-bootstrap .ui-select-choices-row>span:hover {
+  outline: none !important;
+}
+.ui-select-match {
+  &:focus {
+    outline: none !important;
+  }
+}

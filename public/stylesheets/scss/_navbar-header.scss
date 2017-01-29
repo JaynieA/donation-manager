@@ -1,0 +1,60 @@
+// -- NAVBAR -- //
+.logo_img {
+  max-height: 49px;
+  border: 1px solid $white;
+  margin-top: -14px;
+  padding-top: 2px;
+}
+.navbar  {
+  background-color: $white;
+  box-shadow: 0 3px 6px -6px $shadowColor;
+  a {
+    color: $accentRed;
+  }
+}
+.navbar-toggle  {
+  .icon-bar {
+    background-color: #DC0000;
+  }
+}
+.nav {
+  >li {
+    text-align: right;
+  }
+}
+.navbar-collapse[aria-expanded="true"] {
+  border-top: 1px solid $lightGrey;
+}
+
+// -- HEADER --//
+.hdr-logo {
+  height: 125px;
+  margin: 0 auto;
+}
+.lined {
+  line-height: 0.5;
+  text-align: center;
+  display: none;
+  span {
+    display: inline-block;
+    position: relative;
+    &:before,
+    &:after {
+      content: "";
+      position: absolute;
+      height: 5px;
+      border-bottom: 1px solid $secondaryAccentColor;
+      top: 0;
+      width: 500px;
+      margin-top: 60px;
+    }
+    &:before {
+      right: 100%;
+      margin-right: 15px;
+    }
+    &:after {
+      left: 100%;
+      margin-left: 15px;
+    }
+  }
+}

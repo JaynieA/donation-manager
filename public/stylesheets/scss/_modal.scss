@@ -1,0 +1,47 @@
+// -- MODAL -- //
+.modal-dialog {
+  margin-top: 10%;
+}
+.modal-header {
+  padding: 20px;
+  background-color: $accentRed;
+  color: $white;
+  .modal-title {
+    display: inline-block;
+    margin-left: 10px;
+  }
+  .glyphicon {
+    transform: scale(2.0, 2.0);
+    top: 12px;
+    right: 15px;
+  }
+}
+.modal-body {
+  padding: 15px;
+  .row {
+    padding: 20px 0;
+  }
+  label {
+    display: inline-block;
+  }
+  .glyphicon {
+    right: 15px;
+  }
+  .progress, .col-xs-2 {
+    margin-top: 7px;
+  }
+  //delay success check show by 1.5s
+  .animate-show {
+    transition: all linear 1.5s;
+    opacity: 1;
+  }
+  .animate-show.ng-hide {
+    opacity:0;
+  }
+  .progress-bar-success {
+    color: $tertiaryAccentColor;
+  }
+}
+.modal-footer {
+  padding: 20px;
+}

@@ -1,0 +1,91 @@
+// -- TEMPLATES -- //
+.template-tabs {
+  margin-top: 30px;
+  background-color: $accentGrey;
+  padding: 25px 15px 15px;
+  .wrapper {
+    padding: 20px;
+    border-top: none;
+    min-height: 50vh;
+    margin-bottom: 20px;
+    color: $footerBkgColor;
+    background-color: $white;
+    border-radius: 10px;
+    border-top-left-radius: 0;
+    @include box-shadow(darken($footerBkgColor, 12%));
+    .intro {
+      text-align: left;
+      padding: 20px 0;
+    }
+    textarea {
+      border: 2px solid $accentGrey;
+      padding: 17px;
+      background-color: #f9f9f9;
+      &:focus {
+        border: 2px solid $secondaryAccentColor;
+      }
+    }
+    .alert {
+      margin: -5px auto 0;
+      width: 50%;
+    }
+  }
+  span {
+    color: lighten($secondaryAccentColor, 20%);
+    margin: 0 5px;
+  }
+}
+// Template Tabs
+.uib-tab-heading {
+  text-transform: uppercase;
+  color: $accentRed;
+}
+.nav-tabs {
+  border: none;
+  > li.active {
+    > a,
+    > a:focus,
+    > a:hover {
+      text-transform: uppercase;
+      color: $accentRed;
+      border: none;
+    }
+    > a,
+    > a:focus,
+    > a:hover {
+      border-bottom: none;
+    }
+  }
+  > li {
+    > a {
+      text-transform: uppercase;
+      color: $accentRed;
+      border-top-right-radius: 6px;
+      border-top-left-radius: 6px;
+      border-bottom: none;
+      &:hover {
+        background-color: transparent;
+      }
+    }
+    &:nth-child(2) {
+      margin-left: 3px;
+    }
+  }
+}
+.template-tabs {
+  p {
+    font-size: 15px;
+    color: darken($secondaryAccentColor, 10%);
+  }
+}
+.signature {
+  margin-top: 25px;
+  p {
+    &:first-of-type {
+      margin-bottom: 20px;
+    }
+    display: block;
+    text-align: left;
+    margin-bottom: 0px;
+  }
+}

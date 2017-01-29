@@ -1,0 +1,36 @@
+// -- LOGIN & ERROR -- //
+.shadowed-sm-hdr {
+  text-transform: uppercase;
+  margin: 10vh auto 15px;
+  &.error {
+    color: $accentRed;
+    text-shadow: 1px 1px $boxShadowColor;
+    text-transform: none;
+  }
+}
+.shadowed-sm {
+  min-height: 30vh;
+  width: 80%;
+  margin: 0 auto;
+  @include box-shadow($boxShadowColor);
+  display: flex;
+  justify-content: center;
+  .inner {
+    align-self: center;
+    padding: 20px;
+  }
+  a {
+    cursor: pointer;
+  }
+  img, p {
+    margin-bottom: 20px;
+  }
+  .error-img {
+    max-height: 100px;
+    margin: 0 auto;
+  }
+  p {
+    padding: 0 60px;
+    font-size: 18px;
+  }
+}
