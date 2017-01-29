@@ -176,9 +176,11 @@ html, body {
 
 .filters-form {
   margin-top: 30px; }
-  .filters-form .col-sm-4 {
+  .filters-form .form-group {
+    margin-bottom: 0; }
+  .filters-form .col-sm-3 {
     padding-left: 0; }
-    .filters-form .col-sm-4:first-of-type {
+    .filters-form .col-sm-3:not(:last-child) {
       margin-bottom: 10px; }
   .filters-form span.glyphicon-trash {
     color: #d9251e; }
