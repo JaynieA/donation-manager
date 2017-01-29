@@ -1,10 +1,18 @@
 //Home Controller
-myApp.controller('HomeController', ['DonationFactory','$scope', '$http', '$location', function (DonationFactory, $scope, $http, $location) {
+myApp.controller('HomeController', ['DonationFactory', 'AuthFactory', '$scope', '$location',
+ function (DonationFactory, AuthFactory, $scope, $location) {
+
   if (verbose) console.log('loaded HomeController');
 
-  $scope.data = '';
+  $scope.data = false;
   //declare donationFactory
   var donationFactory = DonationFactory;
+  //declare authFactory
+  var authFactory = AuthFactory;
+  //check if user is authorized, declare authorized variable
+  // NOTE: only updated on page load
+  var authorized = authFactory.checkLoggedIn();
+  if (verbose) console.log('AUTH FROM HC-->',authorized);
 
   var calculateCurrentYearTotalDonations = function(responseArray) {
     if (verbose) console.log('in calculateCurrentYearTotalDonations');
@@ -31,26 +39,20 @@ myApp.controller('HomeController', ['DonationFactory','$scope', '$http', '$locat
 
   var checkAuth = function() {
     if (verbose) console.log('in checkAuth');
-    //check if the user is allowed to see this page
-    $http.get('/private/home')
-      .then(function (response) {
-        //if the authStatus is false or undefined...
-        if (response.data.authStatus === undefined || response.data.authStatus === false) {
-          //if not logged in/authorized as admin set data to false
-          if (verbose) console.log('Sorry, you are not logged in.');
-          $scope.data = false;
-          //redirect to the login page
-          $location.path("/#!/login");
-        } else {
-          //else, get server response of true
-          //run init function
-          init();
-          //show the user the page
-          $scope.data = response.data.authStatus;
-          if (verbose) console.log('HC. You are logged in:', response.data.authStatus);
-          getCurrentYearsDonations();
-        } // end else
-    }); // end get
+    //if the user is authorized
+    if (authorized) {
+      //initialize the view
+      init();
+      //show the view to the user
+      $scope.data = authorized;
+      if (verbose) console.log('HC. You are logged in:', authorized);
+    } else { // if the user is not authorized
+      if (verbose) console.log('Sorry, you are not logged in.');
+      //do not show the view
+      $scope.data = false;
+      //redirect to the login page
+      $location.path("/#!/login");
+    } // end else
   }; // end checkAuth
 
   var getCurrentMonth = function() {
@@ -61,7 +63,7 @@ myApp.controller('HomeController', ['DonationFactory','$scope', '$http', '$locat
   }; // end getCurrentMonth
 
   var getCurrentYearsDonations = function() {
-    console.log('in getCurrentYearsDonations');
+    if (verbose) console.log('in getCurrentYearsDonations');
     //get current years donations (from donationFactory)
     donationFactory.getCurrentYearsDonations()
     .then(function(response) {
@@ -74,7 +76,7 @@ myApp.controller('HomeController', ['DonationFactory','$scope', '$http', '$locat
   }; // end getCurrentYearsDonations
 
   var getMonthlyDonations = function(monthNum) {
-    console.log('in getMonthlyDonations');
+    if (verbose) console.log('in getMonthlyDonations');
     //get monthly donations (from donationFactory)
     donationFactory.getMonthlyDonations(monthNum)
     .then(function(response) {

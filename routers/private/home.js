@@ -6,11 +6,6 @@ var router = express.Router();
 var async = require('async');
 var Donation = require('../../models/donation');
 
-// GET /private/home
-router.get('/', function (req, res) {
-  res.send({ authStatus: true });
-});
-
 //POST /private/home
 router.post('/', function(req,res) {
   console.log(req.body.donations);
