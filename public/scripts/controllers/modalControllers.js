@@ -22,12 +22,12 @@ myApp.controller('ModalCtrl', ['$scope','$uibModal', '$timeout',function ($scope
   var getTimeRemaining = function(endtime){
     //var t holds remaining time before endtime
     var t = Date.parse(endtime) - Date.parse(new Date());
-    //converts time strings into values in milliseconds
+    //convert time strings into values in milliseconds
     var seconds = Math.floor( (t/1000) % 60 );
     var minutes = Math.floor( (t/1000/60) % 60 );
     var hours = Math.floor( (t/(1000*60*60)) % 24 );
     var days = Math.floor( t/(1000*60*60*24) );
-    //Output the Clock Data as a Reusable Object
+    //Output the Clock Data as an object
     return {
       'total': t,
       'days': days,
@@ -39,7 +39,9 @@ myApp.controller('ModalCtrl', ['$scope','$uibModal', '$timeout',function ($scope
 
   //open the modal (returns a modal instance)
   $scope.open = function (size) {
+    //open the modal
     if (verbose) console.log('opening pop up');
+    //set the modalInstance
     var modalInstance = $uibModal.open({
       templateUrl: 'uploadReportsModal.html',
       controller: 'ModalInstanceController',
@@ -48,8 +50,6 @@ myApp.controller('ModalCtrl', ['$scope','$uibModal', '$timeout',function ($scope
   }; // end open
 
   //initialize the countdown
-  //TODO: PREVENT countdown and display "overdue" message if the admin has not updated since last month
-  //TODO: handle what happens to the countdown when it hits zero
   var updateClock = function() {
     //Calculate the remaining time
     var t = getTimeRemaining(getEndTime());
@@ -82,79 +82,26 @@ myApp.controller('ModalCtrl', ['$scope','$uibModal', '$timeout',function ($scope
 //this instance object which is used to close the modal.
 
 //ModalInstanceController
-myApp.controller('ModalInstanceController', ['$scope','$uibModalInstance', 'Upload', '$timeout', '$http', '$location',
-  function ($scope, $uibModalInstance, Upload, $timeout, $http, $location) {
+myApp.controller('ModalInstanceController', ['DonationFactory','$scope','$uibModalInstance',
+                                             'Upload', '$timeout', '$location',
+  function (DonationFactory, $scope, $uibModalInstance, Upload, $timeout, $location) {
     if (verbose) console.log('in ModalInstanceController');
+
+    //define donationFactory variable
+    var donationFactory = DonationFactory;
+    //define array for storage
+    var completeUploadResults = [];
     //Define platforms for repeat
     $scope.platforms = [
       { name: 'Paypal', fileData: undefined, progress: 0 },
       { name: 'Razoo', fileData: undefined, progress: 0 },
       { name: 'YouCaring', fileData: undefined, progress: 0 }
     ];
-    //define array for storage
-    var completeUploadResults = [];
 
     //close the  modal
     $scope.close = function () {
       $uibModalInstance.dismiss('cancel');
     }; // end close
-
-    //save info received from uploads
-    $scope.save = function () {
-      if (verbose) console.log('in save-->', completeUploadResults);
-      //send completeUploadResults to the server
-      $http({
-        method: 'POST',
-        url: '/private/home',
-        data: { donations: completeUploadResults }
-      }).then(function(response) {
-        if (verbose) console.log(response);
-        //close the modal
-        $uibModalInstance.close();
-        //Reroute the user to dahsboard view
-        $location.path( "/dashboard" );
-      }); // end then
-    }; // end save
-
-    //handle CSV uploads
-    $scope.uploadFile = function(file, errFiles, index) {
-        if (verbose) console.log('in uploadFile. uploading-->', index);
-        $scope.f = file;
-        $scope.errFile = errFiles && errFiles[0];
-        //if a file was uploaded, continue
-        if (file) {
-            //upload the file
-            file.upload = Upload.upload({
-                url: 'https://angular-file-upload-cors-srv.appspot.com/upload',
-                data: {file: file}
-            }); // end upload
-            //return data if there are timeouts/errors
-            file.upload.then(function (response) {
-                $timeout(function () {
-                    file.result = response.data;
-                }); // end $timeout
-            }, function (response) {
-                if (response.status > 0)
-                    $scope.errorMsg = response.status + ': ' + response.data;
-            }, function (evt) {
-                //track upload progress
-                $scope.platforms[index].progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
-            }); // end progress function
-        } // end if
-        // Parse the uploaded file's data using papa parse
-        Papa.parse(file, {
-          header: true,
-          //when parsing is complete:
-        	complete: function(results) {
-            //parse through platform data, format and and keep only the necessary information
-            var uploadedPlatformName = $scope.platforms[index].name;
-            var resultsArray = results.data;
-            var formattedResultsArray = formatFileData(uploadedPlatformName, resultsArray);
-            //add the results to the completeUploadResults array
-            completeUploadResults = completeUploadResults.concat( formattedResultsArray );
-        	} // end complete
-        }); // end Papa.parse
-    }; // end uploadFile
 
     var formatFileData = function(nameString, resultsArray) {
       if (verbose) console.log('in formatFileData--> for', nameString);
@@ -172,7 +119,6 @@ myApp.controller('ModalInstanceController', ['$scope','$uibModalInstance', 'Uplo
       return formattedResultsArray;
     }; // end formatFileData
 
-    //TODO:change to assembleYouCaringObjects? Separate the formation and the assembling into different functions?
     var formatYouCaringObjects = function(resultsArray) {
       if (verbose) console.log('in formatYouCaringObjects');
       //create empty array to push data into
@@ -300,6 +246,21 @@ myApp.controller('ModalInstanceController', ['$scope','$uibModalInstance', 'Uplo
       return paypalData;
     }; // end formatPaypalObjects
 
+    //save info received from uploads
+    $scope.save = function() {
+      if (verbose) console.log('in save-->', completeUploadResults);
+      donationFactory.saveUploadedDonations(completeUploadResults)
+      .then(function(response) {
+        if (verbose) console.log('SAVE RESPONSE-->', response.data);
+        //close the modal
+        $uibModalInstance.close();
+        //Reroute the user to dahsboard view
+        $location.path( "/dashboard" );
+      }).catch(function(err) {
+        if (verbose) console.log(err);
+      }); // end promise
+    }; // end save
+
     var setUndefinedIfBlank = function(string) {
       //set value as undefined if it is a blank string
       if (string === '') {
@@ -308,6 +269,46 @@ myApp.controller('ModalInstanceController', ['$scope','$uibModalInstance', 'Uplo
         return string;
       } // end else
     }; // end setUndefinedIfBlank
+
+    //handle CSV uploads
+    $scope.uploadFile = function(file, errFiles, index) {
+        if (verbose) console.log('in uploadFile. uploading-->', index);
+        $scope.f = file;
+        $scope.errFile = errFiles && errFiles[0];
+        //if a file was uploaded, continue
+        if (file) {
+            //upload the file
+            file.upload = Upload.upload({
+                url: 'https://angular-file-upload-cors-srv.appspot.com/upload',
+                data: {file: file}
+            }); // end upload
+            //return data if there are timeouts/errors
+            file.upload.then(function (response) {
+                $timeout(function () {
+                    file.result = response.data;
+                }); // end $timeout
+            }, function (response) {
+                if (response.status > 0)
+                    $scope.errorMsg = response.status + ': ' + response.data;
+            }, function (evt) {
+                //track upload progress
+                $scope.platforms[index].progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+            }); // end progress function
+        } // end if
+        // Parse the uploaded file's data using papa parse
+        Papa.parse(file, {
+          header: true,
+          //when parsing is complete:
+        	complete: function(results) {
+            //parse through platform data, format and and keep only the necessary information
+            var uploadedPlatformName = $scope.platforms[index].name;
+            var resultsArray = results.data;
+            var formattedResultsArray = formatFileData(uploadedPlatformName, resultsArray);
+            //add the results to the completeUploadResults array
+            completeUploadResults = completeUploadResults.concat( formattedResultsArray );
+        	} // end complete
+        }); // end Papa.parse
+    }; // end uploadFile
 
   } // end controller callback
 ]); // end ModalInstanceController

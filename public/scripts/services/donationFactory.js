@@ -4,25 +4,30 @@ myApp.factory('DonationFactory', function($http) {
   var factory = {};
 
   factory.getAllDonations = function() {
-    console.log('in getDonations');
+    if (verbose) console.log('in getDonations');
     return $http.get('/private/donations');
   }; // end getDonations
 
   factory.getMonthlyDonations = function(monthNum) {
-    console.log('in getMonthlyDonations');
+    if (verbose) console.log('in getMonthlyDonations');
     return $http.get('/private/donations/monthly/' + monthNum);
   }; // end getMonthlyDonations
 
   factory.getCurrentYearsDonations = function(yearNum) {
-    console.log('in getCurrentYearsDonations');
+    if (verbose) console.log('in getCurrentYearsDonations');
     return $http.get('/private/donations/year');
   }; // end getCurrentYearsDonations
+
+  factory.saveUploadedDonations = function(completeUploadResults) {
+    if (verbose) console.log('in saveUploadedDonations');
+    return $http.post('/private/donations', { donations: completeUploadResults }); // end $http
+  }; // end saveUploadedDonations
 
   return factory;
 }); // end donorFactory
 
 
-// ****** REFACTOR FROM SERVICE ***** //
+// ****** USE IN DASHBORD CONTROLLER WHEN REFACTOR FROM SERVICE ***** //
 //get all donations through donation factory
 // donationFactory.getAllDonations()
 // .then(function(response){

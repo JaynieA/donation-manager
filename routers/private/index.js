@@ -5,7 +5,6 @@
  */
 var express = require('express');
 var router  = express.Router();
-var home = require('./home');
 var dashboard = require('./dashboard');
 var templates = require('./templates');
 var email = require('./email');
@@ -14,7 +13,6 @@ var docs = require('./docs');
 var donations = require('./donations');
 
 /** ---------- SUBROUTES ---------- **/
-router.use('/home', home);
 router.use('/dashboard', dashboard);
 router.use('/templates', templates);
 router.use('/email', email);
