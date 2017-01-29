@@ -3,54 +3,47 @@
 
   <!-- Shown for users that are logged in -->
   <div ng-if="data">
-    {{allYears}}
-    {{allMonths}}
-    <br>
-    status Array: {{statusArray}}
+
     <form class="form filters-form">
       <fieldset>
         <div class="form-group">
 
           <!-- Filter by Month select group  -->
-          month selected: {{monthSelected}}
-          <div class="col-sm-4">
+          <div class="col-sm-3">
             <div class="input-group">
-              <ui-select allow-clear ng-model="monthSelected.month_num" theme="bootstrap">
+              <ui-select allow-clear ng-model="monthSelected.value" theme="bootstrap">
                 <ui-select-match placeholder="Filter By Month..." >{{$select.selected.month_str}}</ui-select-match>
                 <ui-select-choices repeat="month in (allMonths | filter: $select.search) track by month.month_str">
                   <span ng-bind-html="month.month_str"></span>
                 </ui-select-choices>
               </ui-select>
               <span class="input-group-btn">
-                <button type="button" ng-click="monthSelected.month_num = undefined" class="btn btn-default">
+                <button type="button" ng-click="monthSelected.value = undefined" class="btn btn-default">
                   <span class="glyphicon glyphicon-trash"></span>
                 </button>
               </span>
             </div>
           </div>
 
-
-
-          <!-- Filter by month select group  -->
-          <!-- <div class="col-sm-4">
+          <!-- Filter by Month select group  -->
+          <div class="col-sm-3">
             <div class="input-group">
-              <ui-select allow-clear ng-model="selected.value" theme="bootstrap">
-                <ui-select-match placeholder="Filter by Month..." >{{$select.selected.month_str}}, {{$select.selected.year}}</ui-select-match>
-                <ui-select-choices repeat="item in (itemArray | filter: $select.search) track by item.month_str">
-                  <span ng-bind-html="(item.month_str) + ', ' + (item.year)"></span>
+              <ui-select allow-clear ng-model="yearSelected.year" theme="bootstrap">
+                <ui-select-match placeholder="Filter By Year..." >{{$select.selected.year}}</ui-select-match>
+                <ui-select-choices repeat="year in (allYears | filter: $select.search) track by year.year">
+                  <span ng-bind-html="year.year"></span>
                 </ui-select-choices>
               </ui-select>
               <span class="input-group-btn">
-                <button type="button" ng-click="selected.value = undefined" class="btn btn-default">
+                <button type="button" ng-click="yearSelected.year = undefined" class="btn btn-default">
                   <span class="glyphicon glyphicon-trash"></span>
                 </button>
               </span>
             </div>
-          </div> -->
-
+          </div>
 
           <!-- Filter by Status select group  -->
-          <div class="col-sm-4">
+          <div class="col-sm-3">
             <div class="input-group">
               <ui-select allow-clear ng-model="thankSelected.value" theme="bootstrap">
                 <ui-select-match placeholder="Filter By Status..." >{{$select.selected.display}}</ui-select-match>
@@ -65,9 +58,6 @@
               </span>
             </div>
           </div>
-
-
-
 
         </div>
       </fieldset>
@@ -118,7 +108,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="donation in donations | orderBy:sortType:sortReverse | filter: ({donation_month: selected.value.month_num, donation_year: selected.value.year, thanked: thankSelected.value.value})">
+          <tr ng-repeat="donation in donations | orderBy:sortType:sortReverse | filter: ({donation_month: monthSelected.value.month_num, donation_year: yearSelected.year.year, thanked: thankSelected.value.value}) : true">
             <td>{{ donation.date | date:'MM/dd/yyyy' }}</td>
             <td>{{ donation.donor_name }}</td>
             <td>{{ donation.platform_name }}</td>

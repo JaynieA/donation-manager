@@ -2,20 +2,6 @@
 myApp.controller('DashboardController', ['$scope', '$http','$location', '$timeout', function($scope, $http, $location, $timeout) {
   if (verbose) console.log('in DashboardController');
 
-  var condenseDateResults = function(responseArray) {
-    if (verbose) console.log('in condenseDateResults');
-    var dates = [];
-    //push the responses into dates array (if not already in)
-    for (var i = 0; i < responseArray.length; i++) {
-      var dateString = responseArray[i].month + ',' + responseArray[i].year;
-      //if the date is not in dates array, push it in
-      if (dates.indexOf(dateString) === -1) {
-        dates.push(dateString);
-      } // end if
-    } // end for
-    return dates;
-  }; // end condenseDateResults
-
   var convertToMonthName = function(monthNumber) {
     //takes a month number and returns the name of that month
     var months = ['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August',
@@ -83,18 +69,11 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', '$timeou
     $http.get('/private/dashboard/dates')
       .then(function(response) {
         if (verbose) console.log('get dates response');
+        //set fiter select values
         var monthsArray = getMonths(response.data);
         $scope.allMonths = makeMonthsObject(monthsArray);
-        $scope.allYears = getYears(response.data);
-
-
-
-        //condense the dates returned, attach month string, and scope for select
-        /*
-        var condensedDates = condenseDateResults(response.data);
-        $scope.selectDates = makeDateObjects(condensedDates);
-        $scope.itemArray = makeDateObjects(condensedDates);
-        */
+        var yearsArray = getYears(response.data);
+        $scope.allYears = makeYearObjects(yearsArray);
     }); // end $http
   }; // end getDonationDates
 
@@ -135,7 +114,7 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', '$timeou
     //loop through monthsArray and create month objects
     for (var i = 0; i < monthsArray.length; i++) {
       var monthObject = {
-        month_num: monthsArray[i],
+        month_num: Number(monthsArray[i]) - 1,
         month_str: convertToMonthName(monthsArray[i])
       }; // end monthObject
       //push the object into allMonthObjects array
@@ -145,31 +124,19 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', '$timeou
     return allMonthObjects;
   }; // end makeMonthsObject
 
-
-
-
-  var makeDateObjects = function(array) {
-    //convert array of date strings into objects containing their data
-    if (verbose) console.log('in makeDateObjects');
-    var dates = [];
-    for (var i = 0; i < array.length; i++) {
-      //split date strings on ','
-      array[i].split(',');
-      //marshall variables
-      var year = array[i].split(',')[1];
-      var monthNum =  array[i].split(',')[0];
-      var monthString = convertToMonthName(Number(monthNum));
-      //construct object containing date info
-      var newDate = {
-        month_num: monthNum - 1,
-        month_str: monthString,
-        year: year
-      }; // end newDate
-      dates.push(newDate);
+  var makeYearObjects = function(yearsArray) {
+    console.log('in makeYearsObjects', yearsArray);
+    var allYears = [];
+    for (var i = 0; i < yearsArray.length; i++) {
+      var newYear = {
+        year: yearsArray[i]
+      }; // end newYear
+      //push year object into allYears array
+      allYears.push(newYear);
     } // end for
-    console.log('date objects==>',dates);
-    return dates;
-  }; // end makeDateObjects
+    if (verbose) console.log('ALL YEARS-->',allYears);
+    return allYears;
+  }; // end makeYearsObjects
 
   var sendEmail = function(donation) {
     if (verbose) console.log('in sendEmail', donation);
@@ -239,11 +206,10 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', '$timeou
       {value: false,
       display: 'Not Thanked'}
     ]; // end statusArray
-    
-    $scope.selected = { value: undefined };
+    //initiate all filter to 'off'
     $scope.thankSelected = { value: undefined };
-
-    $scope.monthSelected = {value: undefined};
+    $scope.monthSelected = { value: undefined };
+    $scope.yearSelected = { value: undefined };
   }; // end init
 
   init();
