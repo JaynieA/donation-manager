@@ -1,7 +1,15 @@
 //Templates Controller
 
-myApp.controller('TemplatesController', ['$scope', '$http', '$location', '$timeout', function ($scope, $http, $location, $timeout) {
+myApp.controller('TemplatesController', ['AuthFactory', '$scope', '$http', '$location', '$timeout',
+ function (AuthFactory, $scope, $http, $location, $timeout) {
   if (verbose) console.log('loaded TemplatesController');
+
+  //declare authFactory
+  var authFactory = AuthFactory;
+  //declare authorized variable
+  //reflects if user is authorized
+  var authorized = authFactory.checkLoggedIn();
+  if (verbose) console.log('AUTH FROM TC-->',authorized);
 
   var blinkSuccessAlert = function() {
     if (verbose) console.log('in hideAlert');
@@ -11,27 +19,23 @@ myApp.controller('TemplatesController', ['$scope', '$http', '$location', '$timeo
     $timeout(function () { $scope.saveSuccess = false; }, 3000);
   }; // end hideAlert
 
-  var getAuthStatus = function() {
-    if (verbose) console.log('in getAuthStatus');
-    //get authentication that user is logged in and has admin status
-    $http.get('/private/templates')
-      .then(function (response) {
-        //if the authStatus is false or undefined...
-        if (response.data.authStatus === undefined || response.data.authStatus === false) {
-          if (verbose) console.log('Sorry, you are not logged in.');
-          $scope.data = false;
-          //redirect to the login page
-          $location.path("/#!/login");
-        } else {
-          //if they are authorized...
-          //run init function
-          init();
-          //show them the view
-          $scope.data = response.data.authStatus;
-          if (verbose) console.log('TC. You are logged in:', response.data.authStatus);
-        } // end else
-      }); // end $http
-  }; // end getAuthStatus
+  var checkAuth = function() {
+    if (verbose) console.log('in checkAuth');
+    //if the user is authorized
+    if (authorized) {
+      //initialize the view
+      init();
+      //show the view to the user
+      $scope.data = authorized;
+      if (verbose) console.log('TC. You are logged in:', authorized);
+    } else { // if the user is not authorized
+      if (verbose) console.log('Sorry, you are not logged in.');
+      //do not show the view
+      $scope.data = false;
+      //redirect to the login page
+      $location.path("/#!/login");
+    } // end else
+  }; // end checkAuth
 
   var getDefaultEmailTemplate = function() {
     if (verbose) console.log('in getDefaultEmailTemplate');
@@ -107,6 +111,6 @@ myApp.controller('TemplatesController', ['$scope', '$http', '$location', '$timeo
 
   //make sure the user is authorized
   //if they are, display view and run init function
-  getAuthStatus();
+  checkAuth();
 
 }]); // end TemplatesController

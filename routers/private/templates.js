@@ -5,11 +5,6 @@ var express = require('express');
 var router = express.Router();
 var Template = require('../../models/template');
 
-//GET /private/templates
-router.get('/', function (req, res) {
-  res.send({ authStatus: true });
-});
-
 //GET /private/templates/default
 //retrieves default email template text
 router.get('/emailDefault', function(req,res) {
@@ -29,6 +24,7 @@ router.get('/letterDefault', function(req,res) {
   Template.findOne({type:'letter', default: true}, function(err, results) {
     if (err) {
       console.log(err);
+      res.sendStatus(500);
     } else {
       res.send(results);
     } // end else
