@@ -186,6 +186,8 @@ html, body {
 }
 .modal-header {
   padding: 20px;
+  background-color: $accentRed;
+  color: $white;
   .modal-title {
     display: inline-block;
     margin-left: 10px;
@@ -489,7 +491,7 @@ html, body {
     display: none;
   }
   .rz-pointer {
-    background-color: $secondaryAccentColor;
+    background-color: $accentRed;
     width: 20px;
     height: 20px;
     top: -9px;
@@ -501,10 +503,10 @@ html, body {
     }
   }
   .rz-selection {
-    background-color: $secondaryAccentColor;
+    background-color: $accentRed;
   }
   .rz-tick.rz-selected {
-    background-color: $secondaryAccentColor;
+    background-color: $accentRed;
   }
   .rz-pointer {
     &:after {

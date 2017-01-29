@@ -144,7 +144,9 @@ html, body {
   margin-top: 10%; }
 
 .modal-header {
-  padding: 20px; }
+  padding: 20px;
+  background-color: #e54b45;
+  color: #fff; }
   .modal-header .modal-title {
     display: inline-block;
     margin-left: 10px; }
@@ -375,7 +377,7 @@ html, body {
   .rzslider .rz-bubble {
     display: none; }
   .rzslider .rz-pointer {
-    background-color: #37aeb0;
+    background-color: #e54b45;
     width: 20px;
     height: 20px;
     top: -9px;
@@ -383,9 +385,9 @@ html, body {
   .rzslider span:focus {
     outline: none; }
   .rzslider .rz-selection {
-    background-color: #37aeb0; }
+    background-color: #e54b45; }
   .rzslider .rz-tick.rz-selected {
-    background-color: #37aeb0; }
+    background-color: #e54b45; }
   .rzslider .rz-pointer:after {
     display: none; }
 
