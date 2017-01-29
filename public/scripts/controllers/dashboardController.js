@@ -1,6 +1,12 @@
 //Dashboard Controller
-myApp.controller('DashboardController', ['$scope', '$http','$location', '$timeout', function($scope, $http, $location, $timeout) {
+myApp.controller('DashboardController', ['AuthFactory','$scope', '$http','$location', '$timeout',
+ function(AuthFactory, $scope, $http, $location, $timeout) {
   if (verbose) console.log('in DashboardController');
+
+  //declare authFactory
+  var authFactory = AuthFactory;
+  var authorized = authFactory.checkLoggedIn();
+  if (verbose) console.log('AUTH in DC-->',authorized);
 
   var convertToMonthName = function(monthNumber) {
     //takes a month number and returns the name of that month
@@ -56,6 +62,24 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', '$timeou
       } // end else
     }); // end $http
   }; // end getAuthStatus
+
+  var confirmAuth = function() {
+    if (verbose) console.log('in confirmAuth');
+    //confirm that the user is authorized
+    if (authorized) {
+      //initialize the view
+      init();
+      //show the view to the user
+      $scope.data = authorized;
+      if (verbose) console.log('DC. You are logged in:', authorized);
+    } else {
+      if (verbose) console.log('Sorry, you are not logged in.');
+      //do not show the view
+      $scope.data = false;
+      //redirect to the login page
+      $location.path("/#!/login");
+    } // end else
+  }; // end
 
   var getDonations = function() {
     if (verbose) console.log('in getDonations');
@@ -218,6 +242,6 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', '$timeou
 
   //make sure user it authorized
   //if they are, show them the view and run init function
-  getAuthStatus();
+  confirmAuth();
 
 }]); // end DashboardController

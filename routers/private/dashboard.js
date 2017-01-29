@@ -6,13 +6,6 @@ var express = require('express');
 var router = express.Router();
 var Donation = require('../../models/donation');
 
-// GET /private/dashboard
-router.get('/', function (req, res) {
-  console.log('/private/dashboard route get route hit');
-  //send true if user has been authenticated and has admin status
-  res.send({authStatus: true});
-});
-
 //GET private/dashboard/donations
 router.get('/donations', function(req,res) {
   //get all donations
