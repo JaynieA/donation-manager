@@ -56,7 +56,6 @@ router.get('/monthly/:q?', function(req,res) {
 
 //POST /private/donations
 //save uploaded donation information
-//POST /private/home
 router.post('/', function(req,res) {
   console.log(req.body.donations);
   var donations = req.body.donations;
@@ -81,7 +80,7 @@ router.post('/', function(req,res) {
           } // end else
         }); // end save
       } else {
-        //if no match exists, don't save but continue
+        //if a match exists, don't save but continue
         console.log('already exists -->',results);
         callback();
       } // end else
