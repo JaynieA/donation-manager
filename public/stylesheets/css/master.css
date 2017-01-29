@@ -277,7 +277,10 @@ html, body {
         border: 2px solid #37aeb0; }
     .template-tabs .wrapper .alert {
       margin: -5px auto 0;
-      width: 50%; }
+      width: 60%;
+      color: #515150; }
+      .template-tabs .wrapper .alert span {
+        color: #515150; }
   .template-tabs span {
     color: #78d3d5;
     margin: 0 5px; }
@@ -464,6 +467,8 @@ html, body {
 
   .template-tabs {
     padding: 50px 70px; }
+    .template-tabs .wrapper .alert {
+      width: 30%; }
 
   .copyright {
     font-size: 14px; } }

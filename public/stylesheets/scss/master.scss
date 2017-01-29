@@ -168,6 +168,11 @@ html, body {
   // -- TEMPLATES -- //
   .template-tabs {
     padding: 50px 70px;
+    .wrapper {
+      .alert {
+        width: 30%;
+      }
+    }
   }
   // -- FOOTER -- //
   .copyright {

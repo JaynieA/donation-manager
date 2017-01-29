@@ -27,7 +27,11 @@
     }
     .alert {
       margin: -5px auto 0;
-      width: 50%;
+      width: 60%;
+      color: $mainTextColor;
+      span {
+        color: $mainTextColor;
+      }
     }
   }
   span {
