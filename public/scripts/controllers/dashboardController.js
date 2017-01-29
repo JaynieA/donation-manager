@@ -82,13 +82,71 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', '$timeou
     //get aggregate dates of all donations
     $http.get('/private/dashboard/dates')
       .then(function(response) {
-        if (verbose) console.log('get dates response-->', response);
+        if (verbose) console.log('get dates response');
+        var monthsArray = getMonths(response.data);
+        $scope.allMonths = makeMonthsObject(monthsArray);
+        $scope.allYears = getYears(response.data);
+
+
+
         //condense the dates returned, attach month string, and scope for select
+        /*
         var condensedDates = condenseDateResults(response.data);
         $scope.selectDates = makeDateObjects(condensedDates);
         $scope.itemArray = makeDateObjects(condensedDates);
+        */
     }); // end $http
   }; // end getDonationDates
+
+  var getMonths = function(dateObject) {
+    console.log('in getMonths-->', dateObject);
+    var months = [];
+    for (var i = 0; i < dateObject.length; i++) {
+      //if month is not already in months array, push it in
+      if (months.indexOf(dateObject[i].month) === -1) {
+        months.push(dateObject[i].month);
+      } // end if
+    } // end for
+    //sort the number in the array in ascending order
+    months = months.sort(function(a, b){return a-b;});
+    if (verbose) console.log('months array after sort-->',months);
+    return months;
+  }; // end getMonths
+
+  var getYears = function(dateObject) {
+    console.log('in getYears');
+    var years = [];
+    for (var i = 0; i < dateObject.length; i++) {
+      //if year is not already in years array, push it in
+      if (years.indexOf(dateObject[i].year) === -1) {
+        years.push(dateObject[i].year);
+      } // end if
+    } // end for
+    //sort the numbers in the array in desending order
+    years = years.sort(function(a, b){return b-a;});
+    if (verbose) console.log('years array after sort-->', years);
+    return years;
+  }; // end getYears
+
+  var makeMonthsObject = function(monthsArray) {
+    console.log('in makeMonthsObject', monthsArray);
+    //declare empty array to store all month objects
+    var allMonthObjects = [];
+    //loop through monthsArray and create month objects
+    for (var i = 0; i < monthsArray.length; i++) {
+      var monthObject = {
+        month_num: monthsArray[i],
+        month_str: convertToMonthName(monthsArray[i])
+      }; // end monthObject
+      //push the object into allMonthObjects array
+      allMonthObjects.push(monthObject);
+    } // end for
+    if (verbose) console.log(allMonthObjects);
+    return allMonthObjects;
+  }; // end makeMonthsObject
+
+
+
 
   var makeDateObjects = function(array) {
     //convert array of date strings into objects containing their data
@@ -109,6 +167,7 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', '$timeou
       }; // end newDate
       dates.push(newDate);
     } // end for
+    console.log('date objects==>',dates);
     return dates;
   }; // end makeDateObjects
 
@@ -180,8 +239,11 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', '$timeou
       {value: false,
       display: 'Not Thanked'}
     ]; // end statusArray
+    
     $scope.selected = { value: undefined };
     $scope.thankSelected = { value: undefined };
+
+    $scope.monthSelected = {value: undefined};
   }; // end init
 
   init();
