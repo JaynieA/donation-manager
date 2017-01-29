@@ -24,21 +24,6 @@ router.get('/donations', function(req, res) {
   }); // end find
 }); // end get
 
-//GET /private/home/donationByMonth
-router.get('/monthlyTotal/:q?', function(req,res) {
-  //add one to query month so results include that months donations
-  var currentYear = new Date().getFullYear();
-  //subtract one to account for date formatting
-  var month = Number(req.params.q) - 1;
-  Donation.find({ donation_month: month , donation_year: currentYear }, function(err, results) {
-    if (err) {
-      console.log(err);
-    } else {
-      res.send(results);
-    } // end else
-  }); // end find
-}); // end get
-
 //POST /private/home
 router.post('/', function(req,res) {
   console.log(req.body.donations);

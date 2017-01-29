@@ -1,8 +1,10 @@
 //Home Controller
-myApp.controller('HomeController', ['$scope', '$http', '$location', function ($scope, $http, $location) {
+myApp.controller('HomeController', ['DonationFactory','$scope', '$http', '$location', function (DonationFactory, $scope, $http, $location) {
   if (verbose) console.log('loaded HomeController');
 
   $scope.data = '';
+  //declare donationFactory
+  var donationFactory = DonationFactory;
 
   var calculateCurrentYearTotalDonations = function(responseArray) {
     if (verbose) console.log('in calculateCurrentYearTotalDonations');
@@ -18,7 +20,9 @@ myApp.controller('HomeController', ['$scope', '$http', '$location', function ($s
   }; // end calculateCurrentYearTotalDonations
 
   var calculateMonthlyTotal = function(responseArray) {
+    //responseArray contains all donations from x month
     var total = 0;
+    //calculate total donations in responseArray
     for (var i = 0; i < responseArray.length; i++) {
       total += responseArray[i].donation_amt;
     } // end for
@@ -68,25 +72,11 @@ myApp.controller('HomeController', ['$scope', '$http', '$location', function ($s
 
   var getMonthByNumber = function(num) {
     if (verbose) console.log('in getMonthByNumber');
-    var months = ["January", "February", "March", "April", "May", "June","July", "August",
-                      "September", "October", "November", "December"];
-    var month = months[num-1];
+    var months = ['', 'January', 'February', 'March', 'April', 'May', 'June','July', 'August',
+                      'September', 'October', 'November', 'December'];
+    var month = months[num];
     return month;
   }; // end getMonthByNumber
-
-  //get donation total for singular month
-  var getMonthlyDonations = function(monthNum, type) {
-    if (verbose) console.log('in getMonthlyDonations', monthNum);
-    //assemble url string
-    var urlString = '/private/home/monthlyTotal/' + monthNum;
-    $http({
-      method: 'GET',
-      url: urlString
-    }).then(function(response) {
-        $scope.monthTotal = calculateMonthlyTotal(response.data);
-        $scope.monthName = getMonthByNumber(monthNum);
-    }); // end $http
-  }; // end getMonthlyDonations
 
   var init = function() {
     if (verbose) console.log('in init');
@@ -96,8 +86,38 @@ myApp.controller('HomeController', ['$scope', '$http', '$location', function ($s
     initializeSlider();
     //get monthly donations for current month
     var currentMonthNum = new Date().getMonth() + 1;
+
+    // ****** REFACTOR FROM SERVICE ***** //
+
+    //get all donations through donation factory
+    // donationFactory.getAllDonations()
+    // .then(function(response){
+    //   $scope.something = response.data;
+    //   if (verbose) console.log('FACTORY RESPONSE-->',response.data);
+    // }).catch(function(err) {
+    //   if (verbose) console.log(err);
+    // }); // end DF getDonations
+
     getMonthlyDonations(currentMonthNum);
+
   }; // end init
+
+  var getMonthlyDonations = function(monthNum) {
+    console.log('in getMonthlyDonations');
+    //get monthly donations (from donationFactory)
+    donationFactory.getMonthlyDonations(monthNum)
+    .then(function(response) {
+      console.log('get montly donations response-->', response.data);
+      //calculate total donations in monthNum for display
+      $scope.monthTotal = calculateMonthlyTotal(response.data);
+      //get month name as string for display
+      $scope.monthName = getMonthByNumber(monthNum);
+    }).catch(function(err) {
+      console.log(err);
+    }); // end getMonthlyDonations
+  }; // end getMonthlyDonations
+
+  // ****** END REFACTOR ***** //
 
   var initializeSlider = function() {
     if (verbose) console.log('in initializeSlider');
@@ -131,9 +151,9 @@ myApp.controller('HomeController', ['$scope', '$http', '$location', function ($s
         onChange: function () {
             //get the month number the slider was changed to
             $scope.slideChangeData.change = $scope.slider.value;
-            //get month total donations and sipaly them
+            //get total donation amount from selected month and display it
             getMonthlyDonations($scope.slider.value);
-        }
+        } // end onChange
       } // end options
     }; // end slider
   }; // end initializeSlider
