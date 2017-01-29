@@ -3,6 +3,14 @@
 myApp.controller('TemplatesController', ['$scope', '$http', '$location', '$timeout', function ($scope, $http, $location, $timeout) {
   if (verbose) console.log('loaded TemplatesController');
 
+  var blinkSuccessAlert = function() {
+    if (verbose) console.log('in hideAlert');
+    //show saved alert
+    $scope.saveSuccess = true;
+    //re-hide saved alert after a few seconds
+    $timeout(function () { $scope.saveSuccess = false; }, 3000);
+  }; // end hideAlert
+
   var getAuthStatus = function() {
     if (verbose) console.log('in getAuthStatus');
     //get authentication that user is logged in and has admin status
@@ -15,6 +23,10 @@ myApp.controller('TemplatesController', ['$scope', '$http', '$location', '$timeo
           //redirect to the login page
           $location.path("/#!/login");
         } else {
+          //if they are authorized...
+          //run init function
+          init();
+          //show them the view
           $scope.data = response.data.authStatus;
           if (verbose) console.log('TC. You are logged in:', response.data.authStatus);
         } // end else
@@ -43,6 +55,16 @@ myApp.controller('TemplatesController', ['$scope', '$http', '$location', '$timeo
       $scope.template.letter = response.data.text;
     }); // end $http
   }; // end getDefaultLetterTemplate
+
+  var init = function() {
+    if (verbose) console.log('in init');
+    $scope.data = '';
+    $scope.saveSuccess = false;
+    getDefaultEmailTemplate();
+    getDefaultLetterTemplate();
+    //define object to handle child scopes
+    $scope.template = {};
+  }; // end init
 
   $scope.updateEmailTemplate = function() {
     if (verbose) console.log('in updateEmailTemplate', $scope.template.email);
@@ -83,25 +105,8 @@ myApp.controller('TemplatesController', ['$scope', '$http', '$location', '$timeo
     }); // end $http
   }; // end updateLetterTemplate
 
-  var blinkSuccessAlert = function() {
-    if (verbose) console.log('in hideAlert');
-    //show saved alert
-    $scope.saveSuccess = true;
-    //re-hide saved alert after a few seconds
-    $timeout(function () { $scope.saveSuccess = false; }, 3000);
-  }; // end hideAlert
-
-  var init = function() {
-    if (verbose) console.log('in init');
-    $scope.data = '';
-    $scope.saveSuccess = false;
-    getAuthStatus();
-    getDefaultEmailTemplate();
-    getDefaultLetterTemplate();
-    //define object to handle child scopes
-    $scope.template = {};
-  }; // end init
-
-  init();
+  //make sure the user is authorized
+  //if they are, display view and run init function
+  getAuthStatus();
 
 }]); // end TemplatesController

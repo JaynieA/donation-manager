@@ -47,7 +47,10 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', '$timeou
         //redirect to the login page
         $location.path("/#!/login");
       } else {
-        //else (if user is authed), show them the page
+        //else (if user is authed)...
+        //run init function
+        init();
+        //show them the page
         $scope.data = response.data.authStatus;
         if (verbose) console.log('DC. You are logged in:', response.data.authStatus);
       } // end else
@@ -106,6 +109,28 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', '$timeou
     if (verbose) console.log('years array after sort-->', years);
     return years;
   }; // end getYears
+
+  var init = function() {
+    if (verbose) console.log('in init');
+
+    //get donations to populate table
+    getDonations();
+    //get donation dates for select filter
+    getDonationDates();
+    //set filter defaults
+    $scope.statusArray = [
+      {value: true,
+      display: 'Thanked'},
+      {value: false,
+      display: 'Not Thanked'}
+    ]; // end statusArray
+    //initiate all filter to 'off'
+    $scope.thankSelected = { value: undefined };
+    $scope.monthSelected = { value: undefined };
+    $scope.yearSelected = { value: undefined };
+    //TODO: initiate thanked filter to 'Not Thanked' before deploy
+    //$scope.thankSelected = { value: {value: false, display: 'Not Thanked'} };
+  }; // end init
 
   var makeMonthsObject = function(monthsArray) {
     console.log('in makeMonthsObject', monthsArray);
@@ -191,29 +216,8 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', '$timeou
     }); // end $http
   }; // end updateThankedStatus
 
-  var init = function() {
-    if (verbose) console.log('in init');
-    //make sure user it authorized
-    getAuthStatus();
-    //get donations to populate table
-    getDonations();
-    //get donation dates for select filter
-    getDonationDates();
-    //set filter defaults
-    $scope.statusArray = [
-      {value: true,
-      display: 'Thanked'},
-      {value: false,
-      display: 'Not Thanked'}
-    ]; // end statusArray
-    //initiate all filter to 'off'
-    $scope.thankSelected = { value: undefined };
-    $scope.monthSelected = { value: undefined };
-    $scope.yearSelected = { value: undefined };
-    //TODO: initiate thanked filter to 'Not Thanked' before deploy
-    //$scope.thankSelected = { value: {value: false, display: 'Not Thanked'} };
-  }; // end init
-
-  init();
+  //make sure user it authorized
+  //if they are, show them the view and run init function
+  getAuthStatus();
 
 }]); // end DashboardController

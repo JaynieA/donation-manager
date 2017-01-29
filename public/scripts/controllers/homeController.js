@@ -39,6 +39,9 @@ myApp.controller('HomeController', ['$scope', '$http', '$location', function ($s
           $location.path("/#!/login");
         } else {
           //else, get server response of true
+          //run init function
+          init();
+          //show the user the page
           $scope.data = response.data.authStatus;
           if (verbose) console.log('HC. You are logged in:', response.data.authStatus);
           getCurrentYearsDonations();
@@ -85,6 +88,17 @@ myApp.controller('HomeController', ['$scope', '$http', '$location', function ($s
     }); // end $http
   }; // end getMonthlyDonations
 
+  var init = function() {
+    if (verbose) console.log('in init');
+    //get the current year
+    $scope.currentYear = new Date().getFullYear();
+    //initialize the slider
+    initializeSlider();
+    //get monthly donations for current month
+    var currentMonthNum = new Date().getMonth() + 1;
+    getMonthlyDonations(currentMonthNum);
+  }; // end init
+
   var initializeSlider = function() {
     if (verbose) console.log('in initializeSlider');
     //Initialize slider directive
@@ -124,19 +138,8 @@ myApp.controller('HomeController', ['$scope', '$http', '$location', function ($s
     }; // end slider
   }; // end initializeSlider
 
-  //initialize the view
-  var init = function() {
-    if (verbose) console.log('in init');
-    checkAuth();
-    //get the current year
-    $scope.currentYear = new Date().getFullYear();
-    //initialize the slider
-    initializeSlider();
-    //get monthly donations for current month
-    var currentMonthNum = new Date().getMonth() + 1;
-    getMonthlyDonations(currentMonthNum);
-  }; // end init
-
-  init();
+  //check that the user is authorized
+  //if they are, show them the view and run the init function
+  checkAuth();
 
 }]);
