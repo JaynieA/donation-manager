@@ -54,6 +54,38 @@ router.get('/monthly/:q?', function(req,res) {
   }); // end find
 }); // end get
 
+// GET private/donations/dates
+//get aggregate months/years of all donations
+router.get('/dates', function(req,res) {
+  console.log('get /private/donations/dates route hit');
+  Donation.aggregate([{$project:{year: { $year: "$date" },month: { $month: "$date" }}}], function(err, results) {
+    if (err) {
+      console.log(err);
+      res.sendStatus(500);
+    } else {
+      res.send(results);
+    } // end else
+  }); // end aggregate
+}); // end get
+
+// PUT private/donations
+// update the thanked status of a donation
+router.put('/', function(req,res) {
+  console.log('dashboard put route hit', req.body);
+  var id = req.body.id;
+  var now = new Date();
+  //update thanked status of donation
+  Donation.update({'_id': id },{ $set:{ 'thanked' : true , 'thanked_date': now } }, function(err, results) {
+    if (err) {
+      console.log(err);
+      res.sendStatus(500);
+    } else {
+      console.log('thanked-->', id, results);
+      res.sendStatus(201);
+    } // end else
+  }); // end update
+}); // end put
+
 //POST /private/donations
 //save uploaded donation information
 router.post('/', function(req,res) {

@@ -1,67 +1,14 @@
 //Dashboard Controller
-myApp.controller('DashboardController', ['AuthFactory','$scope', '$http','$location', '$timeout',
- function(AuthFactory, $scope, $http, $location, $timeout) {
+myApp.controller('DashboardController', ['AuthFactory', 'DonationFactory', '$scope', '$http','$location', '$timeout',
+ function(AuthFactory, DonationFactory, $scope, $http, $location, $timeout) {
   if (verbose) console.log('in DashboardController');
 
+  //declare donationFactory
+  var donationFactory = DonationFactory;
   //declare authFactory
   var authFactory = AuthFactory;
   var authorized = authFactory.checkLoggedIn();
   if (verbose) console.log('AUTH in DC-->',authorized);
-
-  var convertToMonthName = function(monthNumber) {
-    //takes a month number and returns the name of that month
-    var months = ['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August',
-                  'September', 'October', 'November', 'December'];
-    return months[monthNumber];
-  }; // end convertToMonthName
-
-  var generatePDF = function(donationObject) {
-    if (verbose) console.log('in generatePDF', donationObject);
-    $http({
-      method: 'PUT',
-      url: '/private/pdf',
-      data: donationObject
-    }).then(function(response) {
-      if (verbose) console.log('generate PDF response-->',response);
-      //use the printJS library and /private/docs router
-      //to serve newly created file in a print window
-      //TODO: look for a different library to serve the pdf file in an iframe
-      //      in order to make this next http call unnecessary
-      // $http({
-      //   url: '/private/docs/NewDoc',
-      //   method: 'GET'
-      // }).then(function(response) {
-      //   printJS({ printable: '/private/docs/NewDoc', type:'pdf'});
-      //   updateThankedStatus(donationObject._id);
-      // });
-      //Wait to seconds for pdf to generate, then call it in print window
-      $timeout(function() {
-        printJS({ printable: '/private/docs/NewDoc', type:'pdf'});
-        updateThankedStatus(donationObject._id);
-      }, 2000);
-    }); // end $http
-  }; // end generatePDF
-
-  var getAuthStatus = function() {
-    //get authentication that user is logged in and has admin status
-    $http.get('/private/dashboard')
-      .then(function (response) {
-      //if the authStatus is not true...
-      if (response.data.authStatus !== true) {
-        if (verbose) console.log('Sorry, you are not logged in.');
-        $scope.data = false;
-        //redirect to the login page
-        $location.path("/#!/login");
-      } else {
-        //else (if user is authed)...
-        //run init function
-        init();
-        //show them the page
-        $scope.data = response.data.authStatus;
-        if (verbose) console.log('DC. You are logged in:', response.data.authStatus);
-      } // end else
-    }); // end $http
-  }; // end getAuthStatus
 
   var confirmAuth = function() {
     if (verbose) console.log('in confirmAuth');
@@ -81,31 +28,62 @@ myApp.controller('DashboardController', ['AuthFactory','$scope', '$http','$locat
     } // end else
   }; // end
 
+  var convertToMonthName = function(monthNumber) {
+    //takes a month number and returns the name of that month
+    var months = ['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August',
+                  'September', 'October', 'November', 'December'];
+    return months[monthNumber];
+  }; // end convertToMonthName
+
+  var generatePDF = function(donationObject) {
+    if (verbose) console.log('in generatePDF', donationObject);
+    $http({
+      method: 'PUT',
+      url: '/private/pdf',
+      data: donationObject
+    }).then(function(response) {
+      if (verbose) console.log('generate PDF response-->',response);
+      /* Wait two seconds for pdf to generate, then use the printJS library
+         to serve newly created file in print window */
+      $timeout(function() {
+        printJS({ printable: '/private/docs/NewDoc', type:'pdf'});
+        //update the thanked status of the donation
+        updateThankedStatus(donationObject._id);
+      }, 2000);
+    }); // end $http
+  }; // end generatePDF
+
+  var getAggregateDonationDates = function() {
+    if (verbose) console.log('in getAggregateDonationDates');
+    //get aggregate years/months of all donations (from donationFactory)
+    donationFactory.getAggregateDonationDates()
+    .then(function(response) {
+      if (verbose) console.log('getAggregateDonationDates response-->', response.data);
+      //set fiter select values
+      var monthsArray = getMonths(response.data);
+      $scope.allMonths = makeMonthsObject(monthsArray);
+      var yearsArray = getYears(response.data);
+      $scope.allYears = makeYearObjects(yearsArray);
+    }).catch(function(err) {
+      if (verbose) console.log(error);
+    }); // end $http promise
+  }; // end getAggregateDonationDates
+
   var getDonations = function() {
     if (verbose) console.log('in getDonations');
-    $http.get('/private/dashboard/donations')
-      .then(function(response) {
-        $scope.donations = response.data.donations;
-        $scope.isThanking = true;
-      }); // end $http
+    //get all donations through donation factory
+    donationFactory.getAllDonations()
+    .then(function(response){
+      if (verbose) console.log('getDonations respose-->',response.data);
+      $scope.donations = response.data.donations;
+      $scope.isThanking = true;
+    }).catch(function(err) {
+      if (verbose) console.log(err);
+    }); // end DF getDonations
   }; // end getDonations
 
-  var getDonationDates = function() {
-    if (verbose) console.log('in getDonationDates');
-    //get aggregate dates of all donations
-    $http.get('/private/dashboard/dates')
-      .then(function(response) {
-        if (verbose) console.log('get dates response');
-        //set fiter select values
-        var monthsArray = getMonths(response.data);
-        $scope.allMonths = makeMonthsObject(monthsArray);
-        var yearsArray = getYears(response.data);
-        $scope.allYears = makeYearObjects(yearsArray);
-    }); // end $http
-  }; // end getDonationDates
-
   var getMonths = function(dateObject) {
-    console.log('in getMonths-->', dateObject);
+    //return an array of months from dateObject
     var months = [];
     for (var i = 0; i < dateObject.length; i++) {
       //if month is not already in months array, push it in
@@ -115,12 +93,11 @@ myApp.controller('DashboardController', ['AuthFactory','$scope', '$http','$locat
     } // end for
     //sort the number in the array in ascending order
     months = months.sort(function(a, b){return a-b;});
-    if (verbose) console.log('months array after sort-->',months);
     return months;
   }; // end getMonths
 
   var getYears = function(dateObject) {
-    console.log('in getYears');
+    //return an array of years from dateObject
     var years = [];
     for (var i = 0; i < dateObject.length; i++) {
       //if year is not already in years array, push it in
@@ -130,17 +107,15 @@ myApp.controller('DashboardController', ['AuthFactory','$scope', '$http','$locat
     } // end for
     //sort the numbers in the array in desending order
     years = years.sort(function(a, b){return b-a;});
-    if (verbose) console.log('years array after sort-->', years);
     return years;
   }; // end getYears
 
   var init = function() {
     if (verbose) console.log('in init');
-
     //get donations to populate table
     getDonations();
     //get donation dates for select filter
-    getDonationDates();
+    getAggregateDonationDates();
     //set filter defaults
     $scope.statusArray = [
       {value: true,
@@ -157,7 +132,7 @@ myApp.controller('DashboardController', ['AuthFactory','$scope', '$http','$locat
   }; // end init
 
   var makeMonthsObject = function(monthsArray) {
-    console.log('in makeMonthsObject', monthsArray);
+    if (verbose) console.log('in makeMonthsObject');
     //declare empty array to store all month objects
     var allMonthObjects = [];
     //loop through monthsArray and create month objects
@@ -166,16 +141,16 @@ myApp.controller('DashboardController', ['AuthFactory','$scope', '$http','$locat
         month_num: Number(monthsArray[i]) - 1,
         month_str: convertToMonthName(monthsArray[i])
       }; // end monthObject
-      //push the object into allMonthObjects array
+      //push the monthObject into allMonthObjects array
       allMonthObjects.push(monthObject);
     } // end for
-    if (verbose) console.log(allMonthObjects);
     return allMonthObjects;
   }; // end makeMonthsObject
 
   var makeYearObjects = function(yearsArray) {
-    console.log('in makeYearsObjects', yearsArray);
+    if (verbose) console.log('in makeYearsObjects');
     var allYears = [];
+    //loop through yearsArray and create month objects
     for (var i = 0; i < yearsArray.length; i++) {
       var newYear = {
         year: yearsArray[i]
@@ -183,17 +158,18 @@ myApp.controller('DashboardController', ['AuthFactory','$scope', '$http','$locat
       //push year object into allYears array
       allYears.push(newYear);
     } // end for
-    if (verbose) console.log('ALL YEARS-->',allYears);
     return allYears;
   }; // end makeYearsObjects
 
   var sendEmail = function(donation) {
     if (verbose) console.log('in sendEmail', donation);
+    //construct object to send
     var objectToSend = {
       donor_name: donation.donor_name,
       donor_email: donation.donor_email,
       donation_amt: donation.donation_amt
     }; // end objectToSend
+    //post info to the server
     $http({
       method: 'POST',
       url: '/private/email',
@@ -202,6 +178,9 @@ myApp.controller('DashboardController', ['AuthFactory','$scope', '$http','$locat
       if (verbose) console.log('send email response-->',response.data);
       //update thanked status for this donation
       updateThankedStatus(donation._id);
+    }).catch(function(err) {
+      //if there was an error, log it
+      if (verbose) console.log(err);
     }); // end $http
   }; // end getEmails
 
@@ -221,23 +200,23 @@ myApp.controller('DashboardController', ['AuthFactory','$scope', '$http','$locat
     } else if (donation.donor_email) {
       sendEmail(donation);
     } else {
-      //TODO:  handle cases where none of these are true;
-      alert('error');
+      //TODO: add error handling here if none of the above conditions are met;
+      if (verbose) alert('error');
     } // end else
   }; // end thank
 
   var updateThankedStatus = function(id) {
     if (verbose) console.log('in updateThankedStatus', id);
-    $http({
-      method: 'PUT',
-      url: '/private/dashboard/thank',
-      data: {id: id}
-    }).then(function(response) {
-      if (verbose) console.log(response);
-      //update donations on page
-      //TODO: handle how this works if user has filters applied
+    //use donationFactory function to update the thanked status
+    donationFactory.updateThankedStatus(id)
+    .then(function(response) {
+      if (verbose) console.log(response.data);
+      //update donations displayed on DOM
       getDonations();
-    }); // end $http
+    }).catch(function(err) {
+      //if there was an error, log it
+      if (verbose) console.log(err);
+    }); // end $http promise
   }; // end updateThankedStatus
 
   //make sure user it authorized

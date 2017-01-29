@@ -109,6 +109,8 @@ myApp.controller('HomeController', ['DonationFactory', 'AuthFactory', '$scope', 
     var currentMonthNum = new Date().getMonth() + 1;
     //get & then display donation total for current month
     getMonthlyDonations(currentMonthNum);
+    //calculate and display total donation amount for current year
+    getCurrentYearsDonations();
   }; // end init
 
   var initializeSlider = function() {

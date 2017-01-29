@@ -1,4 +1,4 @@
-//Factory
+//Donation Factory
 myApp.factory('DonationFactory', function($http) {
   if (verbose) console.log('in Donation factory');
   var factory = {};
@@ -23,16 +23,15 @@ myApp.factory('DonationFactory', function($http) {
     return $http.post('/private/donations', { donations: completeUploadResults }); // end $http
   }; // end saveUploadedDonations
 
+  factory.getAggregateDonationDates = function() {
+    if (verbose) console.log('in getAggregateDonationDates');
+    return $http.get('/private/donations/dates');
+  }; // end getAggregateDonationDates
+
+  factory.updateThankedStatus = function(id) {
+    if (verbose) console.log('in updateThankedStatus');
+    return $http.put('/private/donations', {id: id}); // end $http
+  }; // end updateThankedStatus
+
   return factory;
 }); // end donorFactory
-
-
-// ****** USE IN DASHBORD CONTROLLER WHEN REFACTOR FROM SERVICE ***** //
-//get all donations through donation factory
-// donationFactory.getAllDonations()
-// .then(function(response){
-//   $scope.something = response.data;
-//   if (verbose) console.log('FACTORY RESPONSE-->',response.data);
-// }).catch(function(err) {
-//   if (verbose) console.log(err);
-// }); // end DF getDonations
