@@ -1,7 +1,7 @@
 /**
  * Handles all routing for private routes.
  *
- * @module routes/private/index
+ * @module routers/private/index
  */
 var express = require('express');
 var router  = express.Router();
@@ -26,7 +26,6 @@ router.use('/donations', donations);
  * GET private/index
  */
 router.get('/', function (req, res) {
-  console.log('you made it!');
   res.redirect('/#!/home'); // they made it!
 });
 
