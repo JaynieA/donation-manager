@@ -210,6 +210,8 @@ myApp.controller('DashboardController', ['$scope', '$http','$location', '$timeou
     $scope.thankSelected = { value: undefined };
     $scope.monthSelected = { value: undefined };
     $scope.yearSelected = { value: undefined };
+    //TODO: initiate thanked filter to 'Not Thanked' before deploy
+    //$scope.thankSelected = { value: {value: false, display: 'Not Thanked'} };
   }; // end init
 
   init();
