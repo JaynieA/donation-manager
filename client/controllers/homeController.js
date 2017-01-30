@@ -3,7 +3,7 @@ myApp.controller('HomeController', ['DonationFactory', 'AuthFactory', '$scope', 
  function (DonationFactory, AuthFactory, $scope, $location) {
 
   if (verbose) console.log('loaded HomeController');
-
+  
   $scope.data = false;
   //declare donationFactory
   var donationFactory = DonationFactory;

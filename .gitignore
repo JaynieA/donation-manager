@@ -3,3 +3,4 @@ node_modules
 *.log
 *.sass-cache/
 keys.sh
+client.min.js
