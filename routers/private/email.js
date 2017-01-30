@@ -36,7 +36,7 @@ router.post('/', function(req,res) {
       textEmail += signature2 + '\n';
       textEmail += signature3 + '\n';
       //create email html
-      var htmlEmail = '<p style="font-size:15px;">Dear ' + donation.donor_name + ' ,</p>\n';
+      var htmlEmail = '<p style="font-size:15px;">Dear ' + donation.donor_name + ',</p>\n';
       htmlEmail += '<p style="font-size:14px; white-space:pre-wrap;">Thank you for your recent donation of $' + donation.donation_amt + ' to Spot\s Last Stop. ';
       htmlEmail += templateText + '</p>';
       htmlEmail += '<p style="font-size:15px;">Again, Thank You!</p>' + '\n';
