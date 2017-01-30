@@ -4,7 +4,7 @@ module.exports = function(grunt) {
 
     watch: {
       //there can be multiple files and multiple tasks here
-      files: ['client/*.js', 'client/services/*.js', 'client/controllers/*.js'],
+      files: ['client/*.js', 'client/**/*.js'],
       tasks: ['uglify']
     },
 
@@ -14,7 +14,7 @@ module.exports = function(grunt) {
           mangle: false
         },
         files: {
-          'public/scripts/client.min.js': ['client/*.js', 'client/services/*.js', 'client/controllers/*.js']
+          'public/scripts/client.min.js': ['client/*.js', 'client/**/*.js']
         }
       }
     }
