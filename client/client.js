@@ -24,6 +24,11 @@ myApp.config(['$routeProvider', function($routeProvider) {
       controller: 'TemplatesController',
       controllerAs: 'templates'
     })
+    .when('/users', {
+      templateUrl: '../views/routes/users.html',
+      controller: 'UsersController',
+      controllerAs: 'users'
+    })
     .when('/error', {
       templateUrl: '../views/routes/error.html',
       controller: 'ErrorController',
