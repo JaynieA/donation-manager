@@ -142,10 +142,15 @@ myApp.controller('ModalInstanceController', ['DonationFactory','$scope','$uibMod
             if (zip === 0) {
               zip = undefined;
             } // end if
+          //format date variables
+          var wholeDateIn = resultsArray[i][' Date'];
+          var date = moment( new Date( wholeDateIn ) )._d;
+          var month = moment( new Date( wholeDateIn ) ).month();
+          var year = moment( new Date( wholeDateIn ) ).year();
           //assemble donationObject
           var donationObject = {
             platform_name: 'YouCaring',
-            date: new Date(resultsArray[i][' Date']),
+            date: date,
             donor_name: name,
             donor_email: email,
             donation_amt: Number(amount),
@@ -155,8 +160,8 @@ myApp.controller('ModalInstanceController', ['DonationFactory','$scope','$uibMod
             donor_zip: zip,
             reference_id: undefined,
             origin: resultsArray[i].Title,
-            donation_month: new Date(resultsArray[i][' Date']).getMonth(),
-            donation_year: new Date(resultsArray[i][' Date']).getFullYear()
+            donation_month: month,
+            donation_year: year
           }; // end donationObject
           //push objects into youCaringData array
           youCaringData.push(donationObject);
@@ -177,10 +182,15 @@ myApp.controller('ModalInstanceController', ['DonationFactory','$scope','$uibMod
           //Format amount- remove the '$ ' at the beginning
           var amount = resultsArray[i].Amount.replace('$', '');
           amount = amount.trim();
+          //format date variables
+          var wholeDateIn = resultsArray[i].Date;
+          var date = moment( new Date( wholeDateIn ) )._d;
+          var month = moment( new Date( wholeDateIn ) ).month();
+          var year = moment( new Date( wholeDateIn ) ).year();
           //assemble donation object
           var donationObject = {
             platform_name: "Razoo",
-            date: new Date(resultsArray[i].Date),
+            date: date,
             donor_name: full_name,
             donor_email: resultsArray[i].Email,
             donation_amt: Number(amount),
@@ -190,8 +200,8 @@ myApp.controller('ModalInstanceController', ['DonationFactory','$scope','$uibMod
             donor_state: resultsArray[i].State,
             donor_zip: Number(resultsArray[i].Zip),
             origin: resultsArray[i].Origin,
-            donation_month: new Date(resultsArray[i].Date).getMonth(),
-            donation_year: new Date(resultsArray[i].Date).getFullYear()
+            donation_month: month,
+            donation_year: year
           }; // end donationObject
           //push the donationObject into razooData array
           razooData.push(donationObject);
@@ -227,10 +237,15 @@ myApp.controller('ModalInstanceController', ['DonationFactory','$scope','$uibMod
             city = undefined;
             address = undefined;
           } // end else
+          //format date variables
+          var wholeDateIn = resultsArray[i].Date;
+          var date = moment( new Date( wholeDateIn ) )._d;
+          var month = moment( new Date( wholeDateIn ) ).month();
+          var year = moment( new Date( wholeDateIn ) ).year();
           //assemble donation object
           var donationObject = {
             platform_name: 'Paypal',
-            date: new Date(resultsArray[i].Date),
+            date: date,
             donor_name: resultsArray[i].Name,
             donor_email: resultsArray[i]["From Email Address"],
             donation_amt: Number(resultsArray[i].Gross),
@@ -240,8 +255,8 @@ myApp.controller('ModalInstanceController', ['DonationFactory','$scope','$uibMod
             donor_state: state,
             donor_zip: Number(zip),
             origin: resultsArray[i]['Item ID'],
-            donation_month: new Date(resultsArray[i].Date).getMonth(),
-            donation_year: new Date(resultsArray[i].Date).getFullYear()
+            donation_month: month,
+            donation_year: year
           }; // end donationObject
           //push the DonationObject into paypalData array
           paypalData.push(donationObject);
