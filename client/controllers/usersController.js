@@ -10,7 +10,7 @@ myApp.controller('UsersController', ['$http', '$scope', '$location', 'AuthFactor
 
   $scope.approveUser = function(userId){
     if (verbose) console.log('in approveUser', userId);
-    //POST user id to the server for admin status approval
+    //PUT user id to the server for admin status approval
     $http({
       method: 'PUT',
       url: '/private/users',
@@ -43,7 +43,16 @@ myApp.controller('UsersController', ['$http', '$scope', '$location', 'AuthFactor
 
   $scope.deleteUser = function(userId) {
     if (verbose) console.log('in deleteUser', userId);
-
+    //DELETE user by id
+    $http({
+      method: 'DELETE',
+      url: '/private/users/' + userId
+    }).then(function(response) {
+      if(verbose) console.log('delete user response-->',response);
+      getUsers();
+    }).catch(function(err) {
+      if (verbose) console.log(err);
+    }); // end $http
   }; // end deleteUser
 
   var getUsers = function() {

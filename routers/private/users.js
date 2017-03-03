@@ -27,13 +27,24 @@ router.put('/', function(req,res) {
   //Change admin status to true
   Admin.update({'_id': id },{ $set:{ 'admin' : true , } }, function(err, results) {
     if (err) {
-      console.log(err);
       res.sendStatus(500);
     } else {
-      console.log(results);
       res.sendStatus(201);
     } // end else
   }); // end update
 }); // end post
+
+//DELETE - delete user by id
+router.delete('/:id', function(req,res) {
+  console.log('user delete route hit', req.params);
+  //Delete user by id
+  Admin.findByIdAndRemove(req.params.id, function(err,response) {
+    if(err) {
+      res.sendStatus(500);
+    } else {
+      res.sendStatus(200);
+    } // end else
+  }); // end findByIdAndRemove
+}); // end delete
 
 module.exports = router;
