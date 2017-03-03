@@ -1,4 +1,4 @@
-var verbose = true;
+var verbose = false;
 
 myApp.factory('AuthFactory', function ($http) {
   if (verbose) console.log('in auth factory');
