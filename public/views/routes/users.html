@@ -1,7 +1,40 @@
 <p>manage users here</p>
 
-{{data}}
+Logged in? {{data}}
 
 <div ng-if="data">
   <p>show this only if the user is logged in</p>
+
+  <!-- Filters Form -->
+  <form class="form filters-form">
+    <fieldset>
+      <div class="form-group">
+
+        <!-- <div class="col-sm-3">
+          <div class="input-group">
+            <ui-select allow-clear ng-model="monthSelected.value" theme="bootstrap">
+              <ui-select-match placeholder="Filter By Month..." >{{$select.selected.month_str}}</ui-select-match>
+              <ui-select-choices repeat="month in (allMonths | filter: $select.search) track by month.month_str">
+                <span ng-bind-html="month.month_str"></span>
+              </ui-select-choices>
+            </ui-select>
+            <span ng-hide="monthSelected.value === undefined" class="input-group-btn">
+              <button type="button" ng-click="monthSelected.value = undefined" class="btn btn-default">
+                <span class="glyphicon glyphicon-trash"></span>
+              </button>
+            </span>
+          </div>
+        </div> -->
+
+      </div>
+    </fieldset>
+  </form>
+
+  {{ allUsers }}
+  <div class="table-responsive">
+    <table class="table  table-striped table-hover">
+
+    </table>
+  </div>
+
 </div>

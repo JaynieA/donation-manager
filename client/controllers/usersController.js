@@ -1,11 +1,12 @@
 //Users Controller
 myApp.controller('UsersController', ['$http', '$scope', '$location', 'AuthFactory', function($http, $scope, $location, AuthFactory) {
-  console.log('loaded UsersController');
+  if (verbose) console.log('loaded UsersController');
   //declare authFactory
   var authFactory = AuthFactory;
   var authorized = authFactory.checkLoggedIn();
-  //if (verbose)
-  console.log('AUTH in DC-->',authorized);
+  if (verbose) console.log('AUTH in UC-->',authorized);
+  //Initialize scope variables
+  $scope.allUsers = [];
 
   var confirmAuth = function() {
     if (verbose) console.log('in confirmAuth');
@@ -25,8 +26,23 @@ myApp.controller('UsersController', ['$http', '$scope', '$location', 'AuthFactor
     } // end else
   }; // end
 
+  var getUsers = function() {
+    if (verbose) console.log('in getUsers');
+    $http({
+      method: 'GET',
+      url: '/private/users'
+    }).then(function(response) {
+      if (verbose) console.log('get users response-->',response.data.users);
+      //scope all users
+      $scope.allUsers = response.data.users;
+    }).catch(function(err) {
+      if (verbose) console.log(err);
+    }); // end catch
+  }; // end getUsers
+
   var init = function() {
-    console.log('in init');
+    if (verbose) console.log('in init');
+    getUsers();
   }; // end init
 
   confirmAuth();
