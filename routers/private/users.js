@@ -1,6 +1,6 @@
 /**
- * Handles requests for donations
- * @module routers/private/donations
+ * Handles requests for users
+ * @module routers/private/users
  */
 var express = require('express');
 var router = express.Router();
