@@ -3,7 +3,7 @@ myApp.controller('HomeController', ['DonationFactory', 'AuthFactory', '$scope', 
  function (DonationFactory, AuthFactory, $scope, $location) {
 
   if (verbose) console.log('loaded HomeController');
-  
+
   $scope.data = false;
   //declare donationFactory
   var donationFactory = DonationFactory;
@@ -55,13 +55,6 @@ myApp.controller('HomeController', ['DonationFactory', 'AuthFactory', '$scope', 
     } // end else
   }; // end checkAuth
 
-  var getCurrentMonth = function() {
-    var month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    var d = new Date();
-    if (verbose) console.log(month[d.getMonth()]);
-    return month[d.getMonth()];
-  }; // end getCurrentMonth
-
   var getCurrentYearsDonations = function() {
     if (verbose) console.log('in getCurrentYearsDonations');
     //get current years donations (from donationFactory)
@@ -106,7 +99,7 @@ myApp.controller('HomeController', ['DonationFactory', 'AuthFactory', '$scope', 
     //initialize the slider
     initializeSlider();
     //get monthly donations for current month
-    var currentMonthNum = new Date().getMonth() + 1;
+    var currentMonthNum = moment().format('MM') - 1;
     //get & then display donation total for current month
     getMonthlyDonations(currentMonthNum);
     //calculate and display total donation amount for current year
@@ -115,14 +108,18 @@ myApp.controller('HomeController', ['DonationFactory', 'AuthFactory', '$scope', 
 
   var initializeSlider = function() {
     if (verbose) console.log('in initializeSlider');
+    //define month variables
+    var current_month_num = moment().format('MM') - 1;
+    var current_month = moment().format('MMM');
     //Initialize slider directive
     $scope.slideChangeData = {
-        start: getCurrentMonth(),
+        start: current_month,
         change: 0,
         end: 0
     }; // end otherData
     $scope.slider = {
-      value: getCurrentMonth(),
+      //Place current month number in value property here
+      value: current_month_num,
       options: {
         floor: 0,
         ceil: 12,
