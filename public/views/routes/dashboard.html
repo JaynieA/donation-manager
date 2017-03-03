@@ -17,7 +17,7 @@
                   <span ng-bind-html="month.month_str"></span>
                 </ui-select-choices>
               </ui-select>
-              <span class="input-group-btn">
+              <span ng-hide="monthSelected.value === undefined" class="input-group-btn">
                 <button type="button" ng-click="monthSelected.value = undefined" class="btn btn-default">
                   <span class="glyphicon glyphicon-trash"></span>
                 </button>
@@ -34,7 +34,7 @@
                   <span ng-bind-html="year.year"></span>
                 </ui-select-choices>
               </ui-select>
-              <span class="input-group-btn">
+              <span ng-hide="yearSelected.year === undefined" class="input-group-btn">
                 <button type="button" ng-click="yearSelected.year = undefined" class="btn btn-default">
                   <span class="glyphicon glyphicon-trash"></span>
                 </button>
@@ -51,7 +51,7 @@
                   <span ng-bind-html="status.display"></span>
                 </ui-select-choices>
               </ui-select>
-              <span class="input-group-btn">
+              <span ng-hide="thankSelected.value === undefined" class="input-group-btn">
                 <button type="button" ng-click="thankSelected.value = undefined" class="btn btn-default">
                   <span class="glyphicon glyphicon-trash"></span>
                 </button>

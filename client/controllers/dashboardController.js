@@ -127,8 +127,8 @@ myApp.controller('DashboardController', ['AuthFactory', 'DonationFactory', '$sco
     $scope.thankSelected = { value: undefined };
     $scope.monthSelected = { value: undefined };
     $scope.yearSelected = { value: undefined };
-    //Initiate thanked filter to 'Not Thanked'
-    $scope.thankSelected = { value: {value: false, display: 'Not Thanked'} };
+    //TODO: Initiate thanked filter to 'Not Thanked' before deploy?
+    //$scope.thankSelected = { value: {value: false, display: 'Not Thanked'} };
   }; // end init
 
   var makeMonthsObject = function(monthsArray) {

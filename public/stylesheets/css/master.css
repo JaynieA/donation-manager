@@ -466,6 +466,8 @@ html, body {
 
   .filters-form .col-sm-4:first-of-type {
     margin-bottom: 0; }
+  .filters-form .input-group {
+    min-width: 100%; }
 
   .template-tabs {
     padding: 50px 70px; }
