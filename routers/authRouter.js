@@ -5,7 +5,7 @@ var router = express.Router();
 var passport = require('../auth/passport');
 
 router.get('/google', passport.authenticate('google', {
-    scope: ['openid', 'email', 'https://www.googleapis.com/auth/calendar'],
+    scope: ['openid', 'email', 'https://www.googleapis.com/auth/userinfo.profile'],
     prompt: 'select_account',
   }) // end authenticate
 ); // end get
