@@ -48,20 +48,18 @@
       <tbody>
         <tr ng-repeat="user in allUsers | orderBy:sortType:sortReverse | filter: ({ googleName: userSearch })"
             class="text-center">
-
           <td>{{ user.googleName }}</td>
           <td>{{ user.googleEmail }}</td>
-
           <td>
             <span ng-if="user.admin">Approved</span>
             <span ng-if="!user.admin">Pending</span>
           </td>
-
           <td>
-            <button ng-if="!user.admin"  type="button" name="button" class="btn btn-sm btn-accent-secondary">Approve</button>
-            <button ng-if="user.admin" type="button" name="button" class="btn btn-sm btn-accent">Delete</button>
+            <button ng-click="approveUser(user._id)" ng-if="!user.admin"  type="button"
+                    name="button" class="btn btn-sm btn-accent-secondary">Approve</button>
+            <button ng-click="deleteUser(user._id)" ng-if="user.admin" type="button"
+                    name="button" class="btn btn-sm btn-accent">Delete</button>
           </td>
-
         </tr>
       </tbody>
     </table>

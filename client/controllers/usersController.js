@@ -8,6 +8,21 @@ myApp.controller('UsersController', ['$http', '$scope', '$location', 'AuthFactor
   //Initialize scope variables
   $scope.allUsers = [];
 
+  $scope.approveUser = function(userId){
+    if (verbose) console.log('in approveUser', userId);
+    //POST user id to the server for admin status approval
+    $http({
+      method: 'PUT',
+      url: '/private/users',
+      data: { id: userId }
+    }).then(function(response) {
+      if(verbose) console.log('approve user response-->',response);
+      getUsers();
+    }).catch(function(err) {
+      if (verbose) console.log(err);
+    }); // end $http
+  }; // end approveUser
+
   var confirmAuth = function() {
     if (verbose) console.log('in confirmAuth');
     //confirm that the user is authorized
@@ -25,6 +40,11 @@ myApp.controller('UsersController', ['$http', '$scope', '$location', 'AuthFactor
       $location.path("/#!/login");
     } // end else
   }; // end
+
+  $scope.deleteUser = function(userId) {
+    if (verbose) console.log('in deleteUser', userId);
+
+  }; // end deleteUser
 
   var getUsers = function() {
     if (verbose) console.log('in getUsers');

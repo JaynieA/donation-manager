@@ -20,4 +20,20 @@ router.get('/', function(req,res) {
   }); // end find
 }); // end GET
 
+//PUT - approve admin user by id
+router.put('/', function(req,res) {
+  console.log('users PUT route hit', req.body.id);
+  var id = req.body.id;
+  //Change admin status to true
+  Admin.update({'_id': id },{ $set:{ 'admin' : true , } }, function(err, results) {
+    if (err) {
+      console.log(err);
+      res.sendStatus(500);
+    } else {
+      console.log(results);
+      res.sendStatus(201);
+    } // end else
+  }); // end update
+}); // end post
+
 module.exports = router;
