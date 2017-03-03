@@ -3,17 +3,21 @@ myApp.controller('ModalCtrl', ['$scope','$uibModal', '$timeout',function ($scope
 
   //get the the time that the countdown is counting down to
   var getEndTime = function() {
-    var now = new Date();
+    const MAX_DAY = 3; //3rd day of the month
+    const NOW = moment()._d; //today's date
+    const CURRENT_DAY = moment().get('date'); //current day (number)
+    const CURRENT_MONTH = moment().get('month');
+    const CURRENT_YEAR = moment().get('year'); // current year
     var endTime;
-    var currentDay = now.getDate();
-    if (currentDay < 3) {
-      //If the current date (1-31) < 3
+    //If the current date (1-31) < 3
+    if (CURRENT_DAY < MAX_DAY) {
       //set endTime to the 3rd of the current month
-      endTime = new Date(now.getFullYear(), now.getMonth(), 3);
+      endTime = moment(new Date(CURRENT_YEAR, CURRENT_MONTH, MAX_DAY))._d;
+    //if current date >= 3
     } else {
-      //if current date >= 3
+      const NEXT_MONTH = CURRENT_MONTH + 1;
       //set endTime to the third day of the next month
-      endTime = new Date(now.getFullYear(), now.getMonth()+1, 3);
+      endTime = moment(new Date(CURRENT_YEAR, NEXT_MONTH, MAX_DAY))._d;
     } // end else
     return endTime;
   }; // end getEndTime
