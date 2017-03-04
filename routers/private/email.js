@@ -60,8 +60,9 @@ router.post('/', function(req,res) {
       //set up options
       var mailOptions = {
         from: postmark.email, // sender address
-        // to: '<'+donation.donor_email+'>', //receiver
-        to: '<mrs.jaynie.anderson@gmail.com>', //receiver
+        //TODO: before deploy, default emails to send to self for testing
+        //to: '<mrs.jaynie.anderson@gmail.com>', //receiver
+        to: '<'+donation.donor_email+'>', //receiver
         subject: 'Thank you for your donation', //subject line
         text: textEmail, // plain text
         html: htmlEmail //html
