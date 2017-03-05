@@ -11,7 +11,7 @@ To run Donation Manager locally:
 * Ensure that [Node.js](https://nodejs.org/en/) is installed
 * `npm install` dependencies
 * `grunt uglify` to create minified client.min.css
-* Donation Manager requires a MongoDB DBMS, and a database URI at `DATABASE_URL`. Donation Manager was developed using [MongoDB](https://www.mongodb.com/) and [Mongoose](http://mongoosejs.com/).
+* Donation Manager requires a MongoDB DBMS, and a database URI at `DATABASE_URI`. Donation Manager was developed using [MongoDB](https://www.mongodb.com/) and [Mongoose](http://mongoosejs.com/).
 * In order to generate and send emails from within the app, the follow environmental variables are required:
   * `POSTMARK_KEY`
   * `POSTMARK_EMAIL` (sets the 'from' email address)
