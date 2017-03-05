@@ -47,6 +47,7 @@ Template view allows the user to customize both the letter and email template te
 * Nodemailer
 * Postmark
 * Bootstrap
+* UI Bootstrap
 * SASS
 * CSS3
 * HTML5
@@ -54,3 +55,4 @@ Template view allows the user to customize both the letter and email template te
 * PDFKit
 * ngAnimate
 * ng-file-upload
+* AngularJS Slider
