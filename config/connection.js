@@ -8,7 +8,7 @@ var connStr = '';
 if(process.env.MONGODB_URI !== undefined) {
     console.log('env connection string');
     connStr = process.env.MONGODB_URI;
-    mongoose.defaults.ssl = true;
+    //mongoose.defaults.ssl = true;
 } else {
     connStr = 'mongodb://localhost:27017/donationManager';
 } // end else
