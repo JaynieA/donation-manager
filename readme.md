@@ -34,6 +34,8 @@ Template view allows the user to customize both the letter and email template te
   <img src="public/images/templatedemo.png?raw=true" alt="ERD"/>
 </p>
 
+This application is currently hosted at [https://spotsdonations.herokuapp.com](https://spotsdonations.herokuapp.com), although users must be cleared in order to use the application.
+
 
 ##Technologies Used:
 
