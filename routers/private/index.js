@@ -23,8 +23,7 @@ router.use('/users', users);
 
 //GET private/index
 router.get('/', function (req, res) {
-  //res.redirect('/#!/home'); // they made it!
-  res.redirect('https://spotsdonations.herokuapp.com/#!/login'); // they made it!
+  res.redirect('/#!/home'); // they made it!
 });
 
 module.exports = router;
